@@ -1,0 +1,37 @@
+---
+import Page from '../layouts/Page.astro';
+import Container from '../components/core/Container.astro';
+import Button from '../components/buttons/Button.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../i18n/ui.js';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Page title={t('404.title')} noindex>
+	<Container narrow>
+		<section class="not-found">
+			<p class="not-found__code">404</p>
+			<h1>{t('404.title')}</h1>
+			<p class="lead">{t('404.lede')}</p>
+			<Button href={localizePath('/', lang)} large>{t('404.cta')}</Button>
+		</section>
+	</Container>
+</Page>
+
+<style>
+	.not-found {
+		padding: clamp(4rem, 15vh, 9rem) 0;
+		text-align: center;
+	}
+	.not-found__code {
+		font-family: var(--theme-font-family-serif);
+		font-size: var(--font-size-xxxl);
+		font-weight: 700;
+		line-height: 1;
+		color: var(--theme-border);
+	}
+	.not-found :global(.btn) {
+		margin: 1rem auto 0 auto;
+	}
+</style>

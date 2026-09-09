@@ -1,0 +1,117 @@
+/*
+ * 디자인 토큰 — Odyssey Theme (Treefarm Studio, MIT)의 토큰 구조를 그대로 따르되
+ * ISO Company 브랜드와 한국어 타이포그래피에 맞게 조정했습니다.
+ * https://github.com/treefarmstudio/odyssey-theme
+ */
+
+:root {
+	color-scheme: light;
+
+	/* Theme Colors */
+	--theme-primary: hsl(0, 0%, 0%);
+	--theme-primary-hover: hsl(0, 0%, 22%);
+	--theme-on-primary: #fff;
+
+	--theme-bg: #fff;
+	--theme-on-bg: #0b0b0b;
+
+	--theme-surface-1: #f2f2f2;
+	--theme-on-surface-1: #0b0b0b;
+
+	--theme-surface-2: #cce6d0;
+	--theme-on-surface-2: #0b0b0b;
+
+	--theme-border: hsl(0, 0%, 88%);
+	--theme-muted: hsl(0, 0%, 38%);
+
+	/* 상태 배지 */
+	--theme-badge-live-bg: #cce6d0;
+	--theme-badge-live-on: #14401c;
+	--theme-badge-soon-bg: #ffe9c7;
+	--theme-badge-soon-on: #5b3c05;
+	--theme-badge-dev-bg: #e2e2f5;
+	--theme-badge-dev-on: #2a2a63;
+
+	/* Theme Shapes */
+	--theme-shape-radius: clamp(1rem, 2rem, 3rem);
+	--theme-shape-radius-sm: 0.75rem;
+	--theme-button-border-radius: 3rem;
+
+	/* Theme Transition */
+	--theme-transition: 0.2s ease-in-out;
+
+	/* Theme Layout */
+	--section-margin: 3rem;
+	--theme-grid-gap: 1rem;
+	--container-max-width: 1200px;
+	--container-max-width-narrow: 860px;
+	--container-padding: 0 1.25rem;
+
+	/* Theme Fonts */
+	/* 라틴은 Roboto Serif, 한글은 Noto Serif KR.
+	   웹폰트를 못 받는 환경에서는 한글이 바탕체로 떨어지지 않도록 고딕으로 폴백합니다. */
+	--theme-font-family-serif: 'Roboto Serif', 'Noto Serif KR', Georgia, Cambria,
+		'Times New Roman', Times, 'Pretendard', 'Apple SD Gothic Neo',
+		'Malgun Gothic', sans-serif;
+	--theme-font-family-sans: 'Lato', 'Pretendard', 'Noto Sans KR', -apple-system,
+		BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+	--theme-font-family-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo,
+		Consolas, monospace;
+}
+
+:root[data-theme='dark'] {
+	color-scheme: dark;
+
+	--theme-primary: hsl(0, 0%, 100%);
+	--theme-primary-hover: hsl(0, 0%, 86%);
+	--theme-on-primary: hsl(0, 0%, 4%);
+
+	--theme-bg: hsl(0, 0%, 6%);
+	--theme-on-bg: hsl(0, 0%, 96%);
+
+	--theme-surface-1: hsl(0, 0%, 13%);
+	--theme-on-surface-1: hsl(0, 0%, 96%);
+
+	--theme-surface-2: #203422;
+	--theme-on-surface-2: hsl(0, 0%, 96%);
+
+	--theme-border: hsl(0, 0%, 24%);
+	--theme-muted: hsl(0, 0%, 68%);
+
+	--theme-badge-live-bg: #21402a;
+	--theme-badge-live-on: #c6ecce;
+	--theme-badge-soon-bg: #453313;
+	--theme-badge-soon-on: #ffdca6;
+	--theme-badge-dev-bg: #2a2a4a;
+	--theme-badge-dev-on: #d5d5f5;
+}
+
+/* JS가 없거나 사용자가 아직 토글하지 않았을 때는 OS 설정을 따릅니다. */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme='light']):not([data-theme='dark']) {
+		color-scheme: dark;
+
+		--theme-primary: hsl(0, 0%, 100%);
+		--theme-primary-hover: hsl(0, 0%, 86%);
+		--theme-on-primary: hsl(0, 0%, 4%);
+
+		--theme-bg: hsl(0, 0%, 6%);
+		--theme-on-bg: hsl(0, 0%, 96%);
+
+		--theme-surface-1: hsl(0, 0%, 13%);
+		--theme-on-surface-1: hsl(0, 0%, 96%);
+
+		--theme-surface-2: #203422;
+		--theme-on-surface-2: hsl(0, 0%, 96%);
+
+		--theme-border: hsl(0, 0%, 24%);
+		--theme-muted: hsl(0, 0%, 68%);
+
+		--theme-badge-live-bg: #21402a;
+		--theme-badge-live-on: #c6ecce;
+		--theme-badge-soon-bg: #453313;
+		--theme-badge-soon-on: #ffdca6;
+		--theme-badge-dev-bg: #2a2a4a;
+		--theme-badge-dev-on: #d5d5f5;
+	}
+}

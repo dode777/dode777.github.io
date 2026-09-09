@@ -1,0 +1,219 @@
+---
+import Container from './Container.astro';
+import Logo from '../Logo.astro';
+import Button from '../buttons/Button.astro';
+import ThemeToggle from '../theme-switcher/ThemeToggle.astro';
+import LangToggle from '../LangToggle.astro';
+import settings from '../../config/settings.js';
+import { services } from '../../config/services.js';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/ui.js';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const navItems = [
+	{ title: t('nav.home'), href: localizePath('/', lang) },
+	...services.map((service) => ({
+		title: service[lang].name,
+		href: localizePath(`/${service.slug}`, lang),
+	})),
+];
+
+const currentPath = Astro.url.pathname.replace(/\/$/, '') || '/';
+---
+
+<header id="siteHeader">
+	<Container class="header__container">
+		<div class="header__brand">
+			<button
+				id="menuButton"
+				type="button"
+				aria-expanded="false"
+				aria-controls="siteNav"
+				aria-label={t('a11y.openMenu')}
+				data-label-open={t('a11y.openMenu')}
+				data-label-close={t('a11y.closeMenu')}
+			>
+				<svg class="menu-icon menu-icon--ham" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16"></path></svg>
+				<svg class="menu-icon menu-icon--close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false" hidden><path d="M6 6l12 12M18 6L6 18"></path></svg>
+			</button>
+			<a class="header__logo-link" href={localizePath('/', lang)}>
+				<Logo />
+			</a>
+		</div>
+
+		<div class="header__nav" id="siteNav">
+			<nav aria-label={t('nav.services')}>
+				<ul>
+					{
+						navItems.map((item) => (
+							<li>
+								<a
+									href={item.href}
+									aria-current={currentPath === item.href ? 'page' : undefined}
+								>
+									{item.title}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</nav>
+			<div class="header__nav-actions">
+				<LangToggle />
+				<Button href={`mailto:${settings.contactEmail}`} outlined class="header__contact-btn">
+					{t('nav.contact')}
+				</Button>
+			</div>
+		</div>
+
+		<div class="header__actions">
+			<div class="header__actions-desktop">
+				<LangToggle />
+				<Button href={`mailto:${settings.contactEmail}`} outlined>{t('nav.contact')}</Button>
+			</div>
+			<ThemeToggle />
+		</div>
+	</Container>
+</header>
+
+<script>
+	const header = document.getElementById('siteHeader');
+	const menuButton = document.getElementById('menuButton');
+	const ham = header?.querySelector('.menu-icon--ham');
+	const close = header?.querySelector('.menu-icon--close');
+
+	menuButton?.addEventListener('click', () => {
+		const open = header.toggleAttribute('mobile-menu-open');
+		ham?.toggleAttribute('hidden', open);
+		close?.toggleAttribute('hidden', !open);
+		menuButton.setAttribute('aria-expanded', String(open));
+		menuButton.setAttribute(
+			'aria-label',
+			(open ? menuButton.dataset.labelClose : menuButton.dataset.labelOpen) ?? ''
+		);
+		document.body.style.overflow = open ? 'hidden' : '';
+	});
+</script>
+
+<style>
+	header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
+		width: 100%;
+		background-color: var(--theme-bg);
+		border-bottom: 1px solid var(--theme-border);
+	}
+	header :global(.header__container) {
+		min-height: 4.25rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+	}
+	.header__brand {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		z-index: 100;
+	}
+	.header__logo-link {
+		color: inherit;
+		text-decoration: none;
+	}
+	.header__nav {
+		display: flex;
+		align-items: center;
+	}
+	.header__nav nav ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		gap: 1.5rem;
+	}
+	.header__nav nav ul li a {
+		color: inherit;
+		text-decoration: none;
+		opacity: 0.72;
+		transition: opacity linear 150ms;
+	}
+	.header__nav nav ul li a:hover,
+	.header__nav nav ul li a[aria-current='page'] {
+		opacity: 1;
+	}
+	.header__nav nav ul li a[aria-current='page'] {
+		font-weight: 700;
+	}
+	.header__nav-actions {
+		display: none;
+	}
+	.header__actions {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		z-index: 100;
+	}
+	.header__actions-desktop {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+	}
+	#menuButton {
+		display: none;
+		padding: 0.35rem;
+		margin-right: 0.25rem;
+		border: none;
+		background-color: transparent;
+		color: var(--theme-on-bg);
+		cursor: pointer;
+		-webkit-tap-highlight-color: transparent;
+	}
+	.menu-icon {
+		width: 1.5rem;
+		height: 1.5rem;
+		display: block;
+	}
+	.menu-icon[hidden] {
+		display: none;
+	}
+
+	@media (max-width: 860px) {
+		#menuButton {
+			display: block;
+			z-index: 100;
+		}
+		.header__actions-desktop {
+			display: none;
+		}
+		.header__nav {
+			position: fixed;
+			inset: 0;
+			display: none;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			gap: 2.5rem;
+			background-color: var(--theme-bg);
+			z-index: 99;
+		}
+		header[mobile-menu-open] .header__nav {
+			display: flex;
+		}
+		.header__nav nav ul {
+			flex-direction: column;
+			align-items: center;
+			gap: 1.25rem;
+		}
+		.header__nav nav ul li {
+			font-size: var(--font-size-lg);
+		}
+		.header__nav-actions {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: 1rem;
+		}
+	}
+</style>

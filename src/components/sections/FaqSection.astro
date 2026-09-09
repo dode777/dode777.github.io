@@ -1,0 +1,61 @@
+---
+const { faq } = Astro.props;
+---
+
+<div class="faq">
+	{
+		faq.map((item) => (
+			<details class="faq__item">
+				<summary class="faq__question">
+					<span>{item.q}</span>
+					<svg class="faq__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" /></svg>
+				</summary>
+				<p class="faq__answer">{item.a}</p>
+			</details>
+		))
+	}
+</div>
+
+<style>
+	.faq {
+		border: 1px solid var(--theme-border);
+		border-radius: var(--theme-shape-radius-sm);
+		overflow: hidden;
+	}
+	.faq__item {
+		border-bottom: 1px solid var(--theme-border);
+	}
+	.faq__item:last-child {
+		border-bottom: none;
+	}
+	.faq__question {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 1.1rem 1.25rem;
+		font-weight: 700;
+		cursor: pointer;
+		list-style: none;
+	}
+	.faq__question::-webkit-details-marker {
+		display: none;
+	}
+	.faq__question:hover {
+		background-color: var(--theme-surface-1);
+	}
+	.faq__chevron {
+		width: 1.25rem;
+		height: 1.25rem;
+		flex-shrink: 0;
+		transition: transform var(--theme-transition);
+	}
+	.faq__item[open] .faq__chevron {
+		transform: rotate(180deg);
+	}
+	.faq__answer {
+		margin: 0;
+		padding: 0 1.25rem 1.25rem 1.25rem;
+		color: var(--theme-muted);
+	}
+</style>

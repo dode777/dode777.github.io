@@ -1,0 +1,18 @@
+{
+  "name": "dode777-github-io",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "ISO Company 서비스 링크 허브 (GitHub Pages, main 브랜치 /docs)",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "devDependencies": {
+    "@astrojs/sitemap": "^3.7.4",
+    "astro": "^7.3.2"
+  }
+}

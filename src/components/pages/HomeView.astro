@@ -1,0 +1,55 @@
+---
+import Page from '../../layouts/Page.astro';
+import Container from '../core/Container.astro';
+import Section from '../sections/Section.astro';
+import HomeHero from '../sections/HomeHero.astro';
+import ServiceCard from '../cards/ServiceCard.astro';
+import ContactSection from '../sections/ContactSection.astro';
+import { services } from '../../config/services.js';
+import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Page>
+	<HomeHero />
+
+	<Container>
+		<section class="services" id="services">
+			<h2 class="services__title">{t('home.servicesTitle')}</h2>
+			<p class="lead services__lede">{t('home.servicesLede')}</p>
+			<div class="services__grid">
+				{services.map((service) => <ServiceCard service={service} />)}
+			</div>
+		</section>
+	</Container>
+
+	<Section title={t('contact.title')} id="contact" surface narrow={false}>
+		<ContactSection />
+	</Section>
+</Page>
+
+<style>
+	.services {
+		margin: var(--section-margin) auto;
+		scroll-margin-top: 5.5rem;
+	}
+	.services__title {
+		margin-bottom: 0.5rem;
+	}
+	.services__lede {
+		margin-bottom: 2.5rem;
+	}
+	.services__grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: var(--theme-grid-gap);
+	}
+
+	@media (max-width: 860px) {
+		.services__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

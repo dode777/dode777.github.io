@@ -1,0 +1,55 @@
+---
+import Page from '../../layouts/Page.astro';
+import Section from '../sections/Section.astro';
+import ServiceHero from '../sections/ServiceHero.astro';
+import FeatureGrid from '../sections/FeatureGrid.astro';
+import StepsSection from '../sections/StepsSection.astro';
+import RequirementsSection from '../sections/RequirementsSection.astro';
+import ReleaseNotes from '../sections/ReleaseNotes.astro';
+import FaqSection from '../sections/FaqSection.astro';
+import ContactSection from '../sections/ContactSection.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+
+const { service } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const content = service[lang];
+---
+
+<Page title={content.name} description={content.summary}>
+	<ServiceHero service={service} />
+
+	<Section title={t('detail.overview')} id="overview">
+		{content.description.map((paragraph) => <p class="service-overview__p">{paragraph}</p>)}
+	</Section>
+
+	<Section title={t('detail.features')} id="features">
+		<FeatureGrid features={content.features} />
+	</Section>
+
+	<Section title={t('detail.guide')} id="guide">
+		<StepsSection steps={content.steps} />
+	</Section>
+
+	<Section title={t('detail.requirements')} id="requirements">
+		<RequirementsSection requirements={content.requirements} />
+	</Section>
+
+	<Section title={t('detail.releases')} id="releases">
+		<ReleaseNotes service={service} />
+	</Section>
+
+	<Section title={t('detail.faq')} id="faq">
+		<FaqSection faq={content.faq} />
+	</Section>
+
+	<Section title={t('detail.contact')} id="contact" surface>
+		<ContactSection subject={`[${content.name}] `} />
+	</Section>
+</Page>
+
+<style>
+	.service-overview__p {
+		max-width: 62ch;
+	}
+</style>

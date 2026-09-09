@@ -1,0 +1,131 @@
+/*
+ * 라틴 본문/제목 폰트는 Odyssey Theme에서 함께 가져온 로컬 woff2를 사용하고,
+ * 한글 글리프는 Google Fonts(Noto Sans KR / Noto Serif KR)로 폴백됩니다.
+ * (폰트 링크는 BaseHead.astro 참고)
+ */
+
+/* roboto-serif-700 - latin */
+@font-face {
+	font-family: 'Roboto Serif';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/assets/fonts/roboto-serif-v8-latin-700.woff2') format('woff2');
+}
+/* roboto-serif-600 - latin */
+@font-face {
+	font-family: 'Roboto Serif';
+	font-style: normal;
+	font-weight: 600;
+	font-display: swap;
+	src: url('/assets/fonts/roboto-serif-v8-latin-600.woff2') format('woff2');
+}
+/* lato-regular - latin */
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 400;
+	font-display: swap;
+	src: url('/assets/fonts/lato-v23-latin-regular.woff2') format('woff2');
+}
+/* lato-700 - latin */
+@font-face {
+	font-family: 'Lato';
+	font-style: normal;
+	font-weight: 700;
+	font-display: swap;
+	src: url('/assets/fonts/lato-v23-latin-700.woff2') format('woff2');
+}
+
+:root {
+	--font-size-sm: clamp(14.4px, 0.07vw + 14.13px, 15px);
+	--font-size-base: clamp(16.5px, 0.18vw + 15.8px, 18px);
+	--font-size-md: clamp(20px, 0.4vw + 18.4px, 23px);
+	--font-size-lg: clamp(25px, 0.72vw + 22.1px, 31px);
+	--font-size-xl: clamp(31px, 1.2vw + 26.2px, 41px);
+	--font-size-xxl: clamp(38px, 1.9vw + 30.4px, 54px);
+	--font-size-xxxl: clamp(46px, 2.9vw + 34.4px, 70px);
+}
+
+html,
+body {
+	line-height: 1.65;
+	font-family: var(--theme-font-family-sans);
+	font-size: var(--font-size-base);
+	color: var(--theme-on-bg);
+	/* 한글은 단어 단위로 끊어야 읽기 좋습니다. */
+	word-break: keep-all;
+	overflow-wrap: break-word;
+}
+
+h1,
+h2,
+h3 {
+	font-family: var(--theme-font-family-serif);
+	font-weight: 700;
+}
+
+h1 {
+	font-size: var(--font-size-xxl);
+}
+
+h2 {
+	font-size: var(--font-size-xl);
+}
+
+h3 {
+	font-size: var(--font-size-lg);
+}
+
+h1,
+h2 {
+	line-height: 1.2;
+	letter-spacing: -0.02em;
+}
+
+h3 {
+	line-height: 1.3;
+	font-weight: 600;
+}
+
+h4 {
+	font-size: var(--font-size-md);
+	line-height: 1.4;
+}
+
+h6 {
+	font-size: var(--font-size-sm);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	margin: 0 0 1rem 0;
+}
+
+code,
+kbd {
+	font-family: var(--theme-font-family-mono);
+	font-size: 0.875em;
+}
+
+kbd {
+	padding: 0.1em 0.45em;
+	border: 1px solid var(--theme-border);
+	border-bottom-width: 2px;
+	border-radius: 0.35rem;
+	background-color: var(--theme-bg);
+	white-space: nowrap;
+}
+
+blockquote {
+	font-style: italic;
+	font-weight: 500;
+	margin-bottom: 1rem;
+	padding-left: 1.5rem;
+	border-left: 0.25rem solid var(--theme-on-bg);
+}

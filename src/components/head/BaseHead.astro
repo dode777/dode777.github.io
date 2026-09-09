@@ -1,0 +1,71 @@
+---
+import ThemeProvider from '../theme-switcher/ThemeProvider.astro';
+import settings from '../../config/settings.js';
+import {
+	languages,
+	getLangFromUrl,
+	useTranslations,
+	localizePath,
+	stripLangFromPath,
+} from '../../i18n/ui.js';
+
+import '../../styles/index.css';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const { title, description, noindex } = Astro.props;
+
+const pageTitle = title ? `${title} | ${t('site.title')}` : t('site.title');
+const pageDescription = description ?? t('site.description');
+const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? settings.url);
+const basePath = stripLangFromPath(Astro.url.pathname);
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="generator" content={Astro.generator} />
+
+<title>{pageTitle}</title>
+<meta name="title" content={pageTitle} />
+<meta name="description" content={pageDescription} />
+<link rel="canonical" href={canonicalURL} />
+{noindex && <meta name="robots" content="noindex" />}
+
+{
+	Object.keys(languages).map((code) => (
+		<link
+			rel="alternate"
+			hreflang={code}
+			href={new URL(localizePath(basePath, code), settings.url).href}
+		/>
+	))
+}
+<link
+	rel="alternate"
+	hreflang="x-default"
+	href={new URL(localizePath(basePath, 'ko'), settings.url).href}
+/>
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+<!-- 한글 글리프 폴백 (라틴 폰트는 /assets/fonts 에 함께 배포됩니다) -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap"
+/>
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content={t('site.title')} />
+<meta property="og:locale" content={lang === 'ko' ? 'ko_KR' : 'en_US'} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={pageTitle} />
+<meta property="og:description" content={pageDescription} />
+
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content={pageTitle} />
+<meta name="twitter:description" content={pageDescription} />
+
+<ThemeProvider />

@@ -1,0 +1,143 @@
+---
+import Container from './Container.astro';
+import Logo from '../Logo.astro';
+import settings from '../../config/settings.js';
+import { services } from '../../config/services.js';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/ui.js';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const year = new Date().getFullYear();
+---
+
+<footer>
+	<Container>
+		<div class="footer__grid">
+			<div class="footer__brand">
+				<Logo />
+				<p class="footer__tagline">{t('site.description')}</p>
+			</div>
+
+			<div>
+				<p class="footer__heading">{t('footer.services')}</p>
+				<ul class="footer__list">
+					{
+						services.map((service) => (
+							<li>
+								<a href={localizePath(`/${service.slug}`, lang)}>
+									{service[lang].name}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+
+			<div>
+				<p class="footer__heading">{t('footer.links')}</p>
+				<ul class="footer__list">
+					<li><a href={localizePath('/', lang)}>{t('nav.home')}</a></li>
+					<li>
+						<a href={settings.github} target="_blank" rel="noopener noreferrer">
+							{t('footer.github')}
+						</a>
+					</li>
+				</ul>
+			</div>
+
+			<div>
+				<p class="footer__heading">{t('footer.contact')}</p>
+				<ul class="footer__list">
+					<li><a href={`mailto:${settings.contactEmail}`}>{settings.contactEmail}</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<div class="footer__bottom">
+			<p>&copy; {year} {t('footer.copyright')}</p>
+			<p class="footer__credit">
+				<a href="https://github.com/treefarmstudio/odyssey-theme" target="_blank" rel="noopener noreferrer">
+					{t('footer.builtWith')}
+				</a>
+			</p>
+		</div>
+	</Container>
+</footer>
+
+<style>
+	footer {
+		margin-top: var(--section-margin);
+		padding-bottom: 1.5rem;
+		background-color: var(--theme-surface-1);
+		color: var(--theme-on-surface-1);
+		border-top-left-radius: var(--theme-shape-radius);
+		border-top-right-radius: var(--theme-shape-radius);
+	}
+	.footer__grid {
+		padding: 4rem 0 2rem 0;
+		display: grid;
+		grid-template-columns: 2fr 1fr 1fr 1.2fr;
+		gap: 2rem;
+	}
+	.footer__tagline {
+		margin-top: 1rem;
+		max-width: 32ch;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.footer__heading {
+		margin-bottom: 0.75rem;
+		font-weight: 700;
+	}
+	.footer__list {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	.footer__list li {
+		margin-bottom: 0.5rem;
+		font-size: var(--font-size-sm);
+	}
+	.footer__list li a {
+		text-decoration: none;
+		opacity: 0.78;
+		transition: opacity var(--theme-transition);
+	}
+	.footer__list li a:hover {
+		opacity: 1;
+		text-decoration: underline;
+	}
+	.footer__bottom {
+		padding-top: 1.5rem;
+		border-top: 1px solid var(--theme-border);
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 0.5rem;
+	}
+	.footer__bottom p {
+		margin: 0;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.footer__credit a {
+		text-decoration: none;
+	}
+	.footer__credit a:hover {
+		text-decoration: underline;
+	}
+
+	@media (max-width: 860px) {
+		.footer__grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+		.footer__brand {
+			grid-column: 1 / -1;
+		}
+	}
+	@media (max-width: 520px) {
+		.footer__grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

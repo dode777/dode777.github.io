@@ -1,0 +1,21 @@
+---
+// Odyssey Theme의 Container 컴포넌트를 그대로 가져왔습니다.
+const { narrow, as: Tag = 'div', class: className = '' } = Astro.props;
+---
+
+<Tag
+	class={`content__container ${narrow ? 'content__container--narrow' : ''} ${className}`}
+>
+	<slot />
+</Tag>
+
+<style>
+	.content__container {
+		margin: 0 auto;
+		max-width: var(--container-max-width);
+		padding: var(--container-padding);
+	}
+	.content__container--narrow {
+		max-width: var(--container-max-width-narrow);
+	}
+</style>

@@ -1,0 +1,54 @@
+---
+import Container from '../core/Container.astro';
+import Button from '../buttons/Button.astro';
+import settings from '../../config/settings.js';
+import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<Container>
+	<section class="hero">
+		<p class="hero__eyebrow">{t('home.eyebrow')}</p>
+		<h1 class="hero__title">{t('home.title')}</h1>
+		<p class="hero__lede">{t('home.lede')}</p>
+		<div class="hero__actions">
+			<Button href="#services" large>{t('home.ctaPrimary')}</Button>
+			<Button href={`mailto:${settings.contactEmail}`} outlined large>
+				{t('home.ctaSecondary')}
+			</Button>
+		</div>
+	</section>
+</Container>
+
+<style>
+	.hero {
+		padding: clamp(4rem, 12vh, 9rem) 0 clamp(3rem, 8vh, 6rem) 0;
+		max-width: 46rem;
+	}
+	.hero__eyebrow {
+		margin-bottom: 1rem;
+		font-size: var(--font-size-sm);
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--theme-muted);
+	}
+	.hero__title {
+		margin-bottom: 1.5rem;
+		font-size: var(--font-size-xxxl);
+		white-space: pre-line;
+	}
+	.hero__lede {
+		margin-bottom: 2rem;
+		max-width: 46ch;
+		font-size: var(--font-size-md);
+		color: var(--theme-muted);
+	}
+	.hero__actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.75rem;
+	}
+</style>

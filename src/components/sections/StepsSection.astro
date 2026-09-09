@@ -1,0 +1,70 @@
+---
+const { steps } = Astro.props;
+---
+
+<ol class="steps">
+	{
+		steps.map((step) => (
+			<li class="steps__item">
+				<h3 class="steps__title">{step.title}</h3>
+				<p class="steps__body">{step.body}</p>
+			</li>
+		))
+	}
+</ol>
+
+<style>
+	.steps {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		counter-reset: step;
+	}
+	.steps__item {
+		position: relative;
+		padding: 0 0 2rem 3.25rem;
+		counter-increment: step;
+	}
+	.steps__item::before {
+		content: counter(step);
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 2.25rem;
+		height: 2.25rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 3rem;
+		background-color: var(--theme-primary);
+		color: var(--theme-on-primary);
+		font-weight: 700;
+		font-size: var(--font-size-sm);
+	}
+	/* 단계를 잇는 세로선 */
+	.steps__item::after {
+		content: '';
+		position: absolute;
+		top: 2.6rem;
+		left: 1.1rem;
+		bottom: 0.25rem;
+		border-left: 2px dotted var(--theme-border);
+	}
+	.steps__item:last-child {
+		padding-bottom: 0;
+	}
+	.steps__item:last-child::after {
+		display: none;
+	}
+	.steps__title {
+		margin-bottom: 0.35rem;
+		padding-top: 0.15rem;
+		font-family: var(--theme-font-family-sans);
+		font-size: var(--font-size-base);
+		font-weight: 700;
+	}
+	.steps__body {
+		margin: 0;
+		color: var(--theme-muted);
+	}
+</style>

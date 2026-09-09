@@ -1,0 +1,16 @@
+---
+// 첫 페인트 전에 테마를 확정해 화면이 번쩍이는 것을 막습니다.
+---
+
+<script is:inline>
+	(function () {
+		try {
+			var stored = localStorage.getItem('iso-theme');
+			if (stored === 'dark' || stored === 'light') {
+				document.documentElement.setAttribute('data-theme', stored);
+			}
+		} catch (e) {
+			/* localStorage를 못 쓰는 환경에서는 OS 설정을 그대로 따릅니다. */
+		}
+	})();
+</script>

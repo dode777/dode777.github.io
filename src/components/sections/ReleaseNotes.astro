@@ -1,0 +1,108 @@
+---
+import Button from '../buttons/Button.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+
+const { service } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const content = service[lang];
+const releases = content.releases ?? [];
+---
+
+<p class="releases__note">{content.releaseNote}</p>
+
+{
+	releases.length > 0 ? (
+		<ol class="releases">
+			{releases.map((release, index) => (
+				<li class="releases__item">
+					<div class="releases__meta">
+						<span class="releases__version">v{release.version}</span>
+						{index === 0 && <span class="releases__latest">latest</span>}
+						<time class="releases__date" datetime={release.date}>
+							{release.date}
+						</time>
+					</div>
+					<ul class="releases__changes">
+						{release.notes.map((note) => (
+							<li>{note}</li>
+						))}
+					</ul>
+				</li>
+			))}
+		</ol>
+	) : (
+		!content.releaseNote && <p class="releases__empty">{t('detail.releasesEmpty')}</p>
+	)
+}
+
+<p class="releases__link">
+	<Button href={service.releasesUrl} outlined newTab>{t('detail.viewReleases')}</Button>
+</p>
+
+<style>
+	.releases__note {
+		margin-bottom: 2rem;
+		color: var(--theme-muted);
+	}
+	.releases {
+		margin: 0 0 2rem 0;
+		padding: 0;
+		list-style: none;
+		border-left: 2px solid var(--theme-border);
+	}
+	.releases__item {
+		position: relative;
+		padding: 0 0 1.75rem 1.5rem;
+	}
+	.releases__item::before {
+		content: '';
+		position: absolute;
+		top: 0.6rem;
+		left: -0.4rem;
+		width: 0.7rem;
+		height: 0.7rem;
+		border-radius: 50%;
+		background-color: var(--theme-border);
+	}
+	.releases__item:first-child::before {
+		background-color: var(--theme-primary);
+	}
+	.releases__item:last-child {
+		padding-bottom: 0;
+	}
+	.releases__meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.6rem;
+	}
+	.releases__version {
+		font-weight: 700;
+		font-size: var(--font-size-md);
+	}
+	.releases__latest {
+		padding: 0.05rem 0.55rem;
+		border-radius: 3rem;
+		background-color: var(--theme-badge-live-bg);
+		color: var(--theme-badge-live-on);
+		font-size: var(--font-size-sm);
+		font-weight: 700;
+	}
+	.releases__date {
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.releases__changes {
+		margin: 0.4rem 0 0 0;
+		padding-left: 1.1rem;
+		color: var(--theme-muted);
+	}
+	.releases__empty {
+		margin-bottom: 2rem;
+		color: var(--theme-muted);
+	}
+	.releases__link {
+		margin: 0;
+	}
+</style>

@@ -1,0 +1,26 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<a class="skip-link" href="#content">{t('a11y.skipToContent')}</a>
+
+<style>
+	.skip-link {
+		position: absolute;
+		top: 0.5rem;
+		left: 0.5rem;
+		z-index: 200;
+		padding: 0.5rem 1rem;
+		background-color: var(--theme-primary);
+		color: var(--theme-on-primary);
+		border-radius: var(--theme-shape-radius-sm);
+		text-decoration: none;
+		transform: translateY(-200%);
+		transition: transform var(--theme-transition);
+	}
+	.skip-link:focus {
+		transform: translateY(0);
+	}
+</style>

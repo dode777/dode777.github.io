@@ -1,0 +1,70 @@
+---
+import Button from '../buttons/Button.astro';
+import settings from '../../config/settings.js';
+import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+
+const { subject } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+
+const mailto = subject
+	? `mailto:${settings.contactEmail}?subject=${encodeURIComponent(subject)}`
+	: `mailto:${settings.contactEmail}`;
+---
+
+<div class="contact">
+	<p class="contact__lede">{t('contact.lede')}</p>
+
+	<p class="contact__email">
+		<span class="contact__email-label">{t('contact.emailLabel')}</span>
+		<a href={mailto}>{settings.contactEmail}</a>
+	</p>
+
+	<Button href={mailto} large>{t('contact.cta')}</Button>
+
+	<p class="contact__notice">
+		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9" /><path d="M12 11v5M12 8h.01" /></svg>
+		<span>{t('contact.englishNotice')}</span>
+	</p>
+</div>
+
+<style>
+	.contact__lede {
+		max-width: 52ch;
+		color: var(--theme-muted);
+	}
+	.contact__email {
+		margin: 1.5rem 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.75rem;
+	}
+	.contact__email-label {
+		font-size: var(--font-size-sm);
+		font-weight: 700;
+		color: var(--theme-muted);
+	}
+	.contact__email a {
+		font-size: var(--font-size-md);
+		font-weight: 700;
+		text-underline-offset: 0.2em;
+	}
+	.contact__notice {
+		margin: 2rem 0 0 0;
+		padding: 1rem 1.25rem;
+		display: flex;
+		align-items: flex-start;
+		gap: 0.65rem;
+		background-color: var(--theme-bg);
+		border: 1px dashed var(--theme-border);
+		border-radius: var(--theme-shape-radius-sm);
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.contact__notice svg {
+		width: 1.15rem;
+		height: 1.15rem;
+		flex-shrink: 0;
+		margin-top: 0.15rem;
+	}
+</style>
