@@ -1,0 +1,71 @@
+---
+import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+
+const { service } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const shots = service.screenshots ?? [];
+const captions = service[lang].screenshotCaptions ?? [];
+---
+
+{
+	shots.length > 0 ? (
+		<ul class="shots">
+			{shots.map((shot, index) => (
+				<li class="shots__item">
+					<img
+						class="shots__img"
+						src={shot.src}
+						width={shot.width}
+						height={shot.height}
+						alt={captions[index] ?? service[lang].name}
+						loading={index === 0 ? 'eager' : 'lazy'}
+						decoding="async"
+					/>
+					{captions[index] && <p class="shots__caption">{captions[index]}</p>}
+				</li>
+			))}
+		</ul>
+	) : (
+		<div class="shots__placeholder">
+			<p>{t('detail.screenshotsPending')}</p>
+		</div>
+	)
+}
+
+<style>
+	.shots {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+	.shots__img {
+		width: 100%;
+		height: auto;
+		display: block;
+		background-color: var(--theme-surface-1);
+		border: 1px solid var(--theme-border);
+		border-radius: var(--theme-shape-radius-sm);
+	}
+	.shots__caption {
+		margin: 0.75rem 0 0 0;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.shots__placeholder {
+		display: grid;
+		place-items: center;
+		aspect-ratio: 16 / 10;
+		background-color: var(--theme-surface-1);
+		border: 1px dashed var(--theme-border);
+		border-radius: var(--theme-shape-radius-sm);
+	}
+	.shots__placeholder p {
+		margin: 0;
+		color: var(--theme-muted);
+	}
+</style>

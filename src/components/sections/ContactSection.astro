@@ -1,0 +1,223 @@
+---
+import Button from '../buttons/Button.astro';
+import settings from '../../config/settings.js';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/ui.js';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const endpoint = settings.contactFormEndpoint;
+const mailto = `mailto:${settings.contactEmail}`;
+const thanksUrl = new URL(localizePath('/contact/thanks', lang), settings.url).href;
+
+const topics = [
+	t('contact.topicUsage'),
+	t('contact.topicBug'),
+	t('contact.topicFeature'),
+	t('contact.topicEtc'),
+];
+---
+
+<div class="contact">
+	<p class="contact__lede">{t('contact.lede')}</p>
+
+	{
+		endpoint && (
+			<form class="contact__form" action={endpoint} method="POST">
+				{/* FormSubmit 설정값 */}
+				<input type="hidden" name="_subject" value={`[${settings.brand}] 웹사이트 문의`} />
+				<input type="hidden" name="_template" value="table" />
+				<input type="hidden" name="_captcha" value="false" />
+				<input type="hidden" name="_next" value={thanksUrl} />
+				{/* 스팸 봇용 미끼 필드 — 사람에게는 보이지 않습니다 */}
+				<input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+
+				<div class="contact__row">
+					<div class="contact__field">
+						<label for="contactName">
+							{t('contact.nameLabel')}
+							<span class="contact__required">{t('contact.required')}</span>
+						</label>
+						<input
+							id="contactName"
+							name="이름"
+							type="text"
+							required
+							autocomplete="name"
+							placeholder={t('contact.namePlaceholder')}
+						/>
+					</div>
+
+					<div class="contact__field">
+						<label for="contactEmail">
+							{t('contact.emailLabel')}
+							<span class="contact__required">{t('contact.required')}</span>
+						</label>
+						<input
+							id="contactEmail"
+							name="email"
+							type="email"
+							required
+							autocomplete="email"
+							placeholder={t('contact.emailPlaceholder')}
+						/>
+					</div>
+				</div>
+
+				<div class="contact__field">
+					<label for="contactTopic">{t('contact.topicLabel')}</label>
+					<select id="contactTopic" name="문의 유형">
+						{topics.map((topic) => <option value={topic}>{topic}</option>)}
+					</select>
+				</div>
+
+				<div class="contact__field">
+					<label for="contactMessage">
+						{t('contact.messageLabel')}
+						<span class="contact__required">{t('contact.required')}</span>
+					</label>
+					<textarea
+						id="contactMessage"
+						name="문의 내용"
+						rows="7"
+						required
+						placeholder={t('contact.messagePlaceholder')}
+					/>
+				</div>
+
+				<label class="contact__consent">
+					<input type="checkbox" required />
+					<span>{t('contact.consentLabel')}</span>
+				</label>
+
+				<Button large>{t('contact.submit')}</Button>
+
+				<p class="contact__relay">{t('contact.relayNotice')}</p>
+			</form>
+		)
+	}
+
+	<div class="contact__fallback">
+		<p class="contact__fallback-lead">
+			{endpoint ? t('contact.mailFallbackLead') : t('contact.lede')}
+		</p>
+		<p class="contact__email">
+			<a href={mailto}>{settings.contactEmail}</a>
+		</p>
+		<Button href={mailto} outlined>{t('contact.mailFallbackCta')}</Button>
+	</div>
+</div>
+
+<style>
+	.contact__lede {
+		max-width: 56ch;
+		color: var(--theme-muted);
+	}
+	.contact__form {
+		margin-top: 2rem;
+		display: flex;
+		flex-direction: column;
+		gap: 1.25rem;
+	}
+	.contact__row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.25rem;
+	}
+	.contact__field {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4rem;
+	}
+	.contact__field label {
+		display: flex;
+		align-items: baseline;
+		gap: 0.45rem;
+		font-size: var(--font-size-sm);
+		font-weight: 700;
+	}
+	.contact__required {
+		padding: 0 0.4rem;
+		border-radius: 3rem;
+		background-color: var(--theme-bg);
+		border: 1px solid var(--theme-border);
+		font-size: 0.72rem;
+		font-weight: 500;
+		color: var(--theme-muted);
+	}
+	.contact__field input,
+	.contact__field select,
+	.contact__field textarea {
+		width: 100%;
+		padding: 0.7rem 0.9rem;
+		background-color: var(--theme-bg);
+		color: var(--theme-on-bg);
+		border: 1px solid var(--theme-border);
+		border-radius: var(--theme-shape-radius-sm);
+		font-size: var(--font-size-sm);
+		transition: border-color var(--theme-transition);
+	}
+	.contact__field textarea {
+		resize: vertical;
+		min-height: 8rem;
+		line-height: 1.6;
+	}
+	.contact__field input:hover,
+	.contact__field select:hover,
+	.contact__field textarea:hover {
+		border-color: var(--theme-muted);
+	}
+	.contact__field input:focus-visible,
+	.contact__field select:focus-visible,
+	.contact__field textarea:focus-visible {
+		border-color: var(--theme-primary);
+	}
+	.contact__field ::placeholder {
+		color: var(--theme-muted);
+		opacity: 0.75;
+	}
+	.contact__consent {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.6rem;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+		cursor: pointer;
+	}
+	.contact__consent input {
+		margin-top: 0.3rem;
+		flex-shrink: 0;
+		width: 1rem;
+		height: 1rem;
+		accent-color: var(--theme-primary);
+	}
+	.contact__relay {
+		margin: 0;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.contact__fallback {
+		margin-top: 2.5rem;
+		padding-top: 1.75rem;
+		border-top: 1px solid var(--theme-border);
+	}
+	.contact__fallback-lead {
+		margin-bottom: 0.5rem;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.contact__email {
+		margin-bottom: 1rem;
+	}
+	.contact__email a {
+		font-size: var(--font-size-md);
+		font-weight: 700;
+		text-underline-offset: 0.2em;
+	}
+
+	@media (max-width: 640px) {
+		.contact__row {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

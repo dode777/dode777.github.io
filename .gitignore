@@ -1,0 +1,21 @@
+# dependencies
+node_modules/
+
+# astro
+.astro/
+dist/
+
+# 빌드 산출물인 /docs 는 GitHub Pages 배포 소스이므로 커밋합니다. (ignore 하지 않음)
+
+# logs / env
+*.log
+npm-debug.log*
+.env
+.env.production
+
+# os / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/

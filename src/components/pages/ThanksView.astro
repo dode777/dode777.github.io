@@ -1,0 +1,39 @@
+---
+import Page from '../../layouts/Page.astro';
+import Container from '../core/Container.astro';
+import Button from '../buttons/Button.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/ui.js';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+---
+
+<Page title={t('thanks.title')} noindex>
+	<Container narrow>
+		<section class="thanks">
+			<svg class="thanks__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+				<circle cx="12" cy="12" r="9"></circle>
+				<path d="m8.5 12.5 2.5 2.5 4.5-5"></path>
+			</svg>
+			<h1>{t('thanks.title')}</h1>
+			<p class="lead">{t('thanks.lede')}</p>
+			<Button href={localizePath('/', lang)} large>{t('thanks.cta')}</Button>
+		</section>
+	</Container>
+</Page>
+
+<style>
+	.thanks {
+		padding: clamp(4rem, 14vh, 8rem) 0;
+		text-align: center;
+	}
+	.thanks__icon {
+		width: 3.5rem;
+		height: 3.5rem;
+		margin: 0 auto 1.5rem auto;
+		color: var(--theme-primary);
+	}
+	.thanks :global(.btn) {
+		margin: 1rem auto 0 auto;
+	}
+</style>

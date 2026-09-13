@@ -1,0 +1,105 @@
+---
+import Button from '../buttons/Button.astro';
+import StatusBadge from '../StatusBadge.astro';
+import DownloadButton from '../DownloadButton.astro';
+import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/ui.js';
+
+const { service } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const content = service[lang];
+const href = localizePath(`/${service.slug}`, lang);
+---
+
+<article class="service-card">
+	<div class="service-card__head">
+		<StatusBadge status={service.status} />
+		{service.currentVersion && <span class="service-card__version">v{service.currentVersion}</span>}
+	</div>
+
+	<h3 class="service-card__title">
+		<a href={href}>
+			{content.name}
+			<span class="service-card__arrow" aria-hidden="true">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" focusable="false"><path d="M6 18 18 6M9 6h9v9" /></svg>
+			</span>
+		</a>
+	</h3>
+	{content.subName !== content.name && <p class="service-card__subname">{content.subName}</p>}
+
+	<p class="service-card__tagline">{content.tagline}</p>
+	<p class="service-card__summary">{content.summary}</p>
+
+	<div class="service-card__actions">
+		<Button href={href} outlined>{t('card.detail')}</Button>
+		<DownloadButton service={service} compact />
+	</div>
+</article>
+
+<style>
+	.service-card {
+		height: 100%;
+		padding: clamp(1.5rem, 3vw, 2.25rem);
+		display: flex;
+		flex-direction: column;
+		background-color: var(--theme-surface-1);
+		color: var(--theme-on-surface-1);
+		border: 1px solid transparent;
+		border-radius: var(--theme-shape-radius);
+		transition: border-color var(--theme-transition),
+			transform var(--theme-transition);
+	}
+	.service-card:hover {
+		border-color: var(--theme-primary);
+		transform: translateY(-3px);
+	}
+	.service-card__head {
+		margin-bottom: 1.25rem;
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+	.service-card__version {
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.service-card__title {
+		margin-bottom: 0.25rem;
+	}
+	.service-card__title a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.4rem;
+		text-decoration: none;
+	}
+	.service-card__title a:hover {
+		text-decoration: underline;
+		text-underline-offset: 0.2em;
+	}
+	.service-card__arrow svg {
+		width: 0.65em;
+		height: 0.65em;
+		display: block;
+	}
+	.service-card__subname {
+		margin-bottom: 1rem;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.service-card__tagline {
+		margin-bottom: 0.75rem;
+		font-size: var(--font-size-md);
+		font-weight: 700;
+	}
+	.service-card__summary {
+		margin-bottom: 2rem;
+		color: var(--theme-muted);
+	}
+	.service-card__actions {
+		margin-top: auto;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.6rem;
+	}
+</style>

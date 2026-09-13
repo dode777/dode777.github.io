@@ -1,0 +1,48 @@
+---
+import Container from '../core/Container.astro';
+
+const { title, id, narrow = true, lede, surface } = Astro.props;
+---
+
+<section class="page-section" id={id}>
+	<Container>
+		<div
+			class:list={[
+				'page-section__body',
+				narrow && 'page-section__body--narrow',
+				surface && 'page-section__body--surface',
+			]}
+		>
+			{title && <h2 class="page-section__title">{title}</h2>}
+			{lede && <p class="lead page-section__lede">{lede}</p>}
+			<slot />
+		</div>
+	</Container>
+</section>
+
+<style>
+	.page-section {
+		margin: var(--section-margin) auto;
+		scroll-margin-top: 5.5rem;
+	}
+	.page-section__body--narrow {
+		max-width: var(--container-max-width-narrow);
+		margin-inline: auto;
+	}
+	.page-section__body--surface {
+		padding: clamp(2rem, 4vw, 3.5rem);
+		background-color: var(--theme-surface-1);
+		color: var(--theme-on-surface-1);
+		border-radius: var(--theme-shape-radius);
+	}
+	.page-section__title {
+		margin-bottom: 0.75rem;
+	}
+	.page-section__lede {
+		margin-bottom: 2rem;
+		max-width: 60ch;
+	}
+	.page-section__title + :global(*:not(.page-section__lede)) {
+		margin-top: 2rem;
+	}
+</style>

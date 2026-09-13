@@ -1,0 +1,56 @@
+---
+import {
+	languages,
+	getLangFromUrl,
+	useTranslations,
+	localizePath,
+	stripLangFromPath,
+} from '../i18n/ui.js';
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const basePath = stripLangFromPath(Astro.url.pathname);
+---
+
+<nav class="lang-toggle" aria-label={t('a11y.switchLanguage')}>
+	{
+		Object.keys(languages).map((code) => (
+			<a
+				class:list={['lang-toggle__link', code === lang && 'is-active']}
+				href={localizePath(basePath, code)}
+				hreflang={code}
+				lang={code}
+				aria-current={code === lang ? 'true' : undefined}
+			>
+				{code.toUpperCase()}
+			</a>
+		))
+	}
+</nav>
+
+<style>
+	.lang-toggle {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.15rem;
+		border: 1px solid var(--theme-border);
+		border-radius: 3rem;
+	}
+	.lang-toggle__link {
+		padding: 0.2rem 0.65rem;
+		border-radius: 3rem;
+		font-size: var(--font-size-sm);
+		font-weight: 700;
+		text-decoration: none;
+		color: var(--theme-muted);
+		transition: background-color var(--theme-transition),
+			color var(--theme-transition);
+	}
+	.lang-toggle__link:hover {
+		color: var(--theme-on-bg);
+	}
+	.lang-toggle__link.is-active {
+		background-color: var(--theme-primary);
+		color: var(--theme-on-primary);
+	}
+</style>

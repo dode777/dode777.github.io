@@ -1,0 +1,30 @@
+---
+import Container from '../core/Container.astro';
+import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<Container>
+	<section class="hero">
+		<h1 class="hero__title">{t('home.title')}</h1>
+		<p class="hero__lede">{t('home.lede')}</p>
+	</section>
+</Container>
+
+<style>
+	.hero {
+		padding: clamp(3rem, 8vh, 5.5rem) 0 clamp(2rem, 5vh, 3.5rem) 0;
+		max-width: 44rem;
+	}
+	.hero__title {
+		margin-bottom: 1rem;
+		font-size: var(--font-size-xxl);
+	}
+	.hero__lede {
+		margin: 0;
+		max-width: 50ch;
+		font-size: var(--font-size-md);
+		color: var(--theme-muted);
+	}
+</style>

@@ -1,0 +1,62 @@
+html,
+body {
+	height: 100%;
+}
+
+body {
+	max-width: 1920px;
+	margin: 0 auto;
+	background-color: var(--theme-bg);
+	position: relative;
+}
+
+pre {
+  padding: 1em;
+  border-radius: 0.5em;
+  overflow: auto;
+}
+
+pre .language-id {
+  display: none;
+}
+
+/* --- 사이트 전용 유틸리티 --- */
+body {
+	max-width: 1920px;
+	color: var(--theme-on-bg);
+	transition: background-color var(--theme-transition),
+		color var(--theme-transition);
+}
+
+:focus-visible {
+	outline: 3px solid var(--theme-primary);
+	outline-offset: 3px;
+	border-radius: 0.25rem;
+}
+
+hr {
+	border: none;
+	border-top: 1px solid var(--theme-border);
+	margin: 2rem 0;
+}
+
+.visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0 0 0 0);
+	white-space: nowrap;
+	border: 0;
+}
+
+.text-muted {
+	color: var(--theme-muted);
+}
+
+.lead {
+	font-size: var(--font-size-md);
+	color: var(--theme-muted);
+}

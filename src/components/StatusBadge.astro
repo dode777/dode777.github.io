@@ -1,0 +1,33 @@
+---
+import { getLangFromUrl, useTranslations } from '../i18n/ui.js';
+
+const { status } = Astro.props;
+const t = useTranslations(getLangFromUrl(Astro.url));
+---
+
+<span class:list={['badge', `badge--${status}`]}>{t(`status.${status}`)}</span>
+
+<style>
+	.badge {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.15rem 0.7rem;
+		border-radius: 3rem;
+		font-size: var(--font-size-sm);
+		font-weight: 700;
+		line-height: 1.6;
+		white-space: nowrap;
+	}
+	.badge--beta {
+		background-color: var(--theme-badge-soon-bg);
+		color: var(--theme-badge-soon-on);
+	}
+	.badge--dev {
+		background-color: var(--theme-badge-dev-bg);
+		color: var(--theme-badge-dev-on);
+	}
+	.badge--live {
+		background-color: var(--theme-badge-live-bg);
+		color: var(--theme-badge-live-on);
+	}
+</style>

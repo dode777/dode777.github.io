@@ -1,0 +1,103 @@
+---
+// Odyssey Theme의 Button 컴포넌트를 기반으로 disabled 상태와 크기 옵션을 더했습니다.
+const {
+	href,
+	unelevated,
+	outlined,
+	disabled,
+	large,
+	newTab,
+	class: className = '',
+	...rest
+} = Astro.props;
+
+const Tag = disabled ? 'span' : href ? 'a' : 'button';
+---
+
+<Tag
+	class:list={[
+		'btn',
+		unelevated && 'btn--unelevated',
+		outlined && 'btn--outlined',
+		disabled && 'btn--disabled',
+		large && 'btn--large',
+		className,
+	]}
+	href={disabled ? undefined : href}
+	target={newTab && !disabled ? '_blank' : undefined}
+	rel={newTab && !disabled ? 'noopener noreferrer' : undefined}
+	aria-disabled={disabled ? 'true' : undefined}
+	{...rest}
+>
+	<slot />
+	<slot name="icon" />
+</Tag>
+
+<style>
+	.btn {
+		width: fit-content;
+		padding: 0.55rem 1.35rem;
+		margin-bottom: 0;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 0.4rem;
+		background-color: var(--theme-primary);
+		color: var(--theme-on-primary);
+		border: 2px solid var(--theme-primary);
+		border-radius: var(--theme-button-border-radius);
+		font-weight: 700;
+		line-height: 1.35;
+		text-align: center;
+		text-decoration: none;
+		transition: background-color var(--theme-transition),
+			border-color var(--theme-transition), color var(--theme-transition),
+			transform var(--theme-transition);
+	}
+	.btn:hover {
+		background-color: var(--theme-primary-hover);
+		border-color: var(--theme-primary-hover);
+	}
+	.btn--large {
+		padding: 0.75rem 1.75rem;
+		font-size: var(--font-size-base);
+	}
+	.btn--unelevated {
+		background-color: transparent;
+		border-color: transparent;
+		color: var(--theme-on-bg);
+	}
+	.btn--unelevated:hover {
+		background-color: var(--theme-surface-1);
+		border-color: var(--theme-surface-1);
+	}
+	.btn--outlined {
+		color: var(--theme-on-bg);
+		background-color: transparent;
+		border: 2px solid var(--theme-primary);
+	}
+	.btn--outlined:hover {
+		background-color: var(--theme-primary);
+		color: var(--theme-on-primary);
+	}
+	.btn--disabled {
+		background-color: transparent;
+		border: 2px dashed var(--theme-border);
+		color: var(--theme-muted);
+		cursor: not-allowed;
+		font-weight: 500;
+	}
+	.btn--disabled:hover {
+		background-color: transparent;
+		border-color: var(--theme-border);
+	}
+	.btn :global(svg) {
+		width: 1.15em;
+		height: 1.15em;
+		flex-shrink: 0;
+	}
+	button.btn {
+		cursor: pointer;
+		outline-offset: 3px;
+	}
+</style>
