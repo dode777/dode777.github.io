@@ -16,8 +16,7 @@ const t = useTranslations(lang);
 	<HomeHero />
 
 	<Container>
-		<section class="services" id="services">
-			<h2 class="services__title">{t('home.servicesTitle')}</h2>
+		<section class="services" id="services" aria-label={t('site.title')}>
 			<div class="services__grid">
 				{services.map((service) => <ServiceCard service={service} />)}
 			</div>
@@ -34,18 +33,11 @@ const t = useTranslations(lang);
 		margin: var(--section-margin) auto;
 		scroll-margin-top: 5.5rem;
 	}
-	.services__title {
-		margin-bottom: 1.75rem;
-	}
 	.services__grid {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		/* auto-fit 은 빈 트랙을 접기 때문에, 항목이 하나면 카드가 한 줄을 채우고
+		   둘 이상이면 두 칸으로 나뉩니다. */
+		grid-template-columns: repeat(auto-fit, minmax(min(100%, 28rem), 1fr));
 		gap: var(--theme-grid-gap);
-	}
-
-	@media (max-width: 860px) {
-		.services__grid {
-			grid-template-columns: 1fr;
-		}
 	}
 </style>

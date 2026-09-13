@@ -91,8 +91,6 @@ const topics = [
 				</label>
 
 				<Button large>{t('contact.submit')}</Button>
-
-				<p class="contact__relay">{t('contact.relayNotice')}</p>
 			</form>
 		)
 	}
@@ -112,6 +110,8 @@ const topics = [
 	.contact__lede {
 		max-width: 56ch;
 		color: var(--theme-muted);
+		/* 문구에 넣어 둔 줄바꿈을 그대로 살립니다. */
+		white-space: pre-line;
 	}
 	.contact__form {
 		margin-top: 2rem;
@@ -190,11 +190,6 @@ const topics = [
 		width: 1rem;
 		height: 1rem;
 		accent-color: var(--theme-primary);
-	}
-	.contact__relay {
-		margin: 0;
-		font-size: var(--font-size-sm);
-		color: var(--theme-muted);
 	}
 	.contact__fallback {
 		margin-top: 2.5rem;

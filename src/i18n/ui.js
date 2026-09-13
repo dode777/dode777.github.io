@@ -9,9 +9,9 @@ export const defaultLang = settings.defaultLocale;
 
 export const ui = {
 	ko: {
-		'site.title': 'ISO Project',
+		'site.title': 'ISO Service',
 		'site.description':
-			'개인이 만들어 배포하는 프로그램 모음. 예배 화면에 성경 구절을 띄우는 Windows 프로그램 Bible OnAir 를 내려받을 수 있습니다.',
+			'성경 구절 프롬프터 Bible OnAir 를 내려받고 문의할 수 있습니다.',
 
 		'a11y.skipToContent': '본문으로 건너뛰기',
 		'a11y.openMenu': '메뉴 열기',
@@ -22,10 +22,9 @@ export const ui = {
 		'nav.home': '홈',
 		'nav.contact': '문의',
 
-		'home.title': 'ISO Project',
+		'home.title': 'ISO Service',
 		'home.lede':
-			'개인이 만들어 배포하는 프로그램입니다. 각 프로그램의 설명과 내려받기, 버전 기록을 여기서 확인할 수 있습니다.',
-		'home.servicesTitle': '프로그램',
+			'배포 중인 프로그램을 확인하고 내려받으세요.',
 
 		'card.detail': '자세히 보기',
 		'card.download': '내려받기',
@@ -53,7 +52,7 @@ export const ui = {
 
 		'contact.title': '문의',
 		'contact.lede':
-			'사용 중 생긴 문제, 오류 신고, 기능 제안을 아래 양식으로 보내주세요. 적어주신 메일 주소로 답변드립니다.',
+			'문제가 생겼거나 제안할 내용이 있으면 보내주세요.\n적어주신 주소로 답변드립니다.',
 		'contact.nameLabel': '성명',
 		'contact.namePlaceholder': '홍길동',
 		'contact.emailLabel': '답변 받을 이메일',
@@ -64,19 +63,16 @@ export const ui = {
 		'contact.topicFeature': '기능 제안',
 		'contact.topicEtc': '그 밖의 문의',
 		'contact.messageLabel': '문의 내용',
-		'contact.messagePlaceholder':
-			'어떤 상황에서 무엇이 안 되는지 적어주시면 확인이 빠릅니다. 오류 신고라면 사용 중인 Windows 버전과 프로그램 버전을 함께 적어주세요.',
+		'contact.messagePlaceholder': '어떤 상황에서 무엇이 안 되는지 적어주세요.',
 		'contact.consentLabel':
-			'답변을 위해 성명과 이메일 주소를 수집하는 데 동의합니다. 답변 목적 외에는 쓰지 않습니다.',
+			'성명과 이메일 주소를 답변 목적으로만 수집하는 데 동의합니다.',
 		'contact.submit': '문의 보내기',
 		'contact.required': '필수',
-		'contact.relayNotice':
-			'문의 내용은 외부 폼 전송 서비스(FormSubmit)를 거쳐 운영자 메일로 전달됩니다.',
-		'contact.mailFallbackLead': '양식이 동작하지 않으면 메일로 직접 보내주세요.',
+		'contact.mailFallbackLead': '메일로 보내셔도 됩니다.',
 		'contact.mailFallbackCta': '메일 앱으로 보내기',
 
 		'thanks.title': '문의가 접수되었습니다',
-		'thanks.lede': '보내주신 내용을 확인한 뒤 적어주신 메일 주소로 답변드리겠습니다.',
+		'thanks.lede': '적어주신 주소로 답변드리겠습니다.',
 		'thanks.cta': '홈으로 돌아가기',
 
 		'footer.services': '프로그램',
@@ -90,9 +86,9 @@ export const ui = {
 		'404.cta': '홈으로 돌아가기',
 	},
 	en: {
-		'site.title': 'ISO Project',
+		'site.title': 'ISO Service',
 		'site.description':
-			'Programs built and distributed by one developer. Download Bible OnAir, a Windows app that puts scripture on the service screen.',
+			'Bible OnAir — a scripture prompter for Windows. Download it and get in touch here.',
 
 		'a11y.skipToContent': 'Skip to content',
 		'a11y.openMenu': 'Open main menu',
@@ -103,10 +99,9 @@ export const ui = {
 		'nav.home': 'Home',
 		'nav.contact': 'Contact',
 
-		'home.title': 'ISO Project',
+		'home.title': 'ISO Service',
 		'home.lede':
-			'Programs built and distributed by one developer. Read what each one does, download it, and check its version history here.',
-		'home.servicesTitle': 'Programs',
+			'Take a look at what is available and download it.',
 
 		'card.detail': 'Read more',
 		'card.download': 'Download',
@@ -134,7 +129,7 @@ export const ui = {
 
 		'contact.title': 'Contact',
 		'contact.lede':
-			'Send problems, bug reports, or feature requests with the form below. A reply goes to the email address you enter.',
+			'Run into a problem, or have something to suggest? Send it over.\nA reply goes to the address you enter.',
 		'contact.nameLabel': 'Name',
 		'contact.namePlaceholder': 'Your name',
 		'contact.emailLabel': 'Email for the reply',
@@ -145,19 +140,16 @@ export const ui = {
 		'contact.topicFeature': 'Feature request',
 		'contact.topicEtc': 'Something else',
 		'contact.messageLabel': 'Message',
-		'contact.messagePlaceholder':
-			'Describing what you were doing and what went wrong makes it much easier to look into. For a bug report, please include your Windows version and the app version.',
+		'contact.messagePlaceholder': 'What were you doing, and what went wrong?',
 		'contact.consentLabel':
-			'I agree to my name and email address being collected so that I can be replied to. They are not used for anything else.',
+			'I agree to my name and email address being collected for the sole purpose of replying.',
 		'contact.submit': 'Send message',
 		'contact.required': 'Required',
-		'contact.relayNotice':
-			'Messages are delivered to the developer by email through FormSubmit, an external form relay.',
-		'contact.mailFallbackLead': 'If the form does not work, send an email instead.',
+		'contact.mailFallbackLead': 'An email works too.',
 		'contact.mailFallbackCta': 'Open your mail app',
 
 		'thanks.title': 'Your message has been sent',
-		'thanks.lede': 'A reply will go to the email address you entered.',
+		'thanks.lede': 'A reply will go to the address you entered.',
 		'thanks.cta': 'Back to home',
 
 		'footer.services': 'Programs',

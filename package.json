@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "ISO Project 배포 프로그램 안내 페이지 (GitHub Pages, main 브랜치 /docs)",
+  "description": "ISO Service 배포 프로그램 안내 페이지 (GitHub Pages, main 브랜치 /docs)",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",

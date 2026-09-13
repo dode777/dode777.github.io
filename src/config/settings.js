@@ -1,6 +1,6 @@
 export default {
 	/** 헤더 로고 및 저작권 표기 */
-	brand: 'ISO Project',
+	brand: 'ISO Service',
 	/** 배포 도메인 (뒤에 슬래시 없음) */
 	url: 'https://isocompany.co.kr',
 	/** 문의 이메일 */
