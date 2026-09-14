@@ -36,7 +36,6 @@ const pendingNote =
 		<h1 class="service-hero__title">{content.name}</h1>
 		{content.subName !== content.name && <p class="service-hero__subname">{content.subName}</p>}
 		<p class="service-hero__tagline">{content.tagline}</p>
-		<p class="service-hero__summary">{content.summary}</p>
 
 		<div class="service-hero__actions">
 			<DownloadButton service={service} large />
@@ -91,14 +90,9 @@ const pendingNote =
 		color: var(--theme-muted);
 	}
 	.service-hero__tagline {
-		margin-bottom: 1rem;
+		margin-bottom: 2rem;
 		font-size: var(--font-size-md);
 		font-weight: 700;
-	}
-	.service-hero__summary {
-		margin-bottom: 2rem;
-		max-width: 54ch;
-		color: var(--theme-muted);
 	}
 	.service-hero__actions {
 		display: flex;
