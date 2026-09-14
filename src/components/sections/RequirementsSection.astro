@@ -57,6 +57,11 @@ const { columns = [], rows = [] } = requirements;
 	.req__table tbody tr:last-child td {
 		border-bottom: none;
 	}
+	/* 값 열은 헤더와 본문 모두 가운데 정렬해, 병합 칸이 두 열 사이에 놓이게 한다. */
+	.req__table thead th,
+	.req__table tbody td {
+		text-align: center;
+	}
 	.req__table thead th {
 		font-weight: 700;
 		background-color: var(--theme-surface-1);
