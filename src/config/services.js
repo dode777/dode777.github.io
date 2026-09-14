@@ -25,10 +25,10 @@ export const services = [
 			name: 'Bible OnAir',
 			subName: '바이블온에어',
 			tagline: '성경 구절 프롬프터',
-			summary: '노트북에서 구절을 고르면 빔프로젝터 화면에 바로 뜹니다.',
+			summary: '노트북에서 장·절만 고르면 빔프로젝터 화면에 바로 뜹니다.',
 			description: [
-				'예배나 모임에서 앞 화면에 성경 본문을 띄울 때 씁니다.\n조작 창은 노트북에 두고 고른 구절만 앞으로 내보냅니다.',
-				'인터넷이 없어도 돌아갑니다. 새 버전이 나오면 프로그램이 알려줍니다.',
+				'주일 예배나 모임에서 앞 화면에 성경 본문을 띄울 때 쓰는 무료 프로그램입니다.\n조작 창은 노트북에 두고 고른 구절만 앞 화면으로 내보냅니다.',
+				'성경 본문이 프로그램에 함께 들어 있어 인터넷이 없어도 돌아갑니다.',
 			],
 			screenshotCaptions: [
 				'조작 창. 왼쪽에서 구절을 고르고 오른쪽에서 미리 봅니다.',
@@ -37,27 +37,27 @@ export const services = [
 			features: [
 				{
 					title: '듀얼 모니터 송출',
-					body: '연결된 모니터 중에서 출력 화면을 고릅니다.\n모니터를 꽂거나 빼면 목록이 바로 바뀝니다.',
+					body: '빔프로젝터를 꽂고 출력 화면만 고르면 끝입니다.\n모니터를 뺐다 꽂아도 목록이 알아서 갱신됩니다.',
 				},
 				{
 					title: '책 → 장 → 절 선택',
-					body: '세 단계로 고릅니다. Ctrl+F를 누르면 66권을 한 번에 찾습니다.',
+					body: '책·장·절을 차례로 누르면 범위가 잡힙니다.\nCtrl+F로는 66권을 한 번에 찾습니다.',
 				},
 				{
 					title: '표시 모드 3종',
-					body: '한 절씩 · 두세 절씩 · 연속 스크롤 중에 고릅니다.\n글자 크기는 네 단계입니다.',
+					body: '한 절씩 · 두세 절씩 · 연속 스크롤 중에 고릅니다.\n절이 길면 화면에 맞게 글자가 줄어듭니다.',
 				},
 				{
 					title: '송출 대기',
-					body: '다음 구절을 미리 골라 뒀다가 O로 내보내고 Q로 가립니다.',
+					body: '찬양이나 기도 중에 다음 구절을 골라 두면, O 한 번으로 내보냅니다. Q를 누르면 화면을 가립니다.',
 				},
 				{
 					title: '즐겨찾기',
-					body: '자주 쓰는 구절을 저장해 두고 다른 컴퓨터로 옮겨 씁니다.',
+					body: '자주 쓰는 구절을 저장해 두면 다음 주에 바로 불러옵니다.\n파일로 내보내 다른 컴퓨터에서도 씁니다.',
 				},
 				{
 					title: '자동 업데이트',
-					body: '새 버전이 나오면 프로그램 안에서 알리고 바로 설치합니다.',
+					body: '새 버전이 나오면 프로그램이 알려줍니다. 이 페이지를 다시 찾을 일이 없습니다.',
 				},
 			],
 			requirements: [
@@ -99,7 +99,7 @@ export const services = [
 			name: 'Bible OnAir',
 			subName: 'Bible OnAir',
 			tagline: 'A scripture prompter',
-			summary: 'Pick a passage on your laptop; it lands on the projector.',
+			summary: 'Pick a book, chapter and verse on your laptop; it lands on the projector.',
 			description: [
 				'For putting scripture on the front screen during a service or meeting.\nThe control window stays on your laptop; only the passage goes out.',
 				'It works without an internet connection, and tells you when a new version is out.',
@@ -111,27 +111,27 @@ export const services = [
 			features: [
 				{
 					title: 'Dual-screen output',
-					body: 'Pick which connected display to send to.\nThe list updates as monitors come and go.',
+					body: 'Plug in the projector and pick which display to send to.\nThe list refreshes as monitors come and go.',
 				},
 				{
 					title: 'Book → chapter → verse',
-					body: 'Pick in three steps, or press Ctrl+F to search all 66 books.',
+					body: 'Tap through book, chapter and verse.\nCtrl+F searches all 66 books at once.',
 				},
 				{
 					title: 'Three display modes',
-					body: 'One verse, a few verses, or continuous scroll.\nFour type sizes.',
+					body: 'One verse, a few verses, or continuous scroll.\nLong verses shrink to fit the screen.',
 				},
 				{
 					title: 'Staged output',
-					body: 'Queue the next passage, send it with O, blank the screen with Q.',
+					body: 'Line up the next passage during a song, then send it with O. Q blanks the screen.',
 				},
 				{
 					title: 'Favourites',
-					body: 'Save the passages you use often and move them between computers.',
+					body: 'Save the passages you use often and they are there next week.\nExport them to move between computers.',
 				},
 				{
 					title: 'Automatic updates',
-					body: 'New versions are announced and installed inside the app.',
+					body: 'The app tells you when a new version is out. No need to come back here.',
 				},
 			],
 			requirements: [
