@@ -76,4 +76,9 @@ const { columns = [], rows = [] } = requirements;
 	.req__table tbody td:not(.req__shared) {
 		width: 30%;
 	}
+	/* 무료·유료가 같은 항목은 두 칸을 합쳐 가운데에 둡니다.
+	   `.req__table td` 보다 우선순위가 높아야 정렬이 적용됩니다. */
+	.req__table td.req__shared {
+		text-align: center;
+	}
 </style>
