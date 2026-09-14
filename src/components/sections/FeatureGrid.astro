@@ -3,6 +3,18 @@ import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
 
 const { features } = Astro.props;
 const t = useTranslations(getLangFromUrl(Astro.url));
+
+/** 문구 안의 `Ctrl + F` 처럼 백틱으로 감싼 부분을 키 표기로 렌더링합니다. */
+function segments(text) {
+	return text
+		.split(/(`[^`]+`)/)
+		.filter(Boolean)
+		.map((part) =>
+			part.startsWith('`') && part.endsWith('`')
+				? { code: part.slice(1, -1) }
+				: { text: part }
+		);
+}
 ---
 
 <ul class="feature-grid">
@@ -15,7 +27,11 @@ const t = useTranslations(getLangFromUrl(Astro.url));
 						<span class="feature-grid__planned">{t('detail.featuresPlanned')}</span>
 					)}
 				</h3>
-				<p class="feature-grid__body">{feature.body}</p>
+				<p class="feature-grid__body">
+					{segments(feature.body).map((seg) =>
+						seg.code ? <kbd>{seg.code}</kbd> : seg.text
+					)}
+				</p>
 			</li>
 		))
 	}

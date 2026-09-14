@@ -1,5 +1,4 @@
 ---
-import Button from '../buttons/Button.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
 
 const { service } = Astro.props;
@@ -38,14 +37,11 @@ const releases = content.releases ?? [];
 	)
 }
 
-<p class="releases__link">
-	<Button href={service.releasesUrl} outlined newTab>{t('detail.viewReleases')}</Button>
-</p>
-
 <style>
 	.releases__note {
 		margin-bottom: 2rem;
 		color: var(--theme-muted);
+		white-space: pre-line;
 	}
 	.releases {
 		margin: 0 0 2rem 0;
@@ -100,11 +96,11 @@ const releases = content.releases ?? [];
 		padding-left: 1.1rem;
 		color: var(--theme-muted);
 	}
+	.releases__changes li {
+		white-space: pre-line;
+	}
 	.releases__empty {
 		margin-bottom: 2rem;
 		color: var(--theme-muted);
-	}
-	.releases__link {
-		margin: 0;
 	}
 </style>

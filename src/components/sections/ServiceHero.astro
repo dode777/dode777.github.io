@@ -1,6 +1,5 @@
 ---
 import Container from '../core/Container.astro';
-import Button from '../buttons/Button.astro';
 import StatusBadge from '../StatusBadge.astro';
 import DownloadButton from '../DownloadButton.astro';
 import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/ui.js';
@@ -41,9 +40,6 @@ const pendingNote =
 
 		<div class="service-hero__actions">
 			<DownloadButton service={service} large />
-			<Button href={service.releasesUrl} outlined large newTab>
-				{t('detail.viewReleases')}
-			</Button>
 		</div>
 
 		{

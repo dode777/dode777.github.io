@@ -24,7 +24,7 @@ export const ui = {
 
 		'home.title': 'ISO Service',
 		'home.lede':
-			'직접 개발해 배포하는 프로그램입니다. 아래에서 내려받으실 수 있습니다.',
+			'이소컴퍼니의 서비스입니다.\n아래에서 확인해보세요.',
 
 		'card.detail': '자세히 보기',
 		'card.download': '다운로드',
@@ -37,14 +37,13 @@ export const ui = {
 		'detail.backToHome': '목록으로',
 		'detail.overview': '소개',
 		'detail.features': '주요 기능',
-		'detail.screenshots': '프로그램 화면',
+		'detail.screenshots': '{name} 사용 예시',
 		'detail.screenshotsPending': '화면 이미지는 준비 중입니다.',
-		'detail.releases': '업데이트 내역',
+		'detail.releases': 'Releases',
 		'detail.releasesEmpty': '아직 공개된 릴리스가 없습니다.',
 		'detail.requirements': '사용 환경',
-		'detail.faq': '자주 묻는 질문',
+		'detail.faq': '자주 묻는 질문(FAQ)',
 		'detail.currentVersion': '최신 버전',
-		'detail.viewReleases': '모든 버전 보기',
 		'detail.downloadWindows': 'Windows용 다운로드',
 		'detail.downloadStore': '크롬 웹스토어에서 설치',
 		'detail.downloadPendingRelease': '첫 정식 릴리스를 준비하고 있습니다.',
@@ -52,7 +51,7 @@ export const ui = {
 
 		'contact.title': '문의',
 		'contact.lede':
-			'사용 중 발생한 문제나 기능 제안을 남겨주세요.\n적어주신 메일 주소로 답변드립니다.',
+			'사용 중 발생한 문제나 기능 제안을 남겨주세요.\n적어주신 메일 주소로 빠른 시일 내 답변드리겠습니다.',
 		'contact.nameLabel': '이름',
 		'contact.namePlaceholder': '홍길동',
 		'contact.emailLabel': '이메일',
@@ -101,7 +100,7 @@ export const ui = {
 
 		'home.title': 'ISO Service',
 		'home.lede':
-			'Software I develop and distribute. Downloads are below.',
+			'Services by ISO Company.\nTake a look below.',
 
 		'card.detail': 'Read more',
 		'card.download': 'Download',
@@ -114,14 +113,13 @@ export const ui = {
 		'detail.backToHome': 'All programs',
 		'detail.overview': 'Overview',
 		'detail.features': 'Key features',
-		'detail.screenshots': 'Screenshots',
+		'detail.screenshots': '{name} in use',
 		'detail.screenshotsPending': 'Screenshots are on the way.',
-		'detail.releases': 'Release notes',
+		'detail.releases': 'Releases',
 		'detail.releasesEmpty': 'No public releases yet.',
 		'detail.requirements': 'System requirements',
-		'detail.faq': 'Frequently asked questions',
+		'detail.faq': 'Frequently asked questions (FAQ)',
 		'detail.currentVersion': 'Current version',
-		'detail.viewReleases': 'All releases',
 		'detail.downloadWindows': 'Download for Windows',
 		'detail.downloadStore': 'Install from the Chrome Web Store',
 		'detail.downloadPendingRelease': 'The first public release is being prepared.',
@@ -129,7 +127,7 @@ export const ui = {
 
 		'contact.title': 'Contact',
 		'contact.lede':
-			'Report a problem or suggest a feature below.\nA reply will be sent to the address you provide.',
+			'Report a problem or suggest a feature below.\nA reply will be sent to the address you provide as soon as possible.',
 		'contact.nameLabel': 'Name',
 		'contact.namePlaceholder': 'Your name',
 		'contact.emailLabel': 'Email',

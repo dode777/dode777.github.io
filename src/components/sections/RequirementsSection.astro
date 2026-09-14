@@ -1,48 +1,79 @@
 ---
+/**
+ * 사용 환경 표.
+ * requirements = { columns: ['무료', '유료'], rows: [{ label, shared }|{ label, values: [] }] }
+ * shared 가 있는 행은 두 열에 걸쳐 하나의 값을 표시합니다.
+ */
 const { requirements } = Astro.props;
+const { columns = [], rows = [] } = requirements;
 ---
 
-<dl class="requirements">
-	{
-		requirements.map((item) => (
-			<div class="requirements__row">
-				<dt>{item.label}</dt>
-				<dd>{item.value}</dd>
-			</div>
-		))
-	}
-</dl>
+<div class="req">
+	<table class="req__table">
+		<thead>
+			<tr>
+				<td class="req__corner"></td>
+				{columns.map((column) => <th scope="col">{column}</th>)}
+			</tr>
+		</thead>
+		<tbody>
+			{
+				rows.map((row) => (
+					<tr>
+						<th scope="row">{row.label}</th>
+						{row.shared ? (
+							<td colspan={columns.length} class="req__shared">
+								{row.shared}
+							</td>
+						) : (
+							row.values.map((value) => <td>{value}</td>)
+						)}
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+</div>
 
 <style>
-	.requirements {
-		margin: 0;
+	.req {
+		overflow-x: auto;
 		border: 1px solid var(--theme-border);
 		border-radius: var(--theme-shape-radius-sm);
-		overflow: hidden;
 	}
-	.requirements__row {
-		display: grid;
-		grid-template-columns: 12rem 1fr;
-		gap: 1rem;
-		padding: 0.9rem 1.25rem;
+	.req__table {
+		width: 100%;
+		border-collapse: collapse;
+		font-size: var(--font-size-sm);
+		white-space: nowrap;
+	}
+	.req__table th,
+	.req__table td {
+		padding: 0.85rem 1.25rem;
+		text-align: left;
 		border-bottom: 1px solid var(--theme-border);
 	}
-	.requirements__row:last-child {
+	.req__table tbody tr:last-child th,
+	.req__table tbody tr:last-child td {
 		border-bottom: none;
 	}
-	.requirements dt {
-		margin: 0;
+	.req__table thead th {
+		font-weight: 700;
+		background-color: var(--theme-surface-1);
+		color: var(--theme-on-surface-1);
+	}
+	.req__corner {
+		background-color: var(--theme-surface-1);
+		border-bottom: 1px solid var(--theme-border);
+	}
+	.req__table tbody th {
+		width: 10rem;
 		font-weight: 700;
 	}
-	.requirements dd {
-		margin: 0;
+	.req__table tbody td {
 		color: var(--theme-muted);
 	}
-
-	@media (max-width: 600px) {
-		.requirements__row {
-			grid-template-columns: 1fr;
-			gap: 0.15rem;
-		}
+	.req__table tbody td:not(.req__shared) {
+		width: 30%;
 	}
 </style>

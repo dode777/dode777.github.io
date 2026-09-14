@@ -26,5 +26,7 @@ const t = useTranslations(getLangFromUrl(Astro.url));
 		max-width: 50ch;
 		font-size: var(--font-size-md);
 		color: var(--theme-muted);
+		/* 문구에 넣어 둔 줄바꿈을 그대로 살립니다. */
+		white-space: pre-line;
 	}
 </style>
