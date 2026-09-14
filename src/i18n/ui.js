@@ -11,7 +11,7 @@ export const ui = {
 	ko: {
 		'site.title': 'ISO Service',
 		'site.description':
-			'성경 구절 프롬프터 Bible OnAir를 무료로 받아 쓰세요.',
+			'예배용 성경 구절 프롬프터 Bible OnAir. Windows용 무료 프로그램입니다.',
 
 		'a11y.skipToContent': '본문으로 건너뛰기',
 		'a11y.openMenu': '메뉴 열기',
@@ -24,7 +24,7 @@ export const ui = {
 
 		'home.title': 'ISO Service',
 		'home.lede':
-			'직접 만들어 올려둔 프로그램입니다. 받아서 바로 쓰시면 됩니다.',
+			'직접 개발해 배포하는 프로그램입니다. 아래에서 내려받으실 수 있습니다.',
 
 		'card.detail': '자세히 보기',
 		'card.download': '다운로드',
@@ -37,7 +37,7 @@ export const ui = {
 		'detail.backToHome': '목록으로',
 		'detail.overview': '소개',
 		'detail.features': '주요 기능',
-		'detail.screenshots': '화면',
+		'detail.screenshots': '프로그램 화면',
 		'detail.screenshotsPending': '화면 이미지는 준비 중입니다.',
 		'detail.releases': '업데이트 내역',
 		'detail.releasesEmpty': '아직 공개된 릴리스가 없습니다.',
@@ -52,7 +52,7 @@ export const ui = {
 
 		'contact.title': '문의',
 		'contact.lede':
-			'쓰다가 막히는 곳이나 더 필요한 기능이 있으면 남겨주세요.\n적어주신 메일로 답을 드립니다.',
+			'사용 중 발생한 문제나 기능 제안을 남겨주세요.\n적어주신 메일 주소로 답변드립니다.',
 		'contact.nameLabel': '이름',
 		'contact.namePlaceholder': '홍길동',
 		'contact.emailLabel': '이메일',
@@ -62,17 +62,17 @@ export const ui = {
 		'contact.topicBug': '오류 신고',
 		'contact.topicFeature': '기능 제안',
 		'contact.topicEtc': '기타',
-		'contact.messageLabel': '내용',
-		'contact.messagePlaceholder': '어떤 상황에서 무엇이 안 되는지 적어주세요.',
+		'contact.messageLabel': '문의 내용',
+		'contact.messagePlaceholder': '문제가 발생한 상황과 증상을 함께 적어주시면 확인이 빠릅니다.',
 		'contact.consentLabel':
 			'답변을 위해 이름과 이메일을 수집하는 데 동의합니다.',
 		'contact.submit': '보내기',
 		'contact.required': '필수',
-		'contact.mailFallbackLead': '메일이 편하시면 이쪽으로 보내주세요.',
+		'contact.mailFallbackLead': '아래 주소로 메일을 보내셔도 됩니다.',
 		'contact.mailFallbackCta': '메일 앱으로 보내기',
 
-		'thanks.title': '문의를 받았습니다',
-		'thanks.lede': '적어주신 메일로 답을 드리겠습니다.',
+		'thanks.title': '문의를 접수했습니다',
+		'thanks.lede': '적어주신 메일 주소로 답변드리겠습니다.',
 		'thanks.cta': '홈으로',
 
 		'footer.services': '프로그램',
@@ -88,7 +88,7 @@ export const ui = {
 	en: {
 		'site.title': 'ISO Service',
 		'site.description':
-			'Bible OnAir — a free scripture prompter for Windows.',
+			'Bible OnAir — a free scripture prompter for Windows worship services.',
 
 		'a11y.skipToContent': 'Skip to content',
 		'a11y.openMenu': 'Open main menu',
@@ -101,27 +101,27 @@ export const ui = {
 
 		'home.title': 'ISO Service',
 		'home.lede':
-			'Programs I build and put up here. Take what you need.',
+			'Software I develop and distribute. Downloads are below.',
 
 		'card.detail': 'Read more',
 		'card.download': 'Download',
 		'card.comingSoon': 'Coming soon',
 
-		'status.live': 'Stable',
+		'status.live': 'Stable release',
 		'status.beta': 'Release pending',
 		'status.dev': 'In development',
 
 		'detail.backToHome': 'All programs',
 		'detail.overview': 'Overview',
-		'detail.features': 'Main features',
-		'detail.screenshots': 'Screens',
+		'detail.features': 'Key features',
+		'detail.screenshots': 'Screenshots',
 		'detail.screenshotsPending': 'Screenshots are on the way.',
-		'detail.releases': 'What changed',
+		'detail.releases': 'Release notes',
 		'detail.releasesEmpty': 'No public releases yet.',
-		'detail.requirements': 'What you need',
+		'detail.requirements': 'System requirements',
 		'detail.faq': 'Frequently asked questions',
-		'detail.currentVersion': 'Latest',
-		'detail.viewReleases': 'See every version',
+		'detail.currentVersion': 'Current version',
+		'detail.viewReleases': 'All releases',
 		'detail.downloadWindows': 'Download for Windows',
 		'detail.downloadStore': 'Install from the Chrome Web Store',
 		'detail.downloadPendingRelease': 'The first public release is being prepared.',
@@ -129,7 +129,7 @@ export const ui = {
 
 		'contact.title': 'Contact',
 		'contact.lede':
-			'Stuck on something, or missing a feature? Leave a note.\nI will reply to the address you give.',
+			'Report a problem or suggest a feature below.\nA reply will be sent to the address you provide.',
 		'contact.nameLabel': 'Name',
 		'contact.namePlaceholder': 'Your name',
 		'contact.emailLabel': 'Email',
@@ -140,16 +140,16 @@ export const ui = {
 		'contact.topicFeature': 'Feature request',
 		'contact.topicEtc': 'Something else',
 		'contact.messageLabel': 'Message',
-		'contact.messagePlaceholder': 'What were you doing, and what went wrong?',
+		'contact.messagePlaceholder': 'Describing the situation and the symptom helps it get looked at faster.',
 		'contact.consentLabel':
 			'I agree to my name and email being collected so I can be replied to.',
 		'contact.submit': 'Send',
 		'contact.required': 'Required',
-		'contact.mailFallbackLead': 'Prefer email? Write to this address.',
+		'contact.mailFallbackLead': 'You may also write to the address below.',
 		'contact.mailFallbackCta': 'Open your mail app',
 
-		'thanks.title': 'Got it',
-		'thanks.lede': 'I will reply to the address you gave.',
+		'thanks.title': 'Your message has been received',
+		'thanks.lede': 'A reply will be sent to the address you provided.',
 		'thanks.cta': 'Back to home',
 
 		'footer.services': 'Programs',
