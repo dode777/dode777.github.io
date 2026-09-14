@@ -25,10 +25,10 @@ export const services = [
 			name: 'Bible OnAir',
 			subName: '바이블온에어',
 			tagline: '성경 구절 프롬프터',
-			summary: '노트북에서 구절을 고르면 빔프로젝터 화면에 바로 띄웁니다.',
+			summary: '노트북에서 구절을 고르면 빔프로젝터 화면에 바로 뜹니다.',
 			description: [
-				'예배나 모임에서 앞 화면에 성경 본문을 띄울 때 씁니다.\n조작 창은 노트북에 두고, 고른 구절만 앞 화면으로 내보냅니다.',
-				'인터넷 없이 동작하고, 새 버전이 나오면 프로그램이 알려줍니다.',
+				'예배나 모임에서 앞 화면에 성경 본문을 띄울 때 씁니다.\n조작 창은 노트북에 두고 고른 구절만 앞으로 내보냅니다.',
+				'인터넷이 없어도 돌아갑니다. 새 버전이 나오면 프로그램이 알려줍니다.',
 			],
 			screenshotCaptions: [
 				'조작 창. 왼쪽에서 구절을 고르고 오른쪽에서 미리 봅니다.',
@@ -37,49 +37,49 @@ export const services = [
 			features: [
 				{
 					title: '듀얼 모니터 송출',
-					body: '조작 창은 노트북에, 본문은 앞 화면에 전체 화면으로 나갑니다.',
+					body: '연결된 모니터 중에서 출력 화면을 고릅니다.\n모니터를 꽂거나 빼면 목록이 바로 바뀝니다.',
 				},
 				{
 					title: '책 → 장 → 절 선택',
-					body: '세 단계로 고르고, Ctrl+F 로 전권을 검색합니다.',
+					body: '세 단계로 고릅니다. Ctrl+F를 누르면 66권을 한 번에 찾습니다.',
 				},
 				{
 					title: '표시 모드 3종',
-					body: '한 절씩 · 두세 절씩 · 연속 스크롤.\n글자 크기는 4단계입니다.',
+					body: '한 절씩 · 두세 절씩 · 연속 스크롤 중에 고릅니다.\n글자 크기는 네 단계입니다.',
 				},
 				{
 					title: '송출 대기',
-					body: '다음 구절을 미리 골라 두고, O 로 내보내고 Q 로 가립니다.',
+					body: '다음 구절을 미리 골라 뒀다가 O로 내보내고 Q로 가립니다.',
 				},
 				{
 					title: '즐겨찾기',
-					body: '자주 쓰는 구절을 저장하고 파일로 옮깁니다.',
+					body: '자주 쓰는 구절을 저장해 두고 다른 컴퓨터로 옮겨 씁니다.',
 				},
 				{
 					title: '자동 업데이트',
-					body: '새 버전이 나오면 프로그램 안에서 알리고 설치합니다.',
+					body: '새 버전이 나오면 프로그램 안에서 알리고 바로 설치합니다.',
 				},
 			],
 			requirements: [
 				{ label: '운영체제', value: 'Windows 10 이상' },
-				{ label: '설치', value: '설치 파일 실행 · 관리자 권한 불필요' },
-				{ label: '화면', value: '빔프로젝터 또는 보조 모니터' },
-				{ label: '인터넷', value: '불필요' },
+				{ label: '관리자 권한', value: '필요 없습니다' },
+				{ label: '출력 화면', value: '빔프로젝터 또는 보조 모니터' },
+				{ label: '인터넷', value: '없어도 됩니다' },
 				{ label: '무료 버전', value: '개역한글' },
 				{ label: '유료 버전 (준비 중)', value: '개역개정' },
 			],
 			faq: [
 				{
 					q: 'macOS나 리눅스에서도 쓸 수 있나요?',
-					a: 'Windows 전용입니다.',
+					a: 'Windows에서만 됩니다.',
 				},
 				{
-					q: '설치했는데 "알 수 없는 앱" 경고가 뜹니다.',
-					a: '「추가 정보」를 누르고 「실행」을 누르면 설치됩니다.\n코드 서명을 아직 붙이지 않아 나오는 안내입니다.',
+					q: '설치하려는데 "알 수 없는 앱" 경고가 뜹니다.',
+					a: '「추가 정보」 → 「실행」 순서로 누르면 설치가 이어집니다.\n코드 서명을 아직 붙이지 않아 뜨는 경고입니다.',
 				},
 				{
 					q: '모니터 목록에 빔프로젝터가 안 보입니다.',
-					a: 'Windows 디스플레이 설정을 「확장」으로 바꿔 주세요.\n복제 상태에서는 화면 하나로만 잡힙니다.',
+					a: 'Windows 디스플레이 설정을 「확장」으로 바꿔 주세요.\n복제로 되어 있으면 화면 하나로만 잡힙니다.',
 				},
 			],
 			releases: [
@@ -88,18 +88,18 @@ export const services = [
 					date: '2026-09-11',
 					notes: [
 						'첫 공개 버전입니다.',
-						'설치한 뒤로는 새 버전을 프로그램이 알려줍니다.',
-						'개역한글 본문이 들어 있어 인터넷 없이 씁니다.',
+						'한 번 설치하면 다음 버전부터는 프로그램이 알려줍니다.',
+						'개역한글 본문이 들어 있어 인터넷 없이 돌아갑니다.',
 					],
 				},
 			],
-			releaseNote: '전체 버전은 GitHub Releases 에서 볼 수 있습니다.',
+			releaseNote: '모든 버전은 GitHub Releases에 있습니다.',
 		},
 		en: {
 			name: 'Bible OnAir',
 			subName: 'Bible OnAir',
 			tagline: 'A scripture prompter',
-			summary: 'Pick a passage on your laptop and it goes straight to the projector.',
+			summary: 'Pick a passage on your laptop; it lands on the projector.',
 			description: [
 				'For putting scripture on the front screen during a service or meeting.\nThe control window stays on your laptop; only the passage goes out.',
 				'It works without an internet connection, and tells you when a new version is out.',
@@ -111,7 +111,7 @@ export const services = [
 			features: [
 				{
 					title: 'Dual-screen output',
-					body: 'Controls on your laptop, the passage full screen up front.',
+					body: 'Pick which connected display to send to.\nThe list updates as monitors come and go.',
 				},
 				{
 					title: 'Book → chapter → verse',
@@ -136,16 +136,16 @@ export const services = [
 			],
 			requirements: [
 				{ label: 'Operating system', value: 'Windows 10 or later' },
-				{ label: 'Installation', value: 'Run the installer — no admin rights needed' },
-				{ label: 'Display', value: 'A projector or second monitor' },
-				{ label: 'Internet', value: 'Not required' },
+				{ label: 'Admin rights', value: 'Not needed' },
+				{ label: 'Second screen', value: 'A projector or second monitor' },
+				{ label: 'Internet', value: 'Not needed' },
 				{ label: 'Free version', value: '개역한글 (Korean Revised Version)' },
 				{ label: 'Paid version (in preparation)', value: '개역개정 (Revised New Korean Standard)' },
 			],
 			faq: [
 				{
 					q: 'Is there a macOS or Linux build?',
-					a: 'Windows only.',
+					a: 'Windows only, for now.',
 				},
 				{
 					q: 'Windows shows an "unrecognised app" warning.',
@@ -167,7 +167,7 @@ export const services = [
 					],
 				},
 			],
-			releaseNote: 'Every version is listed on GitHub Releases.',
+			releaseNote: 'Every version lives on GitHub Releases.',
 		},
 	},
 ];
