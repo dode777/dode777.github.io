@@ -13,9 +13,13 @@ const { service } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const content = service[lang];
+const metaDescription = [content.summary, content.summaryDetail]
+	.filter(Boolean)
+	.join('. ')
+	.replace('.. ', '. ');
 ---
 
-<Page title={content.name} description={content.summary}>
+<Page title={content.name} description={metaDescription}>
 	<ServiceHero service={service} />
 
 	<Section title={t('detail.overview')} id="overview">

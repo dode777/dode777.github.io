@@ -30,7 +30,9 @@ export const services = [
 			name: 'Bible OnAir',
 			subName: '바이블온에어',
 			tagline: '성경 구절 프롬프터',
-			summary: '노트북에서 장·절을 선택하면 빔프로젝터 화면에 즉시 출력됩니다.',
+			summary: '찾는 순간 바로 화면으로, 예배의 몰입을 돕는 가장 빠른 성경 프롬프터',
+			summaryDetail:
+				'제어 화면과 송출 화면의 이원화로, 성경 구절을 실시간으로 안전하고 빠르게 제공할 수 있습니다.',
 			description: [
 				'예배 중 성경 구절을 빠르게 찾아 띄워야 했던 적 있으신가요?',
 				'갑작스러운 성경 인용에도 당황하지 마세요.\nBible OnAir는 간단한 조작으로 신속한 구절 송출을 지원합니다.',
@@ -105,7 +107,9 @@ export const services = [
 			subName: 'Bible OnAir',
 			tagline: 'A scripture prompter',
 			summary:
-				'Select a book, chapter and verse on your laptop and it is displayed on the projector.',
+				'Found and on screen in an instant — the fastest scripture prompter for worship',
+			summaryDetail:
+				'A separate control window and output screen put verses up quickly and safely, live.',
 			description: [
 				'Ever had to find and put a verse on screen in the middle of a service?',
 				'An unexpected reading need not throw you.\nBible OnAir sends the passage out in a few keystrokes.',

@@ -28,8 +28,8 @@ const href = localizePath(`/${service.slug}`, lang);
 	</h3>
 	{content.subName !== content.name && <p class="service-card__subname">{content.subName}</p>}
 
-	<p class="service-card__tagline">{content.tagline}</p>
-	<p class="service-card__summary">{content.summary}</p>
+	<p class="service-card__tagline">{content.summary}</p>
+	{content.summaryDetail && <p class="service-card__summary">{content.summaryDetail}</p>}
 
 	<div class="service-card__actions">
 		<Button href={href} outlined>{t('card.detail')}</Button>
