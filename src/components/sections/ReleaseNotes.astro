@@ -1,5 +1,10 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+import {
+	DOWNLOADABLE_RELEASES,
+	installerDownloadUrl,
+	installerFileName,
+} from '../../config/services.js';
 
 const { service } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -17,18 +22,49 @@ const releases = content.releases ?? [];
 				<li class="releases__item">
 					<div class="releases__meta">
 						<span class="releases__version">v{release.version}</span>
-						{index === 0 && <span class="releases__latest">latest</span>}
+						{index === 0 && (
+							<span class="releases__latest">{t('releases.latest')}</span>
+						)}
 						{release.date && (
 							<time class="releases__date" datetime={release.date}>
 								{release.date}
 							</time>
 						)}
 					</div>
-					<ul class="releases__changes">
-						{release.notes.map((note) => (
-							<li>{note}</li>
-						))}
-					</ul>
+
+					<p class="releases__summary">{release.summary}</p>
+
+					{release.details?.length > 0 && (
+						<details class="releases__details">
+							<summary>
+								<span>{t('releases.details')}</span>
+								<svg class="releases__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" /></svg>
+							</summary>
+							<ul class="releases__changes">
+								{release.details.map((line) => (
+									<li>{line}</li>
+								))}
+							</ul>
+						</details>
+					)}
+
+					{/* 최신 버전부터 정해진 개수까지만 설치 파일을 제공합니다. */}
+					{index < DOWNLOADABLE_RELEASES && (
+						<p class="releases__download">
+							<a
+								class="releases__download-link"
+								href={installerDownloadUrl(release.version)}
+							>
+								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+									<path d="M12 3.5v11" />
+									<path d="M7.5 10.5 12 15l4.5-4.5" />
+									<path d="M4.5 18.5h15" />
+								</svg>
+								{t('releases.download')}
+							</a>
+							<span class="releases__file">{installerFileName(release.version)}</span>
+						</p>
+					)}
 				</li>
 			))}
 		</ol>
@@ -44,14 +80,14 @@ const releases = content.releases ?? [];
 		white-space: pre-line;
 	}
 	.releases {
-		margin: 0 0 2rem 0;
+		margin: 0;
 		padding: 0;
 		list-style: none;
 		border-left: 2px solid var(--theme-border);
 	}
 	.releases__item {
 		position: relative;
-		padding: 0 0 1.75rem 1.5rem;
+		padding: 0 0 2.25rem 1.5rem;
 	}
 	.releases__item::before {
 		content: '';
@@ -80,7 +116,7 @@ const releases = content.releases ?? [];
 		font-size: var(--font-size-md);
 	}
 	.releases__latest {
-		padding: 0.05rem 0.55rem;
+		padding: 0.05rem 0.6rem;
 		border-radius: 3rem;
 		background-color: var(--theme-badge-live-bg);
 		color: var(--theme-badge-live-on);
@@ -91,13 +127,90 @@ const releases = content.releases ?? [];
 		font-size: var(--font-size-sm);
 		color: var(--theme-muted);
 	}
-	.releases__changes {
-		margin: 0.4rem 0 0 0;
-		padding-left: 1.1rem;
+	.releases__summary {
+		margin: 0.5rem 0 0 0;
 		color: var(--theme-muted);
+		white-space: pre-line;
+	}
+
+	.releases__details {
+		margin-top: 0.85rem;
+		border: 1px solid var(--theme-border);
+		border-radius: var(--theme-shape-radius-sm);
+		overflow: hidden;
+	}
+	.releases__details summary {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		padding: 0.7rem 1rem;
+		font-size: var(--font-size-sm);
+		font-weight: 700;
+		cursor: pointer;
+		list-style: none;
+	}
+	.releases__details summary::-webkit-details-marker {
+		display: none;
+	}
+	.releases__details summary:hover {
+		background-color: var(--theme-surface-1);
+	}
+	.releases__chevron {
+		width: 1.1rem;
+		height: 1.1rem;
+		flex-shrink: 0;
+		transition: transform var(--theme-transition);
+	}
+	.releases__details[open] .releases__chevron {
+		transform: rotate(180deg);
+	}
+	.releases__changes {
+		margin: 0;
+		padding: 0 1rem 1rem 2.1rem;
+		color: var(--theme-muted);
+		font-size: var(--font-size-sm);
 	}
 	.releases__changes li {
+		margin-bottom: 0.4rem;
 		white-space: pre-line;
+	}
+	.releases__changes li:last-child {
+		margin-bottom: 0;
+	}
+
+	.releases__download {
+		margin: 0.85rem 0 0 0;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 0.6rem 0.85rem;
+	}
+	.releases__download-link {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.35rem 0.9rem;
+		border: 1px solid var(--theme-border);
+		border-radius: 3rem;
+		font-size: var(--font-size-sm);
+		font-weight: 700;
+		text-decoration: none;
+		transition: border-color var(--theme-transition),
+			background-color var(--theme-transition);
+	}
+	.releases__download-link:hover {
+		border-color: var(--theme-primary);
+		background-color: var(--theme-surface-1);
+	}
+	.releases__download-link svg {
+		width: 1.05em;
+		height: 1.05em;
+	}
+	.releases__file {
+		font-family: var(--theme-font-family-mono);
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
 	}
 	.releases__empty {
 		margin-bottom: 2rem;

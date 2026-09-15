@@ -8,9 +8,24 @@ import settings from './settings.js';
  * status: 'live' — 정식 버전  |  'beta' — 출시 준비 중  |  'dev' — 개발 중
  */
 
-/** 버전을 올릴 때는 이 두 값만 고치면 설치 파일 주소까지 함께 바뀝니다. */
-const BIBLE_ONAIR_VERSION = '1.0.0';
-const BIBLE_ONAIR_INSTALLER = `Bible-OnAir-Setup-${BIBLE_ONAIR_VERSION}.exe`;
+const RELEASES_REPO = 'https://github.com/dode777/Bible-OnAir-Releases';
+
+/** 내려받기를 제공하는 버전 수 — 최신, 한 단계 전, 두 단계 전. */
+export const DOWNLOADABLE_RELEASES = 3;
+
+/** 설치 파일 이름과 주소는 버전 번호에서 그대로 만들어집니다. */
+export function installerFileName(version) {
+	return `Bible-OnAir-Setup-${version}.exe`;
+}
+export function installerDownloadUrl(version) {
+	return `${RELEASES_REPO}/releases/download/v${version}/${installerFileName(version)}`;
+}
+
+/**
+ * 새 버전을 낼 때는 이 값을 올리고, 아래 releases 배열 맨 앞에 같은 버전의
+ * 설명을 추가하면 됩니다. 설치 파일 주소는 자동으로 따라갑니다.
+ */
+const BIBLE_ONAIR_VERSION = '1.1.0';
 
 export const services = [
 	{
@@ -18,10 +33,10 @@ export const services = [
 		status: 'live',
 		downloadKind: 'windows',
 		/** 릴리스 목록이 아니라 설치 파일을 바로 내려받도록 연결합니다. */
-		downloadUrl: `https://github.com/dode777/Bible-OnAir-Releases/releases/download/v${BIBLE_ONAIR_VERSION}/${BIBLE_ONAIR_INSTALLER}`,
+		downloadUrl: installerDownloadUrl(BIBLE_ONAIR_VERSION),
 		downloadReady: true,
 		currentVersion: BIBLE_ONAIR_VERSION,
-		installerName: BIBLE_ONAIR_INSTALLER,
+		installerName: installerFileName(BIBLE_ONAIR_VERSION),
 		screenshots: [
 			{ src: '/assets/screenshots/bible-onair-control.png', width: 1100, height: 720 },
 			{ src: '/assets/screenshots/bible-onair-screen.png', width: 1599, height: 999 },
@@ -92,11 +107,23 @@ export const services = [
 			],
 			releases: [
 				{
-					version: BIBLE_ONAIR_VERSION,
-					date: '2026-09-11',
-					notes: [
-						'무료 버전에 개역한글 번역본을 기본 내장하여,\n인터넷 연결이 불가능한 환경에서도 끊김 없이 안정적으로 동작하도록 했습니다.',
+					version: '1.1.0',
+					date: '2026-09-15',
+					summary: '사용자의 개선 요청사항을 반영했습니다.',
+					details: [
+						'설정 탭 동작 방식을 수정하였습니다.',
+						'구절 선택 관련 버그를 수정하였습니다.',
+						'송출 모드(두세절씩)를 자연스럽게 다듬었습니다. 폰트 크기에 따라서 출력되는 구절 수가 더 자연스럽게 조정됩니다.',
+						'창 크기에 따른 UI를 개선하여 더 이상 미리보기 창이 과도하게 작게 출력되지 않습니다.',
+						'폰트 크기 종류가 추가되었습니다. \'작게\'부터 \'아주 크게\' 까지 총 5단계로 설정할 수 있습니다.',
 					],
+				},
+				{
+					version: '1.0.0',
+					date: '2026-09-11',
+					summary:
+						'무료 버전에 개역한글 번역본을 기본 내장하여,\n인터넷 연결이 불가능한 환경에서도 끊김 없이 안정적으로 동작하도록 했습니다.',
+					details: [],
 				},
 			],
 			releaseNote:
@@ -169,11 +196,23 @@ export const services = [
 			],
 			releases: [
 				{
-					version: BIBLE_ONAIR_VERSION,
-					date: '2026-09-11',
-					notes: [
-						'The free version bundles the 개역한글 translation,\nso it runs reliably even where no internet connection is available.',
+					version: '1.1.0',
+					date: '2026-09-15',
+					summary: 'Changes requested by people using the app.',
+					details: [
+						'Reworked how the settings tab behaves.',
+						'Fixed bugs in passage selection.',
+						'Smoothed out the multi-verse display mode — the number of verses shown now follows the type size more sensibly.',
+						'Improved the layout at smaller window sizes, so the preview pane is no longer squeezed.',
+						'Added more type sizes — five steps, from the smallest to the largest.',
 					],
+				},
+				{
+					version: '1.0.0',
+					date: '2026-09-11',
+					summary:
+						'The free version bundles the 개역한글 translation,\nso it runs reliably even where no internet connection is available.',
+					details: [],
 				},
 			],
 			releaseNote:
