@@ -121,9 +121,10 @@ export const services = [
 				{
 					version: '1.0.0',
 					date: '2026-09-11',
-					summary:
+					summary: 'Bible OnAir가 출시되었습니다.',
+					details: [
 						'무료 버전에 개역한글 번역본을 기본 내장하여,\n인터넷 연결이 불가능한 환경에서도 끊김 없이 안정적으로 동작하도록 했습니다.',
-					details: [],
+					],
 				},
 			],
 			releaseNote:
@@ -210,9 +211,10 @@ export const services = [
 				{
 					version: '1.0.0',
 					date: '2026-09-11',
-					summary:
+					summary: 'Bible OnAir has been released.',
+					details: [
 						'The free version bundles the 개역한글 translation,\nso it runs reliably even where no internet connection is available.',
-					details: [],
+					],
 				},
 			],
 			releaseNote:
