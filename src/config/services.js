@@ -10,8 +10,32 @@ import settings from './settings.js';
 
 const RELEASES_REPO = 'https://github.com/dode777/Bible-OnAir-Releases';
 
-/** 내려받기를 제공하는 버전 수 — 최신, 한 단계 전, 두 단계 전. */
+/** 내려받기를 제공하는 계열 수 — 최신 계열을 포함해 3개. */
 export const DOWNLOADABLE_RELEASES = 3;
+
+/**
+ * 내려받기를 제공할 버전을 고릅니다. releases 는 최신이 맨 앞인 순서여야 합니다.
+ *
+ * 같은 마이너 계열(1.1.x)에서는 마지막 패치만 남깁니다. 1.1.1 이 1.1.0 의 버그를
+ * 고친 버전이라면 1.1.0 을 내려받게 둘 이유가 없기 때문입니다. 그렇게 추린 계열
+ * 중 최신 DOWNLOADABLE_RELEASES 개만 제공합니다.
+ *
+ * 특정 버전을 내려받기에서 빼야 할 때는 그 릴리스에 hideDownload: true 를 답니다.
+ * (변경 내역에는 그대로 남고 버튼만 사라집니다.)
+ */
+export function downloadableVersions(releases = []) {
+	const lines = new Set();
+	const picked = [];
+	for (const release of releases) {
+		if (release.hideDownload) continue;
+		const line = String(release.version).split('.').slice(0, 2).join('.');
+		if (lines.has(line)) continue;
+		lines.add(line);
+		picked.push(release.version);
+		if (picked.length === DOWNLOADABLE_RELEASES) break;
+	}
+	return new Set(picked);
+}
 
 /** 설치 파일 이름과 주소는 버전 번호에서 그대로 만들어집니다. */
 export function installerFileName(version) {

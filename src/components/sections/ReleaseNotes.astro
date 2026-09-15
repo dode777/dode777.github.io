@@ -1,7 +1,7 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
 import {
-	DOWNLOADABLE_RELEASES,
+	downloadableVersions,
 	installerDownloadUrl,
 	installerFileName,
 } from '../../config/services.js';
@@ -11,6 +11,7 @@ const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const content = service[lang];
 const releases = content.releases ?? [];
+const downloadable = downloadableVersions(releases);
 ---
 
 <p class="releases__note">{content.releaseNote}</p>
@@ -48,8 +49,8 @@ const releases = content.releases ?? [];
 						</details>
 					)}
 
-					{/* 최신 버전부터 정해진 개수까지만 설치 파일을 제공합니다. */}
-					{index < DOWNLOADABLE_RELEASES && (
+					{/* 계열별 마지막 패치만, 그중에서도 최신 몇 개만 설치 파일을 제공합니다. */}
+					{downloadable.has(release.version) && (
 						<p class="releases__download">
 							<a
 								class="releases__download-link"
