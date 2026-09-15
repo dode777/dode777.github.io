@@ -1,11 +1,13 @@
 ---
 import Button from './buttons/Button.astro';
+import { installerDownloadUrl } from './../config/services.js';
 import { getLangFromUrl, useTranslations } from '../i18n/ui.js';
 
-const { service, large, compact } = Astro.props;
+const { service, large, compact, version } = Astro.props;
 const t = useTranslations(getLangFromUrl(Astro.url));
 
-const ready = Boolean(service.downloadReady && service.downloadUrl);
+const href = version ? installerDownloadUrl(version) : service.downloadUrl;
+const ready = Boolean(service.downloadReady && href);
 const labelKey =
 	service.downloadKind === 'chrome-store'
 		? 'detail.downloadStore'
@@ -15,7 +17,7 @@ const label = compact ? t('card.download') : t(labelKey);
 
 {
 	ready ? (
-		<Button href={service.downloadUrl} large={large} newTab>
+		<Button href={href} large={large} newTab>
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" slot="icon">
 				<path d="M12 3.5v11" />
 				<path d="M7.5 10.5 12 15l4.5-4.5" />

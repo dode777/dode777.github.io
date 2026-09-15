@@ -9,6 +9,25 @@ import settings from './settings.js';
  */
 
 const RELEASES_REPO = 'https://github.com/dode777/Bible-OnAir-Releases';
+const RELEASES_RAW = 'https://raw.githubusercontent.com/dode777/Bible-OnAir-Releases/main';
+
+/** 릴리스 노트 원본. 앱과 같은 파일을 읽습니다. */
+export const UPDATE_NOTES_URL = {
+	ko: `${RELEASES_RAW}/UPDATE-NOTES.md`,
+	en: `${RELEASES_RAW}/UPDATE-NOTES.en.md`,
+};
+
+/** 버전별 게시 시각·설치 파일 크기가 담긴 파일. 없으면 아직 배포 전으로 봅니다. */
+export function releaseMetaUrl(version) {
+	return `${RELEASES_REPO}/releases/download/v${version}/latest.yml`;
+}
+
+/**
+ * 릴리스 노트에는 적혀 있지만 설치 파일이 아직 올라오지 않은 버전을 보여줄지 여부.
+ * 기본은 감춥니다. 보여주면 받을 수 없는 버전이 최신으로 올라오고, 같은 계열의
+ * 받을 수 있는 버전이 대신 가려집니다.
+ */
+export const SHOW_UNRELEASED_NOTES = false;
 
 /** 내려받기를 제공하는 계열 수 — 최신 계열을 포함해 3개. */
 export const DOWNLOADABLE_RELEASES = 3;

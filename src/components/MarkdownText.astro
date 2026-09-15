@@ -1,0 +1,20 @@
+---
+/** **굵게** 와 [글자](주소) 만 해석해 그립니다. 그 밖의 표기는 글자 그대로 둡니다. */
+import { inlineSegments } from '../lib/update-notes.js';
+
+const { text } = Astro.props;
+---
+
+{
+	inlineSegments(text ?? '').map((segment) =>
+		segment.bold ? (
+			<strong>{segment.bold}</strong>
+		) : segment.href ? (
+			<a href={segment.href} target="_blank" rel="noopener noreferrer">
+				{segment.link}
+			</a>
+		) : (
+			segment.text
+		)
+	)
+}

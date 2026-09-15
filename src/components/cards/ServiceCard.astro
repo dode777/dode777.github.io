@@ -3,6 +3,7 @@ import Button from '../buttons/Button.astro';
 import StatusBadge from '../StatusBadge.astro';
 import DownloadButton from '../DownloadButton.astro';
 import { getLangFromUrl, useTranslations, localizePath } from '../../i18n/ui.js';
+import { resolveReleases } from '../../lib/releases.js';
 
 const { service } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -10,12 +11,15 @@ const t = useTranslations(lang);
 
 const content = service[lang];
 const href = localizePath(`/${service.slug}`, lang);
+
+const { latest } = await resolveReleases(service, lang);
+const version = latest?.version ?? service.currentVersion;
 ---
 
 <article class="service-card">
 	<div class="service-card__head">
 		<StatusBadge status={service.status} />
-		{service.currentVersion && <span class="service-card__version">v{service.currentVersion}</span>}
+		{version && <span class="service-card__version">v{version}</span>}
 	</div>
 
 	<h3 class="service-card__title">
@@ -33,7 +37,7 @@ const href = localizePath(`/${service.slug}`, lang);
 
 	<div class="service-card__actions">
 		<Button href={href} outlined>{t('card.detail')}</Button>
-		<DownloadButton service={service} compact />
+		<DownloadButton service={service} version={version} compact />
 	</div>
 </article>
 

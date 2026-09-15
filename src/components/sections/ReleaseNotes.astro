@@ -1,76 +1,105 @@
 ---
+import MarkdownText from '../MarkdownText.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
 import {
 	downloadableVersions,
 	installerDownloadUrl,
 	installerFileName,
 } from '../../config/services.js';
+import { formatSize } from '../../lib/update-notes.js';
+import { resolveReleases } from '../../lib/releases.js';
 
 const { service } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const content = service[lang];
-const releases = content.releases ?? [];
-const downloadable = downloadableVersions(releases);
+
+const { entries } = await resolveReleases(service, lang);
+const downloadable = downloadableVersions(entries);
 ---
 
-<p class="releases__note">{content.releaseNote}</p>
-
 {
-	releases.length > 0 ? (
-		<ol class="releases">
-			{releases.map((release, index) => (
-				<li class="releases__item">
-					<div class="releases__meta">
-						<span class="releases__version">v{release.version}</span>
-						{index === 0 && (
-							<span class="releases__latest">{t('releases.latest')}</span>
+	entries.length > 0 ? (
+		<>
+			<p class="releases__note">{content.releaseNote}</p>
+
+			<ol class="releases">
+				{entries.map((release, index) => (
+					<li class="releases__item">
+						<div class="releases__meta">
+							<span class="releases__version">v{release.version}</span>
+							{index === 0 && (
+								<span class="releases__latest">{t('releases.latest')}</span>
+							)}
+							{release.date && (
+								<time class="releases__date" datetime={release.date}>
+									{release.date}
+								</time>
+							)}
+						</div>
+
+						{release.lead && (
+							<p class="releases__summary">
+								<MarkdownText text={release.lead} />
+							</p>
 						)}
-						{release.date && (
-							<time class="releases__date" datetime={release.date}>
-								{release.date}
-							</time>
+
+						{release.blocks.length > 0 && (
+							<details class="releases__details">
+								<summary>
+									<span>{t('releases.details')}</span>
+									<svg class="releases__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" /></svg>
+								</summary>
+								<div class="releases__body">
+									{release.blocks.map((block) =>
+										block.type === 'heading' ? (
+											<h4 class="releases__subheading">
+												<MarkdownText text={block.text} />
+											</h4>
+										) : block.type === 'list' ? (
+											<ul class="releases__changes">
+												{block.items.map((item) => (
+													<li>
+														<MarkdownText text={item} />
+													</li>
+												))}
+											</ul>
+										) : (
+											<p class="releases__paragraph">
+												<MarkdownText text={block.text} />
+											</p>
+										)
+									)}
+								</div>
+							</details>
 						)}
-					</div>
 
-					<p class="releases__summary">{release.summary}</p>
-
-					{release.details?.length > 0 && (
-						<details class="releases__details">
-							<summary>
-								<span>{t('releases.details')}</span>
-								<svg class="releases__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" /></svg>
-							</summary>
-							<ul class="releases__changes">
-								{release.details.map((line) => (
-									<li>{line}</li>
-								))}
-							</ul>
-						</details>
-					)}
-
-					{/* 계열별 마지막 패치만, 그중에서도 최신 몇 개만 설치 파일을 제공합니다. */}
-					{downloadable.has(release.version) && (
-						<p class="releases__download">
-							<a
-								class="releases__download-link"
-								href={installerDownloadUrl(release.version)}
-							>
-								<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-									<path d="M12 3.5v11" />
-									<path d="M7.5 10.5 12 15l4.5-4.5" />
-									<path d="M4.5 18.5h15" />
-								</svg>
-								{t('releases.download')}
-							</a>
-							<span class="releases__file">{installerFileName(release.version)}</span>
-						</p>
-					)}
-				</li>
-			))}
-		</ol>
+						{/* 계열별 마지막 패치만, 그중에서도 최신 몇 개만 설치 파일을 제공합니다. */}
+						{downloadable.has(release.version) && (
+							<p class="releases__download">
+								<a
+									class="releases__download-link"
+									href={installerDownloadUrl(release.version)}
+								>
+									<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+										<path d="M12 3.5v11" />
+										<path d="M7.5 10.5 12 15l4.5-4.5" />
+										<path d="M4.5 18.5h15" />
+									</svg>
+									{t('releases.download')}
+								</a>
+								<span class="releases__file">
+									{installerFileName(release.version)}
+									{release.size && ` · ${formatSize(release.size)}`}
+								</span>
+							</p>
+						)}
+					</li>
+				))}
+			</ol>
+		</>
 	) : (
-		!content.releaseNote && <p class="releases__empty">{t('detail.releasesEmpty')}</p>
+		<p class="releases__empty">{t('releases.unavailable')}</p>
 	)
 }
 
@@ -166,11 +195,25 @@ const downloadable = downloadableVersions(releases);
 	.releases__details[open] .releases__chevron {
 		transform: rotate(180deg);
 	}
+	.releases__body {
+		padding: 0 1rem 1rem 1rem;
+		font-size: var(--font-size-sm);
+	}
+	.releases__subheading {
+		margin: 0.75rem 0 0.5rem 0;
+		font-family: var(--theme-font-family-sans);
+		font-size: var(--font-size-sm);
+		font-weight: 700;
+	}
+	.releases__paragraph {
+		margin: 0 0 0.6rem 0;
+		color: var(--theme-muted);
+		white-space: pre-line;
+	}
 	.releases__changes {
 		margin: 0;
-		padding: 0 1rem 1rem 2.1rem;
+		padding-left: 1.1rem;
 		color: var(--theme-muted);
-		font-size: var(--font-size-sm);
 	}
 	.releases__changes li {
 		margin-bottom: 0.4rem;
@@ -214,7 +257,7 @@ const downloadable = downloadableVersions(releases);
 		color: var(--theme-muted);
 	}
 	.releases__empty {
-		margin-bottom: 2rem;
+		margin: 0;
 		color: var(--theme-muted);
 	}
 </style>
