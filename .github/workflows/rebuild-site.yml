@@ -1,0 +1,54 @@
+# 릴리스 노트(UPDATE-NOTES.md)가 바뀌면 사이트를 다시 빌드해 docs/ 에 반영합니다.
+#
+# 트리거
+#   repository_dispatch : 릴리스 저장소에서 호출 (릴리스 게시 · 노트 수정 시)
+#   workflow_dispatch   : Actions 탭에서 수동 실행
+#   schedule            : 위 둘이 모두 실패했을 때를 대비한 안전망 (월 1회)
+#
+# 빌드 결과가 이전과 같으면 커밋하지 않으므로, 헛도는 날에는 기록이 남지 않습니다.
+name: Rebuild site
+
+on:
+  repository_dispatch:
+    types: [update-notes]
+  workflow_dispatch:
+  schedule:
+    # 매월 1일 03:00 KST (UTC 18:00, 전달 말일)
+    - cron: '0 18 1 * *'
+
+permissions:
+  contents: write
+
+# 여러 번 호출돼도 한 번에 하나씩만 돌게 합니다.
+concurrency:
+  group: rebuild-site
+  cancel-in-progress: false
+
+jobs:
+  rebuild:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+
+      # npm install 이 아니라 npm ci — 잠금 파일을 그대로 써야 빌드 결과가 매번 같습니다.
+      # (의존성이 조금이라도 달라지면 내용이 같아도 산출물이 바뀌어 헛커밋이 생깁니다.)
+      - run: npm ci
+
+      - run: npm run build
+
+      - name: 바뀐 게 있을 때만 커밋
+        run: |
+          git add -A docs
+          if git diff --cached --quiet -- docs; then
+            echo "빌드 결과가 이전과 같습니다. 커밋하지 않습니다."
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Chore: 릴리스 노트 반영 (자동 빌드)'
+          git push
