@@ -53,6 +53,10 @@ public/
   assets/fonts/       Lato, Roboto Serif (라틴)
   assets/screenshots/ 프로그램 화면 이미지
 docs/                 ★ 빌드 산출물 = 배포본 (커밋 대상)
+scripts/
+  track-downloads.mjs 릴리스 다운로드 수 수집 (Actions 에서 실행)
+data/
+  download-stats.csv  다운로드 수 기록 (사이트 빌드에는 쓰이지 않습니다)
 ```
 
 ## 자주 하는 작업
@@ -80,6 +84,34 @@ docs/                 ★ 빌드 산출물 = 배포본 (커밋 대상)
 `public/assets/screenshots/` 의 파일을 바꾸고, 크기가 달라졌다면
 `src/config/services.js`의 `screenshots[].width` / `height` 도 함께 맞춰주세요.
 설명 문구는 같은 파일의 `screenshotCaptions` 에 있습니다.
+
+## 다운로드 수 기록
+
+GitHub 는 릴리스 파일마다 누적 다운로드 수를 세지만 기간별 추이는 주지 않고, 웹 화면에도
+그 숫자가 나오지 않습니다. 그래서 `Track download counts` 워크플로가 하루 한 번
+API 를 읽어 `data/download-stats.csv` 에 한 줄씩 쌓습니다.
+
+```
+recorded_at,tag,asset,download_count
+2026-09-19T13:14:57Z,v1.1.1,Bible-OnAir-Setup-1.1.1.exe,7
+```
+
+두 날짜의 같은 항목을 빼면 그 사이의 증가분이 나옵니다. 값이 하나도 바뀌지 않은 날에는
+기록하지 않으므로, 빈 날은 '변화 없음' 으로 읽으면 됩니다.
+
+숫자를 읽을 때 유의할 점이 있습니다.
+
+- **횟수이지 사람 수가 아닙니다.** 같은 사람이 여러 번 받으면 그만큼 올라갑니다.
+- **자동 업데이트가 섞입니다.** electron-updater 가 새 버전을 받을 때도 `.exe` 가 함께 잡힙니다.
+- **`latest.yml` 은 업데이트 확인 횟수에 가깝습니다.** 실행 중인 앱이 최신 릴리스의 이 파일을
+  읽어 버전을 확인하므로, 설치본 규모를 가늠하는 쪽은 `.exe` 보다 이 값입니다.
+- 크롤러가 받아간 것도 포함됩니다.
+
+지금 값을 바로 보려면 아래 주소를 열면 됩니다 (토큰 없이도 조회됩니다).
+
+```
+https://api.github.com/repos/dode777/Bible-OnAir-Releases/releases
+```
 
 ## 문의 양식
 
