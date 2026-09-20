@@ -10,6 +10,9 @@ export const defaultLang = settings.defaultLocale;
 export const ui = {
 	ko: {
 		'site.title': 'ISO Service',
+		/* 검색 결과에 뜨는 제목. 브랜드명만으로는 아무도 찾지 못하므로
+		   무엇을 하는 곳인지 앞에 둡니다. 화면에는 쓰지 않습니다. */
+		'site.metaTitle': '예배용 성경 자막 프로그램 · Bible OnAir | ISO Service',
 		'site.description':
 			'예배용 성경 구절 프롬프터 Bible OnAir. Windows용 무료 프로그램입니다.',
 
@@ -90,6 +93,8 @@ export const ui = {
 	},
 	en: {
 		'site.title': 'ISO Service',
+		'site.metaTitle':
+			'Scripture prompter for worship · Bible OnAir | ISO Service',
 		'site.description':
 			'Bible OnAir — a free scripture prompter for Windows worship services.',
 

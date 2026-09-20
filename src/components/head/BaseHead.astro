@@ -14,12 +14,30 @@ import '../../styles/index.css';
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
-const { title, description, noindex } = Astro.props;
+const { title, description, noindex, image } = Astro.props;
 
-const pageTitle = title ? `${title} | ${t('site.title')}` : t('site.title');
+const pageTitle = title ? `${title} | ${t('site.title')}` : t('site.metaTitle');
 const pageDescription = description ?? t('site.description');
-const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? settings.url);
+
+/**
+ * 배포된 주소는 모두 끝에 슬래시가 붙습니다(build.format: 'directory').
+ * canonical · hreflang · 사이트맵이 한 글자도 다르지 않아야 같은 페이지로 묶입니다.
+ */
+const withSlash = (pathname) => (pathname.endsWith('/') ? pathname : `${pathname}/`);
+
+const siteURL = Astro.site ?? new URL(settings.url);
+const canonicalURL = new URL(withSlash(Astro.url.pathname), siteURL);
 const basePath = stripLangFromPath(Astro.url.pathname);
+const ogImageURL = new URL(image ?? settings.ogImage.src, siteURL);
+
+const webSiteSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'WebSite',
+	name: t('site.title'),
+	url: siteURL.href,
+	description: t('site.description'),
+	inLanguage: lang === 'ko' ? 'ko-KR' : 'en',
+};
 ---
 
 <meta charset="utf-8" />
@@ -37,14 +55,14 @@ const basePath = stripLangFromPath(Astro.url.pathname);
 		<link
 			rel="alternate"
 			hreflang={code}
-			href={new URL(localizePath(basePath, code), settings.url).href}
+			href={new URL(withSlash(localizePath(basePath, code)), siteURL).href}
 		/>
 	))
 }
 <link
 	rel="alternate"
 	hreflang="x-default"
-	href={new URL(localizePath(basePath, 'ko'), settings.url).href}
+	href={new URL(withSlash(localizePath(basePath, 'ko')), siteURL).href}
 />
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -63,9 +81,22 @@ const basePath = stripLangFromPath(Astro.url.pathname);
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={pageTitle} />
 <meta property="og:description" content={pageDescription} />
+<meta property="og:image" content={ogImageURL} />
+<meta property="og:image:width" content={String(settings.ogImage.width)} />
+<meta property="og:image:height" content={String(settings.ogImage.height)} />
+<meta property="og:image:alt" content={pageTitle} />
 
-<meta name="twitter:card" content="summary" />
+<meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={pageTitle} />
 <meta name="twitter:description" content={pageDescription} />
+<meta name="twitter:image" content={ogImageURL} />
+
+<script
+	type="application/ld+json"
+	is:inline
+	set:html={JSON.stringify(webSiteSchema)}
+/>
+
+<slot />
 
 <ThemeProvider />

@@ -88,6 +88,9 @@ export const services = [
 			name: 'Bible OnAir',
 			subName: '바이블온에어',
 			tagline: '성경 구절 프롬프터',
+			/* 검색 결과 제목에만 쓰는 한 줄. 화면의 tagline 과 달리 무엇을 위한
+			   프로그램인지까지 담아, 제품명을 모르는 사람도 찾을 수 있게 합니다. */
+			metaTagline: '예배용 성경 구절 프롬프터',
 			summary: '찾는 순간 바로 화면으로, 예배의 몰입을 돕는 가장 빠른 성경 프롬프터',
 			summaryDetail:
 				'제어 화면과 송출 화면의 이원화로, 성경 구절을 실시간으로 안전하고 빠르게 제공할 수 있습니다.',
@@ -177,6 +180,7 @@ export const services = [
 			name: 'Bible OnAir',
 			subName: 'Bible OnAir',
 			tagline: 'A scripture prompter',
+			metaTagline: 'A scripture prompter for worship',
 			summary:
 				'Found and on screen in an instant — the fastest scripture prompter for worship',
 			summaryDetail:

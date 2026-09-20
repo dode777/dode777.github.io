@@ -8,6 +8,9 @@ import ReleaseNotes from '../sections/ReleaseNotes.astro';
 import RequirementsSection from '../sections/RequirementsSection.astro';
 import FaqSection from '../sections/FaqSection.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+import settings from '../../config/settings.js';
+import { installerDownloadUrl } from '../../config/services.js';
+import { resolveReleases } from '../../lib/releases.js';
 
 const { service } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -17,9 +20,44 @@ const metaDescription = [content.summary, content.summaryDetail]
 	.filter(Boolean)
 	.join('. ')
 	.replace('.. ', '. ');
+
+// 제품명만으로는 검색되지 않으므로, 무엇을 하는 프로그램인지 제목에 함께 둡니다.
+const metaTitle = content.metaTagline
+	? `${content.name} — ${content.metaTagline}`
+	: content.name;
+
+// 버전은 히어로·릴리스 목록과 같은 출처를 씁니다(결과는 빌드 안에서 재사용됩니다).
+const { latest } = await resolveReleases(service, lang);
+const version = latest?.version ?? service.currentVersion;
+
+const appSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'SoftwareApplication',
+	name: content.name,
+	description: metaDescription,
+	url: new URL(Astro.url.pathname, settings.url).href,
+	applicationCategory: 'MultimediaApplication',
+	operatingSystem: 'Windows',
+	inLanguage: lang === 'ko' ? 'ko-KR' : 'en',
+	...(version ? { softwareVersion: version } : {}),
+	...(version && service.downloadKind === 'windows'
+		? { downloadUrl: installerDownloadUrl(version) }
+		: {}),
+	// 무료입니다. price 를 빼면 검색엔진이 가격 미상으로 읽습니다.
+	offers: { '@type': 'Offer', price: '0', priceCurrency: 'KRW' },
+	author: { '@type': 'Person', name: settings.brand, url: settings.url },
+};
 ---
 
-<Page title={content.name} description={metaDescription}>
+<Page title={metaTitle} description={metaDescription}>
+	<Fragment slot="head">
+		<script
+			type="application/ld+json"
+			is:inline
+			set:html={JSON.stringify(appSchema)}
+		/>
+	</Fragment>
+
 	<ServiceHero service={service} />
 
 	<Section title={t('detail.overview')} id="overview">

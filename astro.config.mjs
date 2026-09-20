@@ -17,5 +17,11 @@ export default defineConfig({
       prefixDefaultLocale: false,
     },
   },
-  integrations: [sitemap()],
+  integrations: [
+    sitemap({
+      // 문의 완료 안내는 noindex 입니다. 사이트맵에 두면 "색인해라"와
+      // "하지 마라"를 동시에 보내는 셈이라 빼 둡니다.
+      filter: (page) => !/\/contact\/thanks\/?$/.test(page),
+    }),
+  ],
 });
