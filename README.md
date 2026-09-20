@@ -58,6 +58,7 @@ docs/                 ★ 빌드 산출물 = 배포본 (커밋 대상)
 scripts/
   track-downloads.mjs 릴리스 다운로드 수 수집 (Actions 에서 실행)
   og-image.html       위 미리보기 이미지의 원본 (브라우저로 캡처해 교체)
+  alias-sitemap.mjs   빌드 후 sitemap-index.xml 을 sitemap.xml 로 한 벌 더 복사
 data/
   download-stats.csv  다운로드 수 기록 (사이트 빌드에는 쓰이지 않습니다)
 ```
@@ -101,6 +102,10 @@ data/
 
 `canonical` · `hreflang` · 사이트맵은 모두 끝에 슬래시가 붙은 주소를 씁니다
 (`BaseHead.astro` 의 `withSlash`). 한 글자라도 다르면 검색엔진이 다른 페이지로 봅니다.
+
+사이트맵은 두 주소에서 열립니다. Astro 가 만드는 것은 `/sitemap-index.xml` 이고,
+빌드 끝에 `scripts/alias-sitemap.mjs` 가 같은 내용을 `/sitemap.xml` 로 한 벌 더 둡니다.
+등록 창에 습관적으로 `/sitemap.xml` 을 적어도 404 페이지(HTML)가 나오지 않게 하려는 것입니다.
 
 링크 공유 미리보기 이미지는 `settings.js` 의 `ogImage` 가 가리킵니다. 교체할 때는
 1200x630 을 지키세요. `scripts/og-image.html` 을 브라우저로 열어 그 크기로 캡처하면
