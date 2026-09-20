@@ -50,11 +50,14 @@ src/
   pages/            라우트 (en/ 하위가 영문)
 public/
   CNAME               커스텀 도메인 (isocompany.co.kr)
+  robots.txt          크롤러 안내 + 사이트맵 위치
   assets/fonts/       Lato, Roboto Serif (라틴)
   assets/screenshots/ 프로그램 화면 이미지
+  assets/og/          링크 공유 미리보기 이미지 (1200x630)
 docs/                 ★ 빌드 산출물 = 배포본 (커밋 대상)
 scripts/
   track-downloads.mjs 릴리스 다운로드 수 수집 (Actions 에서 실행)
+  og-image.html       위 미리보기 이미지의 원본 (브라우저로 캡처해 교체)
 data/
   download-stats.csv  다운로드 수 기록 (사이트 빌드에는 쓰이지 않습니다)
 ```
@@ -84,6 +87,28 @@ data/
 `public/assets/screenshots/` 의 파일을 바꾸고, 크기가 달라졌다면
 `src/config/services.js`의 `screenshots[].width` / `height` 도 함께 맞춰주세요.
 설명 문구는 같은 파일의 `screenshotCaptions` 에 있습니다.
+
+## 검색 노출
+
+검색 결과에 뜨는 제목은 화면에 보이는 제목과 따로 관리합니다. 브랜드명만 적으면
+제품을 이미 아는 사람만 찾을 수 있기 때문입니다.
+
+| 값 | 위치 | 쓰이는 곳 |
+| --- | --- | --- |
+| `site.title` | `src/i18n/ui.js` | 헤더 로고, 제목 접미사 |
+| `site.metaTitle` | `src/i18n/ui.js` | 홈의 `<title>` |
+| `metaTagline` | `src/config/services.js` | 상세 페이지의 `<title>` |
+
+`canonical` · `hreflang` · 사이트맵은 모두 끝에 슬래시가 붙은 주소를 씁니다
+(`BaseHead.astro` 의 `withSlash`). 한 글자라도 다르면 검색엔진이 다른 페이지로 봅니다.
+
+링크 공유 미리보기 이미지는 `settings.js` 의 `ogImage` 가 가리킵니다. 교체할 때는
+1200x630 을 지키세요. `scripts/og-image.html` 을 브라우저로 열어 그 크기로 캡처하면
+같은 모양으로 다시 만들 수 있습니다.
+
+구조화 데이터는 모든 페이지에 `WebSite`, 프로그램 상세 페이지에 `SoftwareApplication`
+이 들어갑니다. 버전과 내려받기 주소는 릴리스 목록과 같은 출처를 쓰므로 따로 손댈
+필요가 없습니다.
 
 ## 다운로드 수 기록
 
