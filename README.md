@@ -91,6 +91,8 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
 `Do-It-Releases` 의 `UPDATE-NOTES(.en).md` 와 Release 별 `latest.yml`(`version` · `releaseDate`).
 
 - 릴리스는 `Do-It` 저장소의 Release 워크플로가 올립니다. 이 저장소에서 버전을 손으로 적을 곳은 없습니다.
+- 릴리스 게시·노트 변경 시 **릴리스 저장소의 Notify homepage 워크플로**가 이 저장소의 Rebuild site 를 부릅니다
+  (Bible-OnAir-Releases · Do-It-Releases 둘 다. 각 저장소에 시크릿 `HOMEPAGE_DISPATCH_TOKEN` 필요).
 - 게시된 버전이 하나라도 있으면 "웹에서 열기"·"열기" 버튼과 버전 표시가 저절로 켜집니다.
   첫 릴리스 뒤에는 `status` 를 `'dev'` 에서 `'live'` 로만 바꿔 주세요.
 - 버전별 설치 파일 링크는 없습니다(웹앱은 항상 최신).
@@ -130,7 +132,7 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
 ## 다운로드 수 기록
 
 GitHub 는 릴리스 파일마다 누적 다운로드 수를 세지만 기간별 추이는 주지 않고, 웹 화면에도
-그 숫자가 나오지 않습니다. 그래서 `Track download counts` 워크플로가 하루 한 번
+그 숫자가 나오지 않습니다. 그래서 `Track download counts` 워크플로가 주 한 번(월요일 새벽)
 API 를 읽어 `data/download-stats.csv` 에 한 줄씩 쌓습니다.
 
 ```
@@ -138,8 +140,8 @@ recorded_at,tag,asset,download_count
 2026-09-19T13:14:57Z,v1.1.1,Bible-OnAir-Setup-1.1.1.exe,7
 ```
 
-두 날짜의 같은 항목을 빼면 그 사이의 증가분이 나옵니다. 값이 하나도 바뀌지 않은 날에는
-기록하지 않으므로, 빈 날은 '변화 없음' 으로 읽으면 됩니다.
+두 날짜의 같은 항목을 빼면 그 사이의 증가분이 나옵니다. 값이 하나도 바뀌지 않은 주에는
+기록하지 않으므로, 빈 주는 '변화 없음' 으로 읽으면 됩니다. 지금 값이 필요하면 Actions 에서 수동 실행하세요.
 
 숫자를 읽을 때 유의할 점이 있습니다.
 
