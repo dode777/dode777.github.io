@@ -1,0 +1,81 @@
+<!doctype html>
+<!--
+  Do-It 링크 공유 미리보기 이미지(1200x630)의 원본입니다. og-image.html(사이트 기본 · Bible OnAir)과 같은 틀입니다.
+  브라우저로 1200x630 캡처해 덮어씁니다.
+    이 파일              → public/assets/og/og-do-it.png
+    이 파일#en           → public/assets/og/og-do-it-en.png
+  앱(doit.isocompany.co.kr)도 같은 그림을 씁니다 — Do-It 저장소 public/og.png 로 복사합니다.
+-->
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* { margin: 0; padding: 0; box-sizing: border-box; }
+			body {
+				width: 1200px; height: 630px; overflow: hidden; position: relative;
+				display: flex; align-items: center;
+				padding: 0 72px;
+				background: #fff;
+				font-family: 'Noto Sans KR', sans-serif;
+				color: #0b0b0b;
+				word-break: keep-all;
+			}
+			/* 위 띠: 사이트 기본 그림의 연두 대신 앱의 주황(꾹 누르기 번짐 색) */
+			body::before {
+				content: ''; position: fixed; inset: 0 0 auto 0; height: 14px;
+				background: #FFB98F;
+			}
+			.copy { flex: 1 1 auto; min-width: 0; padding-right: 420px; }
+			.eyebrow {
+				font-size: 26px; font-weight: 700; letter-spacing: 0.06em;
+				color: #8a3d12; text-transform: uppercase;
+			}
+			h1 {
+				margin: 18px 0 0;
+				font-family: 'Noto Serif KR', serif; font-weight: 700;
+				font-size: 68px; line-height: 1.18; letter-spacing: -0.03em;
+			}
+			.product {
+				margin-top: 26px; display: inline-flex; align-items: center; gap: 12px;
+				padding: 10px 22px; border-radius: 999px;
+				background: #f2f2f2; font-size: 28px; font-weight: 700;
+			}
+			.product span { font-weight: 500; color: #4a4a4a; }
+			.foot { margin-top: 34px; font-size: 25px; font-weight: 500; color: #616161; }
+			/* 휴대폰: 아래로 잘려 나가게 — 첫 화면(주제 이름과 할 일 한 장)이 보이는 만큼만 */
+			.phone {
+				position: absolute; right: 96px; top: 64px;
+				width: 330px; height: 640px;
+				border-radius: 46px 46px 0 0; overflow: hidden;
+				border: 10px solid #16181d; border-bottom: 0;
+				box-shadow: 0 26px 60px rgba(0, 0, 0, 0.22);
+				background: #FFB98F;
+			}
+			.phone img { display: block; width: 100%; }
+			.en { display: none; }
+			html.is-en .ko { display: none; }
+			html.is-en .en { display: inline; }
+		</style>
+		<script>if (location.hash === '#en') document.documentElement.classList.add('is-en'), document.documentElement.lang = 'en';</script>
+	</head>
+	<body>
+		<div class="copy">
+			<p class="eyebrow">ISO Service</p>
+			<h1><span class="ko">손짓으로 챙기는<br />하루 체크리스트</span><span class="en">A daily checklist<br />you run by touch</span></h1>
+			<p class="product">
+				<span class="ko" style="color:inherit;font-weight:700">두잇 Do-It</span><span class="en" style="color:inherit;font-weight:700">Do-It</span>
+				<span><span class="ko">할 일 · 복약 · 고정비</span><span class="en">To-dos · pills · bills</span></span>
+			</p>
+			<p class="foot"><span class="ko">설치 없는 무료 웹앱 · isocompany.co.kr</span><span class="en">Free web app, no install · isocompany.co.kr</span></p>
+		</div>
+		<div class="phone">
+			<img src="../public/assets/screenshots/do-it-feed.png" alt="" />
+		</div>
+	</body>
+</html>

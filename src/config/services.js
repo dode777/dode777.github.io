@@ -302,6 +302,8 @@ export const services = [
 		},
 		/* 휴대폰 세로 화면 (390x844 @2x) — 두 장씩 나란히 놓습니다. */
 		screenshotLayout: 'phone',
+		/* 링크 공유 미리보기 그림(1200x630). 없으면 사이트 기본 그림(Bible OnAir)이 나간다. 원본: scripts/og-do-it.html */
+		ogImage: { ko: '/assets/og/og-do-it.png', en: '/assets/og/og-do-it-en.png' },
 		screenshots: [
 			{ src: '/assets/screenshots/do-it-feed.png', width: 780, height: 1688 },
 			{ src: '/assets/screenshots/do-it-done.png', width: 780, height: 1688 },
