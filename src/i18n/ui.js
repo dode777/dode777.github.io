@@ -31,6 +31,7 @@ export const ui = {
 
 		'card.detail': '자세히 보기',
 		'card.download': '다운로드',
+		'card.open': '열기',
 		'card.comingSoon': '준비 중',
 
 		'status.live': '정식 버전',
@@ -53,6 +54,8 @@ export const ui = {
 		'detail.currentVersion': '최신 버전',
 		'detail.downloadWindows': 'Windows용 다운로드',
 		'detail.downloadStore': '크롬 웹스토어에서 설치',
+		'detail.openWeb': '웹에서 열기',
+		'detail.openWebHint': '휴대폰이나 태블릿에서 열어주세요. 컴퓨터에서는 QR 코드가 나옵니다.',
 		'detail.downloadPendingRelease': '첫 정식 릴리스를 준비하고 있습니다.',
 		'detail.downloadPendingStore': '크롬 웹스토어 등록을 준비하고 있습니다.',
 
@@ -113,6 +116,7 @@ export const ui = {
 
 		'card.detail': 'Read more',
 		'card.download': 'Download',
+		'card.open': 'Open',
 		'card.comingSoon': 'Coming soon',
 
 		'status.live': 'Stable release',
@@ -135,6 +139,8 @@ export const ui = {
 		'detail.currentVersion': 'Current version',
 		'detail.downloadWindows': 'Download for Windows',
 		'detail.downloadStore': 'Install from the Chrome Web Store',
+		'detail.openWeb': 'Open in browser',
+		'detail.openWebHint': 'Open it on a phone or tablet. On a computer you will see a QR code.',
 		'detail.downloadPendingRelease': 'The first public release is being prepared.',
 		'detail.downloadPendingStore': 'The Chrome Web Store listing is being prepared.',
 

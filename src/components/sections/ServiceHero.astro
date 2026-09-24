@@ -14,7 +14,10 @@ const content = service[lang];
 // 버전은 릴리스 목록과 같은 출처에서 가져와, 목록과 버튼이 어긋나지 않게 합니다.
 const { latest } = await resolveReleases(service, lang);
 const version = latest?.version ?? service.currentVersion;
+const web = service.downloadKind === 'web';
 const installer = version ? installerFileName(version) : service.installerName;
+// 웹앱은 설치 파일이 없으니 앱 주소를 적고, 게시된 버전이 있을 때만 켜진 것으로 봅니다.
+const webReady = web && Boolean(version);
 
 const pendingNote =
 	service.downloadKind === 'chrome-store'
@@ -48,13 +51,22 @@ const pendingNote =
 			<DownloadButton service={service} version={version} large />
 		</div>
 
-		{
+		{web ? (
+			webReady ? (
+				<>
+					<p class="service-hero__note">{new URL(service.downloadUrl).host}</p>
+					<p class="service-hero__hint">{t('detail.openWebHint')}</p>
+				</>
+			) : (
+				<p class="service-hero__note">{pendingNote}</p>
+			)
+		) : (
 			service.downloadReady && installer ? (
 				<p class="service-hero__note">{installer}</p>
 			) : (
 				!service.downloadReady && <p class="service-hero__note">{pendingNote}</p>
 			)
-		}
+		)}
 	</section>
 </Container>
 
@@ -106,6 +118,11 @@ const pendingNote =
 		flex-wrap: wrap;
 		align-items: center;
 		gap: 0.75rem;
+	}
+	.service-hero__hint {
+		margin: 0.35rem 0 0 0;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
 	}
 	.service-hero__note {
 		margin: 1rem 0 0 0;

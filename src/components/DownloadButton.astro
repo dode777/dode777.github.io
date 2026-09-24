@@ -6,22 +6,35 @@ import { getLangFromUrl, useTranslations } from '../i18n/ui.js';
 const { service, large, compact, version } = Astro.props;
 const t = useTranslations(getLangFromUrl(Astro.url));
 
-const href = version ? installerDownloadUrl(version) : service.downloadUrl;
-const ready = Boolean(service.downloadReady && href);
+const web = service.downloadKind === 'web';
+// 웹앱은 설치 파일이 없어 항상 앱 주소로 보내고, 게시된 버전(version)이 있을 때만 켭니다.
+const href = web ? service.downloadUrl : version ? installerDownloadUrl(version) : service.downloadUrl;
+const ready = web ? Boolean(version && href) : Boolean(service.downloadReady && href);
 const labelKey =
 	service.downloadKind === 'chrome-store'
 		? 'detail.downloadStore'
-		: 'detail.downloadWindows';
-const label = compact ? t('card.download') : t(labelKey);
+		: web
+			? 'detail.openWeb'
+			: 'detail.downloadWindows';
+const label = compact ? t(web ? 'card.open' : 'card.download') : t(labelKey);
 ---
 
 {
 	ready ? (
 		<Button href={href} large={large} newTab>
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" slot="icon">
-				<path d="M12 3.5v11" />
-				<path d="M7.5 10.5 12 15l4.5-4.5" />
-				<path d="M4.5 18.5h15" />
+				{web ? (
+					<>
+						<rect x="6.5" y="2.5" width="11" height="19" rx="2.5" />
+						<path d="M11 18.5h2" />
+					</>
+				) : (
+					<>
+						<path d="M12 3.5v11" />
+						<path d="M7.5 10.5 12 15l4.5-4.5" />
+						<path d="M4.5 18.5h15" />
+					</>
+				)}
 			</svg>
 			{label}
 		</Button>

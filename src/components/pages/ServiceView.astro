@@ -7,6 +7,7 @@ import Screenshots from '../sections/Screenshots.astro';
 import ReleaseNotes from '../sections/ReleaseNotes.astro';
 import RequirementsSection from '../sections/RequirementsSection.astro';
 import FaqSection from '../sections/FaqSection.astro';
+import StepsSection from '../sections/StepsSection.astro';
 import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
 import settings from '../../config/settings.js';
 import { installerDownloadUrl } from '../../config/services.js';
@@ -32,17 +33,18 @@ const version = latest?.version ?? service.currentVersion;
 
 const appSchema = {
 	'@context': 'https://schema.org',
-	'@type': 'SoftwareApplication',
+	'@type': service.schema?.type ?? 'SoftwareApplication',
 	name: content.name,
 	description: metaDescription,
 	url: new URL(Astro.url.pathname, settings.url).href,
-	applicationCategory: 'MultimediaApplication',
-	operatingSystem: 'Windows',
+	applicationCategory: service.schema?.category ?? 'MultimediaApplication',
+	operatingSystem: service.schema?.operatingSystem ?? 'Windows',
 	inLanguage: lang === 'ko' ? 'ko-KR' : 'en',
 	...(version ? { softwareVersion: version } : {}),
 	...(version && service.downloadKind === 'windows'
 		? { downloadUrl: installerDownloadUrl(version) }
 		: {}),
+	...(version && service.downloadKind === 'web' ? { installUrl: service.downloadUrl } : {}),
 	// 무료입니다. price 를 빼면 검색엔진이 가격 미상으로 읽습니다.
 	offers: { '@type': 'Offer', price: '0', priceCurrency: 'KRW' },
 	author: { '@type': 'Person', name: settings.brand, url: settings.url },
@@ -71,6 +73,14 @@ const appSchema = {
 	<Section title={t('detail.screenshots').replace('{name}', content.name)} id="screenshots">
 		<Screenshots service={service} />
 	</Section>
+
+	{
+		content.installSteps && (
+			<Section title={content.installTitle} id="install">
+				<StepsSection steps={content.installSteps} />
+			</Section>
+		)
+	}
 
 	<Section title={t('detail.releases')} id="releases">
 		<ReleaseNotes service={service} />

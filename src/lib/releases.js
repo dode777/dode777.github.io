@@ -27,12 +27,15 @@ async function build(service, lang) {
 		assumeReleased: true,
 	}));
 
-	const parsed = await loadUpdateNotes(UPDATE_NOTES_URL[lang]);
+	// 출처가 서비스에 적혀 있으면 그것을, 없으면 Bible OnAir 릴리스 저장소를 씁니다.
+	const notesUrl = service.releaseSource?.notes?.[lang] ?? UPDATE_NOTES_URL[lang];
+	const metaUrl = service.releaseSource?.metaUrl ?? releaseMetaUrl;
+	const parsed = await loadUpdateNotes(notesUrl);
 	const sections = parsed ?? fallback;
 
 	let entries = await Promise.all(
 		sections.map(async (section) => {
-			const meta = await loadReleaseMeta(releaseMetaUrl(section.version));
+			const meta = await loadReleaseMeta(metaUrl(section.version));
 			return {
 				...section,
 				date: meta?.date ?? section.date ?? null,

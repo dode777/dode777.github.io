@@ -30,6 +30,7 @@ npm run preview  # 빌드 결과 미리보기
 | --- | --- |
 | `/` | 프로그램 목록 · 문의 양식 |
 | `/bible-onair` | Bible OnAir 상세 |
+| `/do-it` | Do-It 상세 (웹앱 — "웹에서 열기"는 `doit.isocompany.co.kr`) |
 | `/contact/thanks` | 문의 전송 완료 안내 |
 | `/en`, `/en/...` | 영문 페이지 |
 | `/404` | 없는 주소 |
@@ -82,6 +83,17 @@ data/
 `currentVersion` · `installerName` · `releases` 를 갱신하고 `npm run build` 후 `docs/`까지 커밋합니다.
 `downloadUrl`은 `releases/latest`를 가리키므로 링크 자체는 고칠 필요가 없습니다.
 릴리스 항목의 `date` 는 `null` 이면 화면에 날짜가 표시되지 않습니다. `'2026-09-11'` 형식으로 채워 넣으면 됩니다.
+
+### Do-It (웹앱) 버전
+
+Do-It 은 설치 파일이 아니라 웹앱이라 `downloadKind: 'web'` 입니다. 버전·릴리스 목록은
+Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.js` 의 `releaseSource` 가 가리키는
+`Do-It-Releases` 의 `UPDATE-NOTES(.en).md` 와 Release 별 `latest.yml`(`version` · `releaseDate`).
+
+- 릴리스는 `Do-It` 저장소의 Release 워크플로가 올립니다. 이 저장소에서 버전을 손으로 적을 곳은 없습니다.
+- 게시된 버전이 하나라도 있으면 "웹에서 열기"·"열기" 버튼과 버전 표시가 저절로 켜집니다.
+  첫 릴리스 뒤에는 `status` 를 `'dev'` 에서 `'live'` 로만 바꿔 주세요.
+- 버전별 설치 파일 링크는 없습니다(웹앱은 항상 최신).
 
 ### 화면 예시 이미지 교체
 

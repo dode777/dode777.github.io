@@ -70,6 +70,19 @@ export function installerDownloadUrl(version) {
  */
 const BIBLE_ONAIR_VERSION = '1.1.0';
 
+
+/* ── Do-It ─────────────────────────────────────────────────────────────────
+ * 설치 파일이 아니라 웹앱이라 downloadKind 가 'web' 입니다. 흐름은 Bible OnAir 와 같습니다:
+ *   Do-It(비공개 소스) ─ Release 워크플로 ─▶ Do-It-Releases
+ *     · Release v<버전> 에 latest.yml(version · releaseDate) — Bible OnAir 와 같은 형식
+ *     · main 의 UPDATE-NOTES(.en).md — 직접 쓰는 릴리스 노트
+ *     · gh-pages 브랜치 = 웹앱 본체 → DO_IT_APP_URL
+ * 버전은 위 두 파일에서 자동으로 읽습니다. 게시된 버전이 없으면 "웹에서 열기" 버튼이 꺼집니다.
+ */
+const DO_IT_RELEASES_REPO = 'https://github.com/dode777/Do-It-Releases';
+const DO_IT_RELEASES_RAW = 'https://raw.githubusercontent.com/dode777/Do-It-Releases/main';
+export const DO_IT_APP_URL = 'https://doit.isocompany.co.kr/';
+
 export const services = [
 	{
 		slug: 'bible-onair',
@@ -266,6 +279,146 @@ export const services = [
 			],
 			releaseNote:
 				'Later versions need no visit to this page —\nthe program announces and installs them for you.',
+		},
+	},
+	{
+		slug: 'do-it',
+		status: 'dev',
+		downloadKind: 'web',
+		downloadUrl: DO_IT_APP_URL,
+		/* 웹앱은 게시된 버전이 있을 때 자동으로 켜집니다 (DownloadButton). */
+		downloadReady: false,
+		releaseSource: {
+			notes: {
+				ko: `${DO_IT_RELEASES_RAW}/UPDATE-NOTES.md`,
+				en: `${DO_IT_RELEASES_RAW}/UPDATE-NOTES.en.md`,
+			},
+			metaUrl: (version) => `${DO_IT_RELEASES_REPO}/releases/download/v${version}/latest.yml`,
+		},
+		schema: {
+			type: 'WebApplication',
+			category: 'LifestyleApplication',
+			operatingSystem: 'iOS, Android',
+		},
+		/* 휴대폰 세로 화면 (390x844 @2x) — 두 장씩 나란히 놓습니다. */
+		screenshotLayout: 'phone',
+		screenshots: [
+			{ src: '/assets/screenshots/do-it-feed.png', width: 780, height: 1688 },
+			{ src: '/assets/screenshots/do-it-done.png', width: 780, height: 1688 },
+			{ src: '/assets/screenshots/do-it-add.png', width: 780, height: 1688 },
+			{ src: '/assets/screenshots/do-it-summary.png', width: 780, height: 1688 },
+		],
+		ko: {
+			name: 'Do-It',
+			subName: '두잇',
+			tagline: '손짓으로 챙기는 하루',
+			metaTagline: '할 일·복약·고정비 체크 앱',
+			summary: '꾹 누르면 끝. 약, 루틴, 고정비를 한 장씩 넘기며 챙기는 앱',
+			summaryDetail: '설치 없이 휴대폰 브라우저에서 열고, 홈 화면에 추가하면 앱처럼 쓸 수 있습니다.',
+			description: [
+				'매일 먹는 약, 잊기 쉬운 루틴, 달마다 빠져나가는 고정비. 챙길 것은 많은데 체크리스트는 금방 길어집니다.',
+				'Do-It은 한 화면에 한 가지만 보여줍니다.\n꾹 눌러 완료하고, 위로 넘겨 다음 것을 챙기면 됩니다. 놓친 것을 빨갛게 쌓아 재촉하지 않습니다.',
+			],
+			screenshotCaptions: [
+				'한 화면에 하나 — 지금 챙길 것만 크게 보입니다.',
+				'꾹 누르면 완료 — 다시 꾹 누르면 되돌립니다.',
+				'두 번 탭해서 한 줄로 추가 — "저녁 루테인 1알"처럼 적으면 알아서 나눕니다.',
+				'끌어내리면 오늘 요약 — 주제별 남은 것과 고정비 합계를 한눈에.',
+			],
+			features: [
+				{ title: '꾹 눌러 완료', body: '버튼을 찾을 필요 없이 화면을 꾹 누르면 완료됩니다.\n다시 꾹 누르면 되돌리고, 횟수 목표는 누를 때마다 하나씩 올라갑니다.' },
+				{ title: '한 줄로 추가', body: '두 번 탭하고 "스쿼트 주 3회", "넷플릭스 매월 25일 17000원"처럼 적으면 시간대·횟수·금액을 알아서 나눠 넣습니다.' },
+				{ title: '주제별로 넘겨보기', body: '약·영양제, 루틴, 집안일처럼 주제를 나눠 옆으로 넘깁니다.\n같은 주제 안에서는 위아래로 한 장씩 챙깁니다.' },
+				{ title: '간격과 기한', body: '칫솔 교체처럼 며칠마다 하는 일, 자동차 검사처럼 날짜가 정해진 일도 때가 되면 나타납니다.' },
+				{ title: '고정비 한눈에', body: '구독·보험·통신비를 분류별로 모아 한 달 합계와 다가오는 결제일을 보여줍니다.\n해지하기로 한 것은 따로 표시합니다.' },
+				{ title: '설치 없이 앱처럼', body: '앱스토어를 거치지 않고 브라우저에서 바로 엽니다.\n홈 화면에 추가하면 전체 화면으로 열리고, 한 번 연 뒤에는 인터넷 없이도 열립니다.' },
+			],
+			installTitle: '홈 화면에 추가하기',
+			installSteps: [
+				{ title: '휴대폰에서 열기', body: '위의 "웹에서 열기"를 누르거나 doit.isocompany.co.kr 로 들어갑니다. 카카오톡·인스타그램 안에서 열렸다면 오른쪽 아래 메뉴에서 기본 브라우저로 열어주세요.' },
+				{ title: '아이폰 (Safari)', body: '아래쪽 공유 버튼을 누르고 [홈 화면에 추가]를 고릅니다.' },
+				{ title: '안드로이드 (Chrome · 삼성 인터넷)', body: '오른쪽 위 메뉴(⋮)에서 [홈 화면에 추가] 또는 [앱 설치]를 고릅니다.' },
+			],
+			requirements: {
+				columns: ['무료'],
+				rows: [
+					{ label: '기기', shared: '휴대폰 · 태블릿 (데스크톱 미지원)' },
+					{ label: '브라우저', shared: 'iOS Safari · Android Chrome · 삼성 인터넷' },
+					{ label: '설치', shared: '필요 없음 (홈 화면에 추가 권장)' },
+					{ label: '인터넷', shared: '처음 열 때만 필요' },
+				],
+			},
+			faq: [
+				{
+					q: '앱스토어에서 받을 수 있나요?',
+					a: '지금은 웹앱으로만 제공합니다.\n브라우저에서 열고 홈 화면에 추가하면 앱 아이콘이 생기고, 주소창 없이 앱처럼 열립니다.',
+				},
+				{
+					q: '컴퓨터에서도 쓸 수 있나요?',
+					a: 'Do-It은 꾹 누르기, 두 번 탭, 밀기 같은 손짓으로 쓰는 앱이라 휴대폰과 태블릿만 지원합니다.\n컴퓨터에서 열면 휴대폰으로 옮겨 열 수 있는 QR 코드가 나옵니다.',
+				},
+				{
+					q: '홈 화면에 추가 메뉴가 보이지 않습니다.',
+					a: '카카오톡이나 인스타그램 같은 앱 안의 브라우저에서는 이 메뉴가 없습니다.\n아이폰은 Safari, 안드로이드는 Chrome 이나 삼성 인터넷으로 다시 열어주세요.',
+				},
+			],
+			releaseNote: '새 버전은 따로 설치할 필요 없이, 앱을 다시 열면 자동으로 적용됩니다.',
+		},
+		en: {
+			name: 'Do-It',
+			subName: 'Do-It',
+			tagline: 'Your day, one gesture at a time',
+			metaTagline: 'A checklist for tasks, pills and bills',
+			summary: 'Press and hold to finish. Swipe through pills, routines and bills one card at a time',
+			summaryDetail: 'Open it in your phone browser — no install — and add it to the home screen to use it like an app.',
+			description: [
+				'Daily pills, easy-to-forget routines, monthly bills. There is a lot to keep track of, and checklists grow long fast.',
+				'Do-It shows one thing per screen.\nPress and hold to finish it, then swipe up to the next. Missed items are never piled up in red.',
+			],
+			screenshotCaptions: [
+				'One thing per screen — only what needs doing now, in large type.',
+				'Press and hold to finish — hold again to undo.',
+				'Double-tap to add in one line — it splits time, dose and amount for you.',
+				'Pull down for today’s summary — what is left per topic and your monthly bills.',
+			],
+			features: [
+				{ title: 'Press and hold to finish', body: 'No buttons to hunt for: hold anywhere on the card.\nHold again to undo; count goals go up by one each time.' },
+				{ title: 'Add in one line', body: 'Double-tap and type a line — the time, count and amount are filled in for you.' },
+				{ title: 'Swipe by topic', body: 'Split things into topics such as pills, routines and chores and swipe sideways between them.\nWithin a topic, swipe up card by card.' },
+				{ title: 'Intervals and deadlines', body: 'Things you do every few days, or by a set date, show up when they are due.' },
+				{ title: 'Bills at a glance', body: 'Subscriptions, insurance and utilities grouped by category, with the monthly total and upcoming payment dates.' },
+				{ title: 'An app without installing', body: 'Opens straight in the browser.\nAdd it to the home screen to open it full screen, and offline after the first visit.' },
+			],
+			installTitle: 'Add to the home screen',
+			installSteps: [
+				{ title: 'Open it on your phone', body: 'Tap "Open in browser" above, or go to doit.isocompany.co.kr. If it opened inside a messenger app, switch to the default browser first.' },
+				{ title: 'iPhone (Safari)', body: 'Tap the Share button at the bottom and choose [Add to Home Screen].' },
+				{ title: 'Android (Chrome · Samsung Internet)', body: 'Open the menu (⋮) at the top right and choose [Add to Home screen] or [Install app].' },
+			],
+			requirements: {
+				columns: ['Free'],
+				rows: [
+					{ label: 'Device', shared: 'Phone · tablet (no desktop)' },
+					{ label: 'Browser', shared: 'iOS Safari · Android Chrome · Samsung Internet' },
+					{ label: 'Install', shared: 'Not needed (adding to the home screen is recommended)' },
+					{ label: 'Internet', shared: 'Only on first open' },
+				],
+			},
+			faq: [
+				{
+					q: 'Is it on the App Store?',
+					a: 'For now it is a web app only.\nOpen it in the browser and add it to the home screen to get an icon that opens without the address bar.',
+				},
+				{
+					q: 'Can I use it on a computer?',
+					a: 'Do-It is driven by gestures — hold, double-tap, swipe — so it supports phones and tablets only.\nOn a computer it shows a QR code to open it on your phone.',
+				},
+				{
+					q: 'I cannot find "Add to Home Screen".',
+					a: 'Browsers inside apps such as KakaoTalk or Instagram do not offer it.\nReopen the page in Safari on iPhone, or Chrome / Samsung Internet on Android.',
+				},
+			],
+			releaseNote: 'New versions need no install — they apply the next time you open the app.',
 		},
 	},
 ];
