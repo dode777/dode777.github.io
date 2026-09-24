@@ -283,7 +283,7 @@ export const services = [
 	},
 	{
 		slug: 'do-it',
-		status: 'dev',
+		status: 'live',
 		downloadKind: 'web',
 		downloadUrl: DO_IT_APP_URL,
 		/* 웹앱은 게시된 버전이 있을 때 자동으로 켜집니다 (DownloadButton). */
