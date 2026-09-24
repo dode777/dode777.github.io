@@ -15,7 +15,8 @@ const t = useTranslations(lang);
 const content = service[lang];
 
 const { entries } = await resolveReleases(service, lang);
-const downloadable = downloadableVersions(entries);
+// 버전별 설치 파일은 Windows 프로그램에만 있습니다(웹앱은 항상 최신).
+const downloadable = service.downloadKind === 'windows' ? downloadableVersions(entries) : new Set();
 ---
 
 {

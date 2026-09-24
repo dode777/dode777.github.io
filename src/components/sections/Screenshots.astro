@@ -11,7 +11,7 @@ const captions = service[lang].screenshotCaptions ?? [];
 
 {
 	shots.length > 0 ? (
-		<ul class="shots">
+		<ul class:list={['shots', { 'shots--phone': service.screenshotLayout === 'phone' }]}>
 			{shots.map((shot, index) => (
 				<li class="shots__item">
 					<img
@@ -42,6 +42,22 @@ const captions = service[lang].screenshotCaptions ?? [];
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
+	}
+	/* 휴대폰 세로 화면: 한 줄에 두 장, 좁은 화면에서는 한 장 */
+	.shots--phone {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 2rem 1.5rem;
+		/* 세로로 긴 화면이라 폭을 줄여 한 장이 한 화면 안에 들어오게 합니다. */
+		max-width: 34rem;
+		margin: 0 auto;
+	}
+	@media (max-width: 480px) {
+		.shots--phone {
+			grid-template-columns: minmax(0, 1fr);
+			max-width: 20rem;
+			margin: 0 auto;
+		}
 	}
 	.shots__img {
 		width: 100%;
