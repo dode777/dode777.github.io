@@ -129,7 +129,8 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
 잇는 방식만 바꾸고 싶으면 `ui.js` 의 `site.descriptionItem` · `descriptionJoin` · `descriptionTail`
 세 값을 고치면 됩니다.
 
-홈의 `<title>` 은 자동이 아닙니다. **서비스를 추가하면 `site.metaTitle` 도 함께 고쳐야 합니다.**
+홈의 `<title>` 과 첫 화면 문구(`home.title` · `home.lede`)는 서비스 이름을 담지 않습니다.
+만드는 곳이 어떤 성격인지만 밝히므로, 서비스가 늘어도 고칠 필요가 없습니다.
 
 `canonical` · `hreflang` · 사이트맵은 모두 끝에 슬래시가 붙은 주소를 씁니다
 (`BaseHead.astro` 의 `withSlash`). 한 글자라도 다르면 검색엔진이 다른 페이지로 봅니다.

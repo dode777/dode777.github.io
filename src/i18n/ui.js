@@ -28,9 +28,9 @@ export const ui = {
 		'nav.home': '홈',
 		'nav.contact': '문의',
 
-		'home.title': 'ISO Service',
+		'home.title': '북적이는 1인 스튜디오',
 		'home.lede':
-			'이소컴퍼니의 서비스입니다.\n아래에서 확인해보세요.',
+			'혼자 만드는 프로그램을 모아둔 곳입니다.\n아래에서 확인해보세요.',
 
 		'card.detail': '자세히 보기',
 		'card.download': '다운로드',
@@ -113,9 +113,9 @@ export const ui = {
 		'nav.home': 'Home',
 		'nav.contact': 'Contact',
 
-		'home.title': 'ISO Service',
+		'home.title': 'A crowded one-person studio',
 		'home.lede':
-			'Services by ISO Company.\nTake a look below.',
+			'Everything here is made by one person.\nTake a look below.',
 
 		'card.detail': 'Read more',
 		'card.download': 'Download',
