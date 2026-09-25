@@ -12,7 +12,7 @@ export const ui = {
 		'site.title': 'ISO Service',
 		/* 검색 결과에 뜨는 제목. 브랜드명만으로는 아무도 찾지 못하므로
 		   무엇을 하는 곳인지 앞에 둡니다. 화면에는 쓰지 않습니다. */
-		'site.metaTitle': 'Bible OnAir · Do-It | 이소서비스',
+		'site.metaTitle': '북적이는 1인 스튜디오 | 이소서비스',
 		/* 사이트 설명은 services.js 의 목록에서 만들어집니다 (lib/site-meta.js).
 		   서비스를 넣거나 빼면 메타 설명과 푸터 문구가 함께 따라갑니다. */
 		'site.descriptionItem': '{name} — {tagline}',
@@ -99,7 +99,7 @@ export const ui = {
 	},
 	en: {
 		'site.title': 'ISO Service',
-		'site.metaTitle': 'Bible OnAir · Do-It | ISO Service',
+		'site.metaTitle': 'A crowded one-person studio | ISO Service',
 		'site.descriptionItem': '{name} — {tagline}',
 		'site.descriptionJoin': ' · ',
 		'site.descriptionTail': 'Free to use.',
