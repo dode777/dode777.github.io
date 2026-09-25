@@ -93,6 +93,8 @@ export const services = [
 		downloadReady: true,
 		currentVersion: BIBLE_ONAIR_VERSION,
 		installerName: installerFileName(BIBLE_ONAIR_VERSION),
+		/* 링크 공유 미리보기 그림(1200x630). 원본: scripts/og-bible-onair.html */
+		ogImage: { ko: '/assets/og/og-bible-onair.png', en: '/assets/og/og-bible-onair-en.png' },
 		screenshots: [
 			{ src: '/assets/screenshots/bible-onair-control.png', width: 1100, height: 720 },
 			{ src: '/assets/screenshots/bible-onair-screen.png', width: 1599, height: 999 },
@@ -364,6 +366,38 @@ export const services = [
 					a: '카카오톡이나 인스타그램 같은 앱 안의 브라우저에서는 이 메뉴가 없습니다.\n아이폰은 Safari, 안드로이드는 Chrome 이나 삼성 인터넷으로 다시 열어주세요.',
 				},
 			],
+			releases: [
+				{
+					version: '0.1.2',
+					date: '2026-09-24',
+					summary: '더 앱처럼 동작하도록 다듬었습니다.',
+					details: [
+						'설정 같은 창이 떠 있을 때 화면이 옆으로 끌려 밀리던 문제를 고쳤습니다.',
+						'두 번 탭하거나 두 손가락으로 벌려도 화면이 확대되지 않습니다.',
+						'안내 문구를 길게 눌러도 글자가 선택되지 않습니다. 입력창에서는 그대로 쓸 수 있습니다.',
+					],
+				},
+				{
+					version: '0.1.1',
+					date: '2026-09-24',
+					summary: '시작 화면을 다듬었습니다.',
+					details: [
+						'앱을 열 때 나오는 시작 화면을 조금 더 여유 있게 보여줍니다. 탭하면 바로 넘어갑니다.',
+						'시작 화면이 사라진 뒤 화면 아래쪽에 색이 남던 문제를 고쳤습니다.',
+					],
+				},
+				{
+					version: '0.1.0',
+					date: '2026-09-24',
+					summary: 'Do-It이 출시되었습니다.',
+					details: [
+						'한 화면에 할 일 하나씩 보여줍니다. 꾹 눌러 완료하고, 다시 꾹 누르면 되돌립니다.',
+						'두 번 탭해서 한 줄로 추가합니다. 시간대·횟수·금액을 알아서 나눠 넣습니다.',
+						'구독·보험·통신비 같은 고정비를 분류별로 모아 한 달 합계와 다가오는 결제일을 보여줍니다.',
+						'설치 없이 휴대폰 브라우저에서 열고, 홈 화면에 추가하면 앱처럼 쓸 수 있습니다.',
+					],
+				},
+			],
 			releaseNote: '새 버전은 따로 설치할 필요 없이, 앱을 다시 열면 자동으로 적용됩니다.',
 		},
 		en: {
@@ -418,6 +452,38 @@ export const services = [
 				{
 					q: 'I cannot find "Add to Home Screen".',
 					a: 'Browsers inside apps such as KakaoTalk or Instagram do not offer it.\nReopen the page in Safari on iPhone, or Chrome / Samsung Internet on Android.',
+				},
+			],
+			releases: [
+				{
+					version: '0.1.2',
+					date: '2026-09-24',
+					summary: 'Feels more like an app.',
+					details: [
+						'Fixed panels such as Settings sliding sideways off the screen when dragged.',
+						'The screen no longer zooms in when you double-tap or pinch.',
+						'Long-pressing labels no longer selects text. Input fields work as before.',
+					],
+				},
+				{
+					version: '0.1.1',
+					date: '2026-09-24',
+					summary: 'Polished the opening screen.',
+					details: [
+						'The opening screen now stays a little longer. Tap to skip it.',
+						'Fixed a strip of color that could stay at the bottom of the screen after the opening screen.',
+					],
+				},
+				{
+					version: '0.1.0',
+					date: '2026-09-24',
+					summary: 'Do-It is out.',
+					details: [
+						'One thing on screen at a time. Press and hold to finish it, press again to undo.',
+						'Double-tap and add in one line — the time of day, the count and the amount are split out for you.',
+						'Subscriptions, insurance and phone bills are grouped so you see the monthly total and what is due next.',
+						'No install: open it in a phone browser, add it to the home screen and it behaves like an app.',
+					],
 				},
 			],
 			releaseNote: 'New versions need no install — they apply the next time you open the app.',

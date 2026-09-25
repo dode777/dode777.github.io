@@ -1,6 +1,7 @@
 ---
 import ThemeProvider from '../theme-switcher/ThemeProvider.astro';
 import settings from '../../config/settings.js';
+import { siteDescription } from '../../lib/site-meta.js';
 import {
 	languages,
 	getLangFromUrl,
@@ -17,7 +18,8 @@ const t = useTranslations(lang);
 const { title, description, noindex, image } = Astro.props;
 
 const pageTitle = title ? `${title} | ${t('site.title')}` : t('site.metaTitle');
-const pageDescription = description ?? t('site.description');
+const siteDesc = siteDescription(lang);
+const pageDescription = description ?? siteDesc;
 
 /**
  * 배포된 주소는 모두 끝에 슬래시가 붙습니다(build.format: 'directory').
@@ -28,14 +30,14 @@ const withSlash = (pathname) => (pathname.endsWith('/') ? pathname : `${pathname
 const siteURL = Astro.site ?? new URL(settings.url);
 const canonicalURL = new URL(withSlash(Astro.url.pathname), siteURL);
 const basePath = stripLangFromPath(Astro.url.pathname);
-const ogImageURL = new URL(image ?? settings.ogImage.src, siteURL);
+const ogImageURL = new URL(image ?? settings.ogImage.src[lang], siteURL);
 
 const webSiteSchema = {
 	'@context': 'https://schema.org',
 	'@type': 'WebSite',
 	name: t('site.title'),
 	url: siteURL.href,
-	description: t('site.description'),
+	description: siteDesc,
 	inLanguage: lang === 'ko' ? 'ko-KR' : 'en',
 };
 ---

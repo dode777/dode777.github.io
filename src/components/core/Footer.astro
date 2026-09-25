@@ -1,4 +1,5 @@
 ---
+import { siteDescription } from '../../lib/site-meta.js';
 import Container from './Container.astro';
 import Logo from '../Logo.astro';
 import settings from '../../config/settings.js';
@@ -15,7 +16,7 @@ const year = new Date().getFullYear();
 		<div class="footer__grid">
 			<div class="footer__brand">
 				<Logo />
-				<p class="footer__tagline">{t('site.description')}</p>
+				<p class="footer__tagline">{siteDescription(lang)}</p>
 			</div>
 
 			<div>

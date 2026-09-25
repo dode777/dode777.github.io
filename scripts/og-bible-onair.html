@@ -1,8 +1,9 @@
 <!doctype html>
 <!--
-  링크 공유 미리보기 이미지(1200x630)의 원본입니다.
-  고칠 일이 생기면 이 파일을 열어 손보고 브라우저로 1200x630 캡처해
-  public/assets/og/og-default.png 를 덮어쓰면 됩니다.
+  Bible OnAir 링크 공유 미리보기 이미지(1200x630)의 원본입니다. og-home.html(사이트 기본)과 같은 틀입니다.
+  브라우저로 1200x630 캡처해 덮어씁니다.
+    이 파일              → public/assets/og/og-bible-onair.png
+    이 파일#en           → public/assets/og/og-bible-onair-en.png
 -->
 <html lang="ko">
 	<head>
@@ -54,14 +55,18 @@
 				box-shadow: 0 26px 60px rgba(0, 0, 0, 0.18);
 			}
 			.shot img { display: block; width: 100%; }
+			.en { display: none; }
+			html.is-en .ko { display: none; }
+			html.is-en .en { display: inline; }
 		</style>
 	</head>
 	<body>
+		<script>if (location.hash === '#en') document.documentElement.classList.add('is-en'), document.documentElement.lang = 'en';</script>
 		<div class="copy">
 			<p class="eyebrow">ISO Service</p>
-			<h1>예배용<br />성경 자막 프로그램</h1>
-			<p class="product">Bible OnAir <span>성경 구절 프롬프터</span></p>
-			<p class="foot">Windows 무료 · isocompany.co.kr</p>
+			<h1><span class="ko">예배용<br />성경 자막 프로그램</span><span class="en">A scripture prompter<br />for worship</span></h1>
+			<p class="product">Bible OnAir <span><span class="ko">성경 구절 프롬프터</span><span class="en">Scripture on the screen</span></span></p>
+			<p class="foot"><span class="ko">Windows 무료 · isocompany.co.kr</span><span class="en">Free for Windows · isocompany.co.kr</span></p>
 		</div>
 		<div class="shot">
 			<img src="../public/assets/screenshots/bible-onair-screen.png" alt="" />

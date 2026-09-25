@@ -12,9 +12,12 @@ export const ui = {
 		'site.title': 'ISO Service',
 		/* 검색 결과에 뜨는 제목. 브랜드명만으로는 아무도 찾지 못하므로
 		   무엇을 하는 곳인지 앞에 둡니다. 화면에는 쓰지 않습니다. */
-		'site.metaTitle': '예배용 성경 자막 프로그램 · Bible OnAir | ISO Service',
-		'site.description':
-			'예배용 성경 구절 프롬프터 Bible OnAir. Windows용 무료 프로그램입니다.',
+		'site.metaTitle': 'Bible OnAir · Do-It | 이소서비스',
+		/* 사이트 설명은 services.js 의 목록에서 만들어집니다 (lib/site-meta.js).
+		   서비스를 넣거나 빼면 메타 설명과 푸터 문구가 함께 따라갑니다. */
+		'site.descriptionItem': '{name} — {tagline}',
+		'site.descriptionJoin': ', ',
+		'site.descriptionTail': '무료로 쓸 수 있습니다.',
 
 		'a11y.skipToContent': '본문으로 건너뛰기',
 		'a11y.openMenu': '메뉴 열기',
@@ -96,10 +99,10 @@ export const ui = {
 	},
 	en: {
 		'site.title': 'ISO Service',
-		'site.metaTitle':
-			'Scripture prompter for worship · Bible OnAir | ISO Service',
-		'site.description':
-			'Bible OnAir — a free scripture prompter for Windows worship services.',
+		'site.metaTitle': 'Bible OnAir · Do-It | ISO Service',
+		'site.descriptionItem': '{name} — {tagline}',
+		'site.descriptionJoin': ' · ',
+		'site.descriptionTail': 'Free to use.',
 
 		'a11y.skipToContent': 'Skip to content',
 		'a11y.openMenu': 'Open main menu',

@@ -53,6 +53,23 @@ async function build(service, lang) {
 	if (!SHOW_UNRELEASED_NOTES) entries = entries.filter((entry) => entry.released);
 	entries.sort((a, b) => compareVersions(b.version, a.version));
 
+	/*
+	 * 출시된 서비스인데 버전이 하나도 남지 않았다면 빌드를 멈춥니다.
+	 *
+	 * 이 값이 비면 화면에서 버전 표시와 내려받기·열기 버튼이 통째로 사라지고
+	 * "첫 정식 릴리스를 준비하고 있습니다" 가 대신 나옵니다. 재빌드는 사람 손을
+	 * 거치지 않고 결과를 바로 커밋하므로, 네트워크가 한 번 흔들린 것만으로
+	 * 출시된 서비스가 준비 중인 것처럼 배포될 수 있습니다.
+	 * 그런 페이지를 내보내느니 빌드가 실패하는 편이 낫습니다.
+	 */
+	if (service.status === 'live' && entries.length === 0) {
+		throw new Error(
+			`[releases] ${service.slug}(${lang}): 릴리스 정보를 얻지 못했습니다. ` +
+				`릴리스 노트(${notesUrl})를 읽지 못했고 services.js 의 대비 목록도 비어 있습니다. ` +
+				`버튼과 버전이 사라진 페이지가 배포되지 않도록 빌드를 멈춥니다.`
+		);
+	}
+
 	return { entries, latest: entries[0] ?? null };
 }
 

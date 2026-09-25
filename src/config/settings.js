@@ -17,7 +17,11 @@ export default {
 	 * 링크 공유 미리보기 이미지. 카카오톡·페이스북 등이 이 파일을 카드로 띄웁니다.
 	 * 교체할 때는 1200x630 을 지키세요. 비율이 어긋나면 잘려 나갑니다.
 	 */
-	ogImage: { src: '/assets/og/og-default.png', width: 1200, height: 630 },
+	ogImage: {
+		src: { ko: '/assets/og/og-default.png', en: '/assets/og/og-default-en.png' },
+		width: 1200,
+		height: 630,
+	},
 	/** GitHub 프로필 */
 	github: 'https://github.com/dode777',
 	/** 지원 로케일 (첫 번째가 기본값) */

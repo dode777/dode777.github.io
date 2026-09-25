@@ -45,6 +45,7 @@ src/
     settings.js     브랜드명, 도메인, 문의 이메일, 폼 전송 주소
     services.js     ★ 프로그램 카탈로그 (한/영 문구가 모두 여기 있습니다)
   i18n/ui.js        UI 문구 사전 + 로케일 경로 헬퍼
+  lib/site-meta.js  서비스 목록에서 사이트 설명 한 줄을 만듭니다
   styles/           Odyssey 기반 디자인 토큰 / 타이포 / 리셋
   components/       Header, Footer, 버튼, 카드, 상세 페이지 섹션, 문의 폼
   layouts/          Base(문서 뼈대), Page(헤더+푸터 포함)
@@ -58,7 +59,9 @@ public/
 docs/                 ★ 빌드 산출물 = 배포본 (커밋 대상)
 scripts/
   track-downloads.mjs 릴리스 다운로드 수 수집 (Actions 에서 실행)
-  og-image.html       위 미리보기 이미지의 원본 (브라우저로 캡처해 교체)
+  og-home.html        사이트 기본 미리보기 이미지의 원본 (브라우저로 캡처해 교체)
+  og-bible-onair.html Bible OnAir 미리보기 이미지의 원본
+  og-do-it.html       Do-It 미리보기 이미지의 원본
   alias-sitemap.mjs   빌드 후 sitemap-index.xml 을 sitemap.xml 로 한 벌 더 복사
 data/
   download-stats.csv  다운로드 수 기록 (사이트 빌드에는 쓰이지 않습니다)
@@ -97,6 +100,12 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
   첫 릴리스 뒤에는 `status` 를 `'dev'` 에서 `'live'` 로만 바꿔 주세요.
 - 버전별 설치 파일 링크는 없습니다(웹앱은 항상 최신).
 
+`services.js` 의 `releases` 배열은 릴리스 저장소를 못 읽었을 때 쓰는 **대비 목록**입니다.
+이 값이 비어 있고 노트도 못 읽으면 버전 표시와 버튼이 통째로 사라진 페이지가 만들어지는데,
+재빌드는 사람 손을 거치지 않고 결과를 커밋하므로 그대로 배포됩니다. 그래서 `status: 'live'`
+인 서비스에서 릴리스가 하나도 남지 않으면 **빌드를 멈춥니다**(`src/lib/releases.js`).
+새 서비스를 올릴 때는 대비 목록도 함께 채워 두세요.
+
 ### 화면 예시 이미지 교체
 
 `public/assets/screenshots/` 의 파일을 바꾸고, 크기가 달라졌다면
@@ -112,7 +121,15 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
 | --- | --- | --- |
 | `site.title` | `src/i18n/ui.js` | 헤더 로고, 제목 접미사 |
 | `site.metaTitle` | `src/i18n/ui.js` | 홈의 `<title>` |
-| `metaTagline` | `src/config/services.js` | 상세 페이지의 `<title>` |
+| `metaTagline` | `src/config/services.js` | 상세 페이지의 `<title>`, 사이트 설명 |
+
+**사이트 설명은 손으로 적지 않습니다.** `src/lib/site-meta.js` 가 `services.js` 의 목록에서
+`{name} — {metaTagline}` 을 이어 붙여 만들고, 메타 설명과 푸터 문구가 함께 그 값을 씁니다.
+서비스를 넣거나 빼면 저절로 따라오므로, 문구가 옛날 목록으로 남는 일이 없습니다.
+잇는 방식만 바꾸고 싶으면 `ui.js` 의 `site.descriptionItem` · `descriptionJoin` · `descriptionTail`
+세 값을 고치면 됩니다.
+
+홈의 `<title>` 은 자동이 아닙니다. **서비스를 추가하면 `site.metaTitle` 도 함께 고쳐야 합니다.**
 
 `canonical` · `hreflang` · 사이트맵은 모두 끝에 슬래시가 붙은 주소를 씁니다
 (`BaseHead.astro` 의 `withSlash`). 한 글자라도 다르면 검색엔진이 다른 페이지로 봅니다.
@@ -121,9 +138,20 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
 빌드 끝에 `scripts/alias-sitemap.mjs` 가 같은 내용을 `/sitemap.xml` 로 한 벌 더 둡니다.
 등록 창에 습관적으로 `/sitemap.xml` 을 적어도 404 페이지(HTML)가 나오지 않게 하려는 것입니다.
 
-링크 공유 미리보기 이미지는 `settings.js` 의 `ogImage` 가 가리킵니다. 교체할 때는
-1200x630 을 지키세요. `scripts/og-image.html` 을 브라우저로 열어 그 크기로 캡처하면
-같은 모양으로 다시 만들 수 있습니다.
+링크 공유 미리보기 이미지는 페이지마다 다릅니다. 서비스 상세 페이지는 `services.js` 의
+`ogImage`(로케일별)를, 그 밖의 화면은 `settings.js` 의 `ogImage.src` 를 씁니다.
+
+| 화면 | 그림 | 원본 |
+| --- | --- | --- |
+| 홈 · 404 · 문의 완료 | `og-default(-en).png` | `scripts/og-home.html` |
+| Bible OnAir | `og-bible-onair(-en).png` | `scripts/og-bible-onair.html` |
+| Do-It | `og-do-it(-en).png` | `scripts/og-do-it.html` |
+
+원본 HTML 을 브라우저로 열어 **1200x630** 으로 캡처해 덮어쓰면 됩니다. 주소 끝에 `#en` 을
+붙이면 영문판이 나옵니다. 비율이 어긋나면 공유 화면에서 잘립니다.
+
+서비스를 추가하면 `scripts/og-home.html` 의 카드도 한 장 늘려 주세요. 이 그림만은
+자동으로 따라오지 않습니다.
 
 구조화 데이터는 모든 페이지에 `WebSite`, 프로그램 상세 페이지에 `SoftwareApplication`
 이 들어갑니다. 버전과 내려받기 주소는 릴리스 목록과 같은 출처를 쓰므로 따로 손댈

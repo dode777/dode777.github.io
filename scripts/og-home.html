@@ -1,0 +1,85 @@
+<!doctype html>
+<!--
+  사이트 기본 링크 공유 미리보기 이미지(1200x630)의 원본입니다.
+  홈·404·문의 완료처럼 특정 서비스에 속하지 않는 화면이 이 그림을 씁니다.
+  브라우저로 1200x630 캡처해 덮어씁니다.
+    이 파일              → public/assets/og/og-default.png
+    이 파일#en           → public/assets/og/og-default-en.png
+  서비스를 늘리면 아래 .card 를 한 장 더 두고 폭을 나눠 주세요.
+-->
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@700&display=swap"
+			rel="stylesheet"
+		/>
+		<style>
+			* { margin: 0; padding: 0; box-sizing: border-box; }
+			body {
+				width: 1200px; height: 630px; overflow: hidden; position: relative;
+				display: flex; flex-direction: column; justify-content: center;
+				padding: 0 72px;
+				background: #fff;
+				font-family: 'Noto Sans KR', sans-serif;
+				color: #0b0b0b;
+				word-break: keep-all;
+			}
+			/* 위 띠 — 사이트의 기본 강조색 */
+			body::before {
+				content: ''; position: fixed; inset: 0 0 auto 0; height: 14px;
+				background: #cce6d0;
+			}
+			.eyebrow {
+				font-size: 26px; font-weight: 700; letter-spacing: 0.06em;
+				color: #14401c; text-transform: uppercase;
+			}
+			h1 {
+				margin: 16px 0 0;
+				font-family: 'Noto Serif KR', serif; font-weight: 700;
+				font-size: 66px; line-height: 1.15; letter-spacing: -0.03em;
+			}
+			.cards { display: flex; gap: 24px; margin-top: 40px; }
+			.card {
+				flex: 1 1 0; min-width: 0;
+				padding: 30px 34px; border-radius: 24px; background: #f2f2f2;
+			}
+			.card b {
+				display: block;
+				font-family: 'Noto Serif KR', serif; font-weight: 700;
+				font-size: 38px; letter-spacing: -0.02em;
+			}
+			.card i { display: block; margin-top: 10px; font-size: 26px; font-style: normal; }
+			.card em {
+				display: block; margin-top: 16px; font-size: 22px; font-style: normal;
+				font-weight: 500; color: #616161;
+			}
+			.foot { margin-top: 34px; font-size: 25px; font-weight: 500; color: #616161; }
+			.en { display: none; }
+			html.is-en .ko { display: none; }
+			html.is-en .en { display: inline; }
+		</style>
+	</head>
+	<body>
+		<script>if (location.hash === '#en') document.documentElement.classList.add('is-en'), document.documentElement.lang = 'en';</script>
+		<p class="eyebrow">ISO SERVICE</p>
+		<h1><span class="ko">이소서비스</span><span class="en">ISO Service</span></h1>
+
+		<div class="cards">
+			<div class="card">
+				<b>Bible OnAir</b>
+				<i><span class="ko">예배용 성경 구절 프롬프터</span><span class="en">A scripture prompter for worship</span></i>
+				<em><span class="ko">Windows · 무료</span><span class="en">Windows · free</span></em>
+			</div>
+			<div class="card">
+				<b>Do-It</b>
+				<i><span class="ko">할 일 · 복약 · 고정비 체크</span><span class="en">To-dos · pills · bills</span></i>
+				<em><span class="ko">웹앱 · 설치 없음</span><span class="en">Web app · no install</span></em>
+			</div>
+		</div>
+
+		<p class="foot">isocompany.co.kr</p>
+	</body>
+</html>
