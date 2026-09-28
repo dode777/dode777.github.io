@@ -27,9 +27,9 @@ site:
   descriptionJoin:
     ko: ', '
     en: ' · '
-  # descriptionTail:
-  #   ko: 무료로 쓸 수 있습니다.
-  #   en: Free to use.
+  descriptionTail:
+    ko: 
+    en: 
 
 # ── 화면 낭독기·보조 기술용 설명 (눈에 보이지 않습니다)
 a11y:
