@@ -1,14 +1,27 @@
-# 릴리스 노트(UPDATE-NOTES.md)가 바뀌면 사이트를 다시 빌드해 docs/ 에 반영합니다.
+# 내용이 바뀌면 사이트를 다시 빌드해 docs/ 에 반영합니다.
 #
 # 트리거
+#   push                : content/ 의 문구나 화면 코드를 고쳤을 때 (GitHub 웹 편집 포함)
 #   repository_dispatch : 릴리스 저장소에서 호출 (릴리스 게시 · 노트 수정 시)
 #   workflow_dispatch   : Actions 탭에서 수동 실행
-#   schedule            : 위 둘이 모두 실패했을 때를 대비한 안전망 (월 1회)
+#   schedule            : 위가 모두 실패했을 때를 대비한 안전망 (월 1회)
+#
+# docs/ 는 아래 paths 에 없으므로, 이 워크플로가 만든 커밋이 자신을 다시 부르지 않습니다.
 #
 # 빌드 결과가 이전과 같으면 커밋하지 않으므로, 헛도는 날에는 기록이 남지 않습니다.
 name: Rebuild site
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - 'content/**'
+      - 'src/**'
+      - 'scripts/**'
+      - 'public/**'
+      - 'astro.config.mjs'
+      - 'package.json'
+      - 'package-lock.json'
   repository_dispatch:
     types: [update-notes]
   workflow_dispatch:
