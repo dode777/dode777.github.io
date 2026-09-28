@@ -26,40 +26,40 @@ metaTagline:
   ko: 예배용 성경 구절 프롬프터
   en: A scripture prompter for worship
 summary:
-  ko: 찾는 순간 바로 화면으로, 예배의 몰입을 돕는 가장 빠른 성경 프롬프터
+  ko: 찾는 순간 바로 화면으로, 예배의 몰입을 돕는 가장 빠른 성경 프롬프터예요.
   en: Found and on screen in an instant — the fastest scripture prompter for worship
 # ↓ 비워 두어도 됩니다 — 홈 카드의 부연 한 줄입니다. 비우면 그 줄이 사라집니다.
 summaryDetail:
-  ko: 제어 화면과 송출 화면의 이원화로, 성경 구절을 실시간으로 안전하고 빠르게 제공할 수 있습니다.
+  ko: 제어 화면과 송출 화면의 이원화로, 성경 구절을 실시간으로 안전하고 빠르게 제공할 수 있어요.
   en: A separate control window and output screen put verses up quickly and safely, live.
 description:
   - ko: 예배 중 성경 구절을 빠르게 찾아 띄워야 했던 적 있으신가요?
     en: Ever had to find and put a verse on screen in the middle of a service?
   - ko: |-
       갑작스러운 성경 인용에도 당황하지 마세요.
-      Bible OnAir는 간단한 조작으로 신속한 구절 송출을 지원합니다.
+      Bible OnAir는 간단한 조작으로 신속한 구절 송출을 지원해요.
     en: |-
       An unexpected reading need not throw you.
       Bible OnAir sends the passage out in a few keystrokes.
 screenshotCaptions:
-  - ko: 조작 화면 — 왼쪽에서 구절을 선택하고 오른쪽에서 송출 화면을 미리 봅니다.
+  - ko: 조작 화면 — 왼쪽에서 구절을 선택하고 오른쪽에서 송출 화면을 미리 봐요.
     en: Control window — select a passage on the left, preview the output on the right.
-  - ko: 송출 화면 — 선택한 구절이 출력 화면에 표시됩니다.
+  - ko: 송출 화면 — 선택한 구절이 출력 화면에 표시돼요.
     en: Output screen — the selected passage as displayed up front.
 features:
   - title:
       ko: 손쉬운 송출 화면 설정
       en: Simple output setup
     body:
-      ko: 듀얼모니터나 빔프로젝터 등 구절을 송출할 화면을 쉽고 빠르게 설정할 수 있습니다.
+      ko: 듀얼모니터나 빔프로젝터 등 구절을 송출할 화면을 쉽고 빠르게 설정할 수 있어요.
       en: Choose the display the passage goes to — a second monitor or a projector — in a couple of clicks.
   - title:
       ko: 신속한 구절 선택
       en: Fast passage selection
     body:
       ko: |-
-        책, 장, 절을 차례로 선택하여 송출 범위를 신속하게 지정합니다.
-        단축키(`Ctrl + F`) 검색 기능도 지원합니다.
+        책, 장, 절을 차례로 선택하여 송출 범위를 신속하게 지정해요.
+        단축키(`Ctrl + F`) 검색 기능도 지원해요.
       en: |-
         Select book, chapter and verse in turn to set the range.
         A search shortcut (`Ctrl + F`) is available as well.
@@ -67,20 +67,20 @@ features:
       ko: 다양한 송출 모드
       en: Several display modes
     body:
-      ko: 한 절씩, 여러 절씩 보기, 연속 스크롤 등 다양한 출력 방식을 제공하여 예배 상황에 맞춰 자유롭게 활용할 수 있습니다.
+      ko: 한 절씩, 여러 절씩 보기, 연속 스크롤 등 다양한 출력 방식을 제공하여 예배 상황에 맞춰 자유롭게 활용할 수 있어요.
       en: One verse, several verses, or continuous scroll — pick whichever suits the moment in the service.
   - title:
       ko: 송출 대기 및 전환
       en: Stage and switch
     body:
-      ko: 단축키 하나로 송출 상태와 대기 상태를 빠르게 전환할 수 있습니다.
+      ko: 단축키 하나로 송출 상태와 대기 상태를 빠르게 전환할 수 있어요.
       en: A single key switches between sending the passage out and holding it back.
   - title:
       ko: 즐겨찾기 및 백업
       en: Favourites and backup
     body:
       ko: |-
-        자주 사용하는 구절을 즐겨찾기에 등록해 빠르게 꺼내 쓸 수 있습니다.
+        자주 사용하는 구절을 즐겨찾기에 등록해 빠르게 꺼내 쓸 수 있어요.
         JSON 파일 형식의 가져오기/내보내기 기능을 통해 목록을 편리하게 백업하고 공유해 보세요.
       en: |-
         Register the passages you use often and recall them instantly.
@@ -89,7 +89,7 @@ features:
       ko: 자동 업데이트
       en: Automatic updates
     body:
-      ko: 새로운 기능과 최신 버전을 빠르게 안내하고 자동으로 업데이트합니다.
+      ko: 새로운 기능과 최신 버전을 빠르게 안내하고 자동으로 업데이트해요.
       en: New features and releases are announced and installed automatically.
 requirements:
   columns:
