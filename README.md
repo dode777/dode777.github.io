@@ -43,7 +43,7 @@ npm run preview  # 빌드 결과 미리보기
 content/              ★ 화면에 보이는 글자는 전부 여기 (YAML)
   site.yml            브랜드 · 도메인 · 문의 메일
   ui.yml              첫 화면 · 버튼 · 문의 양식 · 푸터
-  og.yml              링크 공유 카드의 글자
+  og.yml              링크 공유 사진의 글자
   services/
     bible-onair.yml   서비스별 소개 · 기능 · 사용 환경 · FAQ
     do-it.yml
@@ -63,7 +63,7 @@ public/
   robots.txt          크롤러 안내 + 사이트맵 위치
   assets/fonts/       Lato, Roboto Serif (라틴)
   assets/screenshots/ 프로그램 화면 이미지
-  assets/og/          링크 공유 미리보기 이미지 (1200x630)
+  assets/og/          링크 공유 사진 (1200x630)
 docs/                 ★ 빌드 산출물 = 배포본 (커밋 대상)
 scripts/
   track-downloads.mjs 릴리스 다운로드 수 수집 (Actions 에서 실행)
@@ -71,7 +71,7 @@ scripts/
   og-bible-onair.html Bible OnAir 미리보기 이미지의 원본
   og-do-it.html       Do-It 미리보기 이미지의 원본
   og-content.js       위 세 원본이 읽는 문구 (자동 생성 · 고치지 마세요)
-  render-og.mjs       카드 여섯 장을 다시 만듭니다 (npm run og)
+  render-og.mjs       링크 공유 사진 여섯 장을 다시 만듭니다 (npm run og)
   build-og-content.mjs  og-content.js 를 만듭니다 (npm run build 가 실행)
   check-content.mjs   content/ 검사 (npm run build 가 실행)
   alias-sitemap.mjs   빌드 후 sitemap-index.xml 을 sitemap.xml 로 한 벌 더 복사
@@ -90,7 +90,7 @@ data/
 | 첫 화면 · 버튼 · 문의 양식 · 푸터 | `content/ui.yml` |
 | 서비스 소개 · 기능 · 화면 설명 · 사용 환경 · FAQ | `content/services/<이름>.yml` |
 | 브랜드 표기 · 도메인 · 문의 메일 | `content/site.yml` |
-| 링크 공유 카드의 글자 | `content/og.yml` |
+| 링크 공유 사진의 글자 | `content/og.yml` |
 
 항목마다 `ko`(한국어)와 `en`(영어)이 나란히 있습니다. 둘 다 채워야 합니다.
 
@@ -133,8 +133,8 @@ lede:
 1. `content/services/<이름>.yml` 을 만듭니다. 기존 파일을 복사해 고치는 편이 빠릅니다.
 2. `src/config/services.js` 의 `services` 배열에 연결 설정을 넣습니다
    (`slug` · `status` · 내려받기 방식 · 화면 그림 · 공유 그림 경로).
-3. `content/og.yml` 의 `home.notes` 와 `services` 에 카드 문구를 더합니다.
-4. `scripts/og-home.html` 의 카드 상자를 한 칸 늘리고 `npm run og` 로 그림을 다시 만듭니다.
+3. `content/og.yml` 의 `home.notes` 와 `services` 에 링크 공유 사진 문구를 더합니다.
+4. `scripts/og-home.html` 의 상자를 한 칸 늘립니다. 그림은 저절로 다시 만들어집니다.
 
 목록 카드, 상세 페이지(`/<slug>`, `/en/<slug>`), 헤더·푸터 링크, 사이트맵, 사이트 설명은
 저절로 따라옵니다.
@@ -196,7 +196,7 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
 빌드 끝에 `scripts/alias-sitemap.mjs` 가 같은 내용을 `/sitemap.xml` 로 한 벌 더 둡니다.
 등록 창에 습관적으로 `/sitemap.xml` 을 적어도 404 페이지(HTML)가 나오지 않게 하려는 것입니다.
 
-링크 공유 미리보기 이미지는 페이지마다 다릅니다. 서비스 상세 페이지는 `services.js` 의
+링크 공유 사진(주소를 카카오톡·문자로 보냈을 때 뜨는 미리보기 그림)은 페이지마다 다릅니다. 서비스 상세 페이지는 `services.js` 의
 `ogImage`(로케일별)를, 그 밖의 화면은 `settings.js` 의 `ogImage.src` 를 씁니다.
 
 | 화면 | 그림 | 원본 |
@@ -205,18 +205,27 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
 | Bible OnAir | `og-bible-onair(-en).png` | `scripts/og-bible-onair.html` |
 | Do-It | `og-do-it(-en).png` | `scripts/og-do-it.html` |
 
-카드의 글자는 `content/og.yml` 에 있고, 서비스 한 줄 소개처럼 페이지와 겹치는 문구는
-`content/services/*.yml` 에서 가져옵니다. 문구를 고친 뒤 그림을 다시 만들려면:
+그림의 글자는 `content/og.yml` 에 있고, 서비스 한 줄 소개처럼 페이지와 겹치는 문구는
+`content/services/*.yml` 에서 가져옵니다.
+
+**문구를 고치면 그림은 저절로 다시 만들어집니다.** `Render share images` 워크플로가
+`content/` 변경을 보고 돌아, 새 그림을 `public/assets/og/` 에 커밋합니다. 이어서
+`Rebuild site` 가 `docs/` 까지 반영합니다. 터미널을 열 일이 없습니다.
+
+직접 돌리고 싶으면 저장소의 **Actions 탭 → Render share images → Run workflow** 를
+누르면 됩니다.
+
+내 컴퓨터에서 만들려면 (선택):
 
 ```
-npm run og      # 여섯 장을 모두 다시 만듭니다 (크롬 필요)
+npm run og                                  # 크롬이 설치돼 있으면 그대로
+CHROME_PATH=/path/to/chrome npm run og      # 경로를 직접 줄 때
 ```
 
-크롬 경로를 직접 주려면 `CHROME_PATH=/path/to/chrome npm run og` 로 실행합니다.
 원본 HTML 을 브라우저로 열어 **1200x630** 으로 직접 캡처해도 됩니다. 주소 끝에 `#en` 을
 붙이면 영문판이 나옵니다.
 
-서비스를 추가하면 `scripts/og-home.html` 의 카드 상자도 한 칸 늘려 주세요. 배치만은
+서비스를 추가하면 `scripts/og-home.html` 의 상자도 한 칸 늘려 주세요. 배치만은
 자동으로 따라오지 않습니다.
 
 구조화 데이터는 모든 페이지에 `WebSite`, 프로그램 상세 페이지에 `SoftwareApplication`
