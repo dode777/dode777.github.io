@@ -1,0 +1,20 @@
+# 사이트 전체에 걸리는 값입니다. 언어와 무관하게 하나씩만 있습니다.
+#
+#   · brand 는 헤더 로고와 푸터 저작권 표기에 나옵니다.
+#   · url 을 바꾸면 astro.config.mjs 의 site 와 public/CNAME 도 함께 고쳐야 합니다.
+#   · contactFormEndpoint 를 비우면 문의 양식이 사라지고 메일 링크만 남습니다.
+
+# 헤더 로고와 저작권 표기
+brand: ISO Service
+
+# 배포 도메인 (뒤에 슬래시 없이)
+url: https://isocompany.co.kr
+
+# 문의 메일 주소
+contactEmail: hello@isocompany.co.kr
+
+# 문의 양식을 전달하는 외부 서비스 주소 (비우면 양식 대신 메일 링크만 표시)
+contactFormEndpoint: https://formsubmit.co/hello@isocompany.co.kr
+
+# 푸터의 GitHub 링크
+github: https://github.com/dode777
