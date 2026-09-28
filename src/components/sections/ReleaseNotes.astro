@@ -22,7 +22,7 @@ const downloadable = service.downloadKind === 'windows' ? downloadableVersions(e
 {
 	entries.length > 0 ? (
 		<>
-			<p class="releases__note">{content.releaseNote}</p>
+			{content.releaseNote && <p class="releases__note">{content.releaseNote}</p>}
 
 			<ol class="releases">
 				{entries.map((release, index) => (

@@ -44,7 +44,9 @@ const pendingNote =
 		</div>
 
 		<h1 class="service-hero__title">{content.name}</h1>
-		{content.subName !== content.name && <p class="service-hero__subname">{content.subName}</p>}
+		{content.subName && content.subName !== content.name && (
+			<p class="service-hero__subname">{content.subName}</p>
+		)}
 		<p class="service-hero__tagline">{content.tagline}</p>
 
 		<div class="service-hero__actions">

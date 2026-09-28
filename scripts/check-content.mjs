@@ -13,11 +13,23 @@ const LOCALES = settings.locales;
 const problems = [];
 
 /**
- * 일부러 비워 둘 수 있는 자리입니다.
+ * 일부러 비워 둘 수 있는 자리입니다. content/ 의 해당 항목 위에도 같은 내용이
+ * 주석으로 적혀 있으니, 여기를 고치면 그 주석도 함께 고쳐 주세요.
+ *
  * 그 밖의 자리는 값이 없으면 실수로 봅니다 — 빈 값이 그대로 배포되면 화면에
- * 열쇠말(site.descriptionTail 같은 글자)이 찍혀 나갑니다.
+ * 열쇠말(site.descriptionTail 같은 글자)이나 빈 줄이 나갑니다.
  */
-const OPTIONAL = new Set(['site.descriptionTail']);
+const OPTIONAL = new Set([
+	'ui:site.descriptionTail', // 사이트 설명 끝에 덧붙이는 한 문장
+	'services:subName', // 제품명 아래 작은 이름
+	'services:summaryDetail', // 카드의 부연 한 줄
+	'services:releaseNote', // 릴리스 목록 위의 안내 한 줄
+]);
+
+/** OPTIONAL 에서 쓰는 앞자리. 서비스 파일은 이름이 달라도 한 묶음으로 봅니다. */
+function scopeOf(file) {
+	return file.startsWith('services/') ? 'services' : file.replace(/\.yml$/, '');
+}
 
 function report(file, where, message) {
 	problems.push({ file, where, message });
@@ -33,7 +45,7 @@ function walk(node, file, path) {
 
 	const present = LOCALES.filter((lang) => lang in node);
 	if (present.length > 0) {
-		if (OPTIONAL.has(path)) return;
+		if (OPTIONAL.has(`${scopeOf(file)}:${path}`)) return;
 		for (const lang of LOCALES) {
 			if (!(lang in node)) {
 				report(file, path, `${lang} 이 없습니다 (${present.join('·')} 만 있습니다)`);

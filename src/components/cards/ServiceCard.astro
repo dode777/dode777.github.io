@@ -30,7 +30,9 @@ const version = latest?.version ?? service.currentVersion;
 			</span>
 		</a>
 	</h3>
-	{content.subName !== content.name && <p class="service-card__subname">{content.subName}</p>}
+	{content.subName && content.subName !== content.name && (
+		<p class="service-card__subname">{content.subName}</p>
+	)}
 
 	<p class="service-card__tagline">{content.summary}</p>
 	{content.summaryDetail && <p class="service-card__summary">{content.summaryDetail}</p>}
