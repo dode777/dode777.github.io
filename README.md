@@ -40,11 +40,19 @@ npm run preview  # 빌드 결과 미리보기
 ## 디렉토리
 
 ```
+content/              ★ 화면에 보이는 글자는 전부 여기 (YAML)
+  site.yml            브랜드 · 도메인 · 문의 메일
+  ui.yml              첫 화면 · 버튼 · 문의 양식 · 푸터
+  og.yml              링크 공유 카드의 글자
+  services/
+    bible-onair.yml   서비스별 소개 · 기능 · 사용 환경 · FAQ
+    do-it.yml
 src/
+  content/load.js   content/ 를 읽어 화면 코드가 쓰는 모양으로 넘겨줍니다
   config/
-    settings.js     브랜드명, 도메인, 문의 이메일, 폼 전송 주소
-    services.js     ★ 프로그램 카탈로그 (한/영 문구가 모두 여기 있습니다)
-  i18n/ui.js        UI 문구 사전 + 로케일 경로 헬퍼
+    settings.js     공유 그림 경로 · 지원 언어 (문구는 content/site.yml)
+    services.js     프로그램 연결 설정 (문구는 content/services/*.yml)
+  i18n/ui.js        content/ui.yml 을 읽어 주는 얇은 층 + 로케일 경로 헬퍼
   lib/site-meta.js  서비스 목록에서 사이트 설명 한 줄을 만듭니다
   styles/           Odyssey 기반 디자인 토큰 / 타이포 / 리셋
   components/       Header, Footer, 버튼, 카드, 상세 페이지 섹션, 문의 폼
@@ -59,9 +67,13 @@ public/
 docs/                 ★ 빌드 산출물 = 배포본 (커밋 대상)
 scripts/
   track-downloads.mjs 릴리스 다운로드 수 수집 (Actions 에서 실행)
-  og-home.html        사이트 기본 미리보기 이미지의 원본 (브라우저로 캡처해 교체)
+  og-home.html        사이트 기본 미리보기 이미지의 원본 (문구는 content/ 에서 읽습니다)
   og-bible-onair.html Bible OnAir 미리보기 이미지의 원본
   og-do-it.html       Do-It 미리보기 이미지의 원본
+  og-content.js       위 세 원본이 읽는 문구 (자동 생성 · 고치지 마세요)
+  render-og.mjs       카드 여섯 장을 다시 만듭니다 (npm run og)
+  build-og-content.mjs  og-content.js 를 만듭니다 (npm run build 가 실행)
+  check-content.mjs   content/ 검사 (npm run build 가 실행)
   alias-sitemap.mjs   빌드 후 sitemap-index.xml 을 sitemap.xml 로 한 벌 더 복사
 data/
   download-stats.csv  다운로드 수 기록 (사이트 빌드에는 쓰이지 않습니다)
@@ -71,21 +83,66 @@ data/
 
 ### 문구 수정
 
-프로그램 관련 문구는 `src/config/services.js`에 있습니다.
-헤더·푸터·버튼·문의 양식 같은 공통 UI 문구는 `src/i18n/ui.js`에 있습니다.
+**화면에 보이는 글자는 전부 `content/` 안에 있습니다.** 코드를 열 일이 없습니다.
+
+| 고치고 싶은 것 | 파일 |
+| --- | --- |
+| 첫 화면 · 버튼 · 문의 양식 · 푸터 | `content/ui.yml` |
+| 서비스 소개 · 기능 · 화면 설명 · 사용 환경 · FAQ | `content/services/<이름>.yml` |
+| 브랜드 표기 · 도메인 · 문의 메일 | `content/site.yml` |
+| 링크 공유 카드의 글자 | `content/og.yml` |
+
+항목마다 `ko`(한국어)와 `en`(영어)이 나란히 있습니다. 둘 다 채워야 합니다.
+
+```yaml
+title:
+  ko: 북적이는 1인 스튜디오
+  en: A crowded one-person studio
+
+lede:
+  ko: |-
+    혼자 만드는 프로그램을 모아둔 곳입니다.
+    아래에서 확인해보세요.
+  en: |-
+    Everything here is made by one person.
+    Take a look below.
+```
+
+따옴표도 쉼표도 필요 없습니다. 줄을 바꾸고 싶으면 `|-` 아래에서 그냥 줄을 바꿉니다.
+왼쪽 이름(`title`, `lede` 같은 것)은 화면 코드가 찾는 이름이라 바꾸면 안 됩니다.
+
+**GitHub 웹에서 바로 고쳐도 됩니다.** 저장소에서 파일을 열고 연필 아이콘을 누른 뒤
+커밋하면 `Rebuild site` 워크플로가 받아서 배포합니다. 휴대폰에서도 됩니다.
+
+한쪽 언어를 빠뜨리거나 필요한 항목을 지우면 **빌드가 멈추고** 어느 파일 어느 자리인지
+알려줍니다(`npm run check:content` 로 따로 확인할 수도 있습니다).
+
+```
+✗ content/services/do-it.yml
+  features[0].title — en 이 비어 있습니다
+  faq — 항목이 없습니다
+
+배포되지 않았습니다. 위 내용을 채우고 다시 실행하세요.
+```
+
+문구가 아닌 **연결 설정**(내려받기 주소·화면 그림 경로·릴리스 저장소 위치)은
+`src/config/services.js` 와 `src/config/settings.js` 에 남아 있습니다.
 
 ### 프로그램 추가
 
-`src/config/services.js`의 `services` 배열에 항목을 넣으면 목록 카드,
-상세 페이지(`/<slug>`, `/en/<slug>`), 헤더/푸터 링크, 사이트맵이 함께 생성됩니다.
-`ko`, `en` 두 언어 블록을 모두 채워야 합니다.
+1. `content/services/<이름>.yml` 을 만듭니다. 기존 파일을 복사해 고치는 편이 빠릅니다.
+2. `src/config/services.js` 의 `services` 배열에 연결 설정을 넣습니다
+   (`slug` · `status` · 내려받기 방식 · 화면 그림 · 공유 그림 경로).
+3. `content/og.yml` 의 `home.notes` 와 `services` 에 카드 문구를 더합니다.
+4. `scripts/og-home.html` 의 카드 상자를 한 칸 늘리고 `npm run og` 로 그림을 다시 만듭니다.
+
+목록 카드, 상세 페이지(`/<slug>`, `/en/<slug>`), 헤더·푸터 링크, 사이트맵, 사이트 설명은
+저절로 따라옵니다.
 
 ### 버전 올릴 때
 
-`Bible-OnAir-Releases`에 새 릴리스를 올린 뒤 `src/config/services.js`의
-`currentVersion` · `installerName` · `releases` 를 갱신하고 `npm run build` 후 `docs/`까지 커밋합니다.
-`downloadUrl`은 `releases/latest`를 가리키므로 링크 자체는 고칠 필요가 없습니다.
-릴리스 항목의 `date` 는 `null` 이면 화면에 날짜가 표시되지 않습니다. `'2026-09-11'` 형식으로 채워 넣으면 됩니다.
+버전과 변경 내용은 릴리스 저장소의 `UPDATE-NOTES(.en).md` 와 `latest.yml` 에서 **자동으로** 읽습니다.
+이 저장소에서 손으로 적을 것은 없습니다. 릴리스를 올리면 `Rebuild site` 워크플로가 받아서 배포합니다.
 
 ### Do-It (웹앱) 버전
 
@@ -100,7 +157,7 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
   첫 릴리스 뒤에는 `status` 를 `'dev'` 에서 `'live'` 로만 바꿔 주세요.
 - 버전별 설치 파일 링크는 없습니다(웹앱은 항상 최신).
 
-`services.js` 의 `releases` 배열은 릴리스 저장소를 못 읽었을 때 쓰는 **대비 목록**입니다.
+`content/services/<이름>.yml` 의 `releases` 는 릴리스 저장소를 못 읽었을 때 쓰는 **대비 목록**입니다.
 이 값이 비어 있고 노트도 못 읽으면 버전 표시와 버튼이 통째로 사라진 페이지가 만들어지는데,
 재빌드는 사람 손을 거치지 않고 결과를 커밋하므로 그대로 배포됩니다. 그래서 `status: 'live'`
 인 서비스에서 릴리스가 하나도 남지 않으면 **빌드를 멈춥니다**(`src/lib/releases.js`).
@@ -148,10 +205,18 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
 | Bible OnAir | `og-bible-onair(-en).png` | `scripts/og-bible-onair.html` |
 | Do-It | `og-do-it(-en).png` | `scripts/og-do-it.html` |
 
-원본 HTML 을 브라우저로 열어 **1200x630** 으로 캡처해 덮어쓰면 됩니다. 주소 끝에 `#en` 을
-붙이면 영문판이 나옵니다. 비율이 어긋나면 공유 화면에서 잘립니다.
+카드의 글자는 `content/og.yml` 에 있고, 서비스 한 줄 소개처럼 페이지와 겹치는 문구는
+`content/services/*.yml` 에서 가져옵니다. 문구를 고친 뒤 그림을 다시 만들려면:
 
-서비스를 추가하면 `scripts/og-home.html` 의 카드도 한 장 늘려 주세요. 이 그림만은
+```
+npm run og      # 여섯 장을 모두 다시 만듭니다 (크롬 필요)
+```
+
+크롬 경로를 직접 주려면 `CHROME_PATH=/path/to/chrome npm run og` 로 실행합니다.
+원본 HTML 을 브라우저로 열어 **1200x630** 으로 직접 캡처해도 됩니다. 주소 끝에 `#en` 을
+붙이면 영문판이 나옵니다.
+
+서비스를 추가하면 `scripts/og-home.html` 의 카드 상자도 한 칸 늘려 주세요. 배치만은
 자동으로 따라오지 않습니다.
 
 구조화 데이터는 모든 페이지에 `WebSite`, 프로그램 상세 페이지에 `SoftwareApplication`
