@@ -12,6 +12,13 @@ import settings from '../src/config/settings.js';
 const LOCALES = settings.locales;
 const problems = [];
 
+/**
+ * 일부러 비워 둘 수 있는 자리입니다.
+ * 그 밖의 자리는 값이 없으면 실수로 봅니다 — 빈 값이 그대로 배포되면 화면에
+ * 열쇠말(site.descriptionTail 같은 글자)이 찍혀 나갑니다.
+ */
+const OPTIONAL = new Set(['site.descriptionTail']);
+
 function report(file, where, message) {
 	problems.push({ file, where, message });
 }
@@ -26,10 +33,16 @@ function walk(node, file, path) {
 
 	const present = LOCALES.filter((lang) => lang in node);
 	if (present.length > 0) {
+		if (OPTIONAL.has(path)) return;
 		for (const lang of LOCALES) {
+			if (!(lang in node)) {
+				report(file, path, `${lang} 이 없습니다 (${present.join('·')} 만 있습니다)`);
+				continue;
+			}
 			const value = node[lang];
-			if (!(lang in node)) report(file, path, `${lang} 이 없습니다 (${present.join('·')} 만 있습니다)`);
-			else if (typeof value === 'string' && value.trim() === '') report(file, path, `${lang} 이 비어 있습니다`);
+			const isEmpty =
+				value === null || value === undefined || (typeof value === 'string' && value.trim() === '');
+			if (isEmpty) report(file, path, `${lang} 이 비어 있습니다`);
 		}
 		return;
 	}
