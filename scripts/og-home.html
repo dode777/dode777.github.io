@@ -57,29 +57,44 @@
 				font-weight: 500; color: #616161;
 			}
 			.foot { margin-top: 26px; font-size: 25px; font-weight: 500; color: #616161; }
-			.en { display: none; }
-			html.is-en .ko { display: none; }
-			html.is-en .en { display: inline; }
 		</style>
 	</head>
 	<body>
-		<script>if (location.hash === '#en') document.documentElement.classList.add('is-en'), document.documentElement.lang = 'en';</script>
-		<p class="eyebrow">ISO SERVICE</p>
-		<h1><span class="ko">북적이는<br />1인 스튜디오</span><span class="en">A crowded<br />one-person studio</span></h1>
+		<p class="eyebrow" data-og="eyebrow"></p>
+		<h1 data-og="home.headline"></h1>
 
 		<div class="cards">
 			<div class="card">
-				<b>Bible OnAir</b>
-				<i><span class="ko">예배용 성경 구절 프롬프터</span><span class="en">A scripture prompter for worship</span></i>
-				<em><span class="ko">Windows · 무료</span><span class="en">Windows · free</span></em>
+				<b data-og="home.cards.0.name"></b>
+				<i data-og="home.cards.0.tagline"></i>
+				<em data-og="home.cards.0.note"></em>
 			</div>
 			<div class="card">
-				<b>Do-It</b>
-				<i><span class="ko">할 일 · 복약 · 고정비 체크</span><span class="en">To-dos · pills · bills</span></i>
-				<em><span class="ko">웹앱 · 설치 없음</span><span class="en">Web app · no install</span></em>
+				<b data-og="home.cards.1.name"></b>
+				<i data-og="home.cards.1.tagline"></i>
+				<em data-og="home.cards.1.note"></em>
 			</div>
 		</div>
 
-		<p class="foot">isocompany.co.kr</p>
+		<p class="foot" data-og="home.foot"></p>
+		<script src="og-content.js"></script>
+		<script>
+			/* 문구는 content/ 에서 옵니다. 여기서는 자리에 끼워 넣기만 합니다. */
+			(function () {
+				var lang = location.hash === '#en' ? 'en' : 'ko';
+				document.documentElement.lang = lang;
+				var data = window.OG[lang];
+				document.querySelectorAll('[data-og]').forEach(function (el) {
+					var value = el.dataset.og.split('.').reduce(function (o, k) {
+						return o == null ? o : o[k];
+					}, data);
+					el.textContent = '';
+					String(value == null ? '' : value).split('\n').forEach(function (line, i) {
+						if (i) el.appendChild(document.createElement('br'));
+						el.appendChild(document.createTextNode(line));
+					});
+				});
+			})();
+		</script>
 	</body>
 </html>

@@ -58,24 +58,40 @@
 				background: #FFB98F;
 			}
 			.phone img { display: block; width: 100%; }
-			.en { display: none; }
-			html.is-en .ko { display: none; }
-			html.is-en .en { display: inline; }
 		</style>
 		<script>if (location.hash === '#en') document.documentElement.classList.add('is-en'), document.documentElement.lang = 'en';</script>
 	</head>
 	<body>
 		<div class="copy">
-			<p class="eyebrow">ISO Service</p>
-			<h1><span class="ko">손짓으로 챙기는<br />하루 체크리스트</span><span class="en">A daily checklist<br />you run by touch</span></h1>
+			<p class="eyebrow" data-og="eyebrow"></p>
+			<h1 data-og="services.do-it.headline"></h1>
 			<p class="product">
-				<span class="ko" style="color:inherit;font-weight:700">두잇 Do-It</span><span class="en" style="color:inherit;font-weight:700">Do-It</span>
-				<span><span class="ko">할 일 · 복약 · 고정비</span><span class="en">To-dos · pills · bills</span></span>
+				<span style="color:inherit;font-weight:700" data-og="services.do-it.pillName"></span>
+				<span data-og="services.do-it.pillTagline"></span>
 			</p>
-			<p class="foot"><span class="ko">설치 없는 무료 웹앱 · isocompany.co.kr</span><span class="en">Free web app, no install · isocompany.co.kr</span></p>
+			<p class="foot" data-og="services.do-it.foot"></p>
 		</div>
 		<div class="phone">
 			<img src="../public/assets/screenshots/do-it-feed.png" alt="" />
 		</div>
+		<script src="og-content.js"></script>
+		<script>
+			/* 문구는 content/ 에서 옵니다. 여기서는 자리에 끼워 넣기만 합니다. */
+			(function () {
+				var lang = location.hash === '#en' ? 'en' : 'ko';
+				document.documentElement.lang = lang;
+				var data = window.OG[lang];
+				document.querySelectorAll('[data-og]').forEach(function (el) {
+					var value = el.dataset.og.split('.').reduce(function (o, k) {
+						return o == null ? o : o[k];
+					}, data);
+					el.textContent = '';
+					String(value == null ? '' : value).split('\n').forEach(function (line, i) {
+						if (i) el.appendChild(document.createElement('br'));
+						el.appendChild(document.createTextNode(line));
+					});
+				});
+			})();
+		</script>
 	</body>
 </html>

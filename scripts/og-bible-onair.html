@@ -55,21 +55,36 @@
 				box-shadow: 0 26px 60px rgba(0, 0, 0, 0.18);
 			}
 			.shot img { display: block; width: 100%; }
-			.en { display: none; }
-			html.is-en .ko { display: none; }
-			html.is-en .en { display: inline; }
 		</style>
 	</head>
 	<body>
-		<script>if (location.hash === '#en') document.documentElement.classList.add('is-en'), document.documentElement.lang = 'en';</script>
 		<div class="copy">
-			<p class="eyebrow">ISO Service</p>
-			<h1><span class="ko">예배용<br />성경 자막 프로그램</span><span class="en">A scripture prompter<br />for worship</span></h1>
-			<p class="product">Bible OnAir <span><span class="ko">성경 구절 프롬프터</span><span class="en">Scripture on the screen</span></span></p>
-			<p class="foot"><span class="ko">Windows 무료 · isocompany.co.kr</span><span class="en">Free for Windows · isocompany.co.kr</span></p>
+			<p class="eyebrow" data-og="eyebrow"></p>
+			<h1 data-og="services.bible-onair.headline"></h1>
+			<p class="product"><span data-og="services.bible-onair.pillName"></span> <span data-og="services.bible-onair.pillTagline"></span></p>
+			<p class="foot" data-og="services.bible-onair.foot"></p>
 		</div>
 		<div class="shot">
 			<img src="../public/assets/screenshots/bible-onair-screen.png" alt="" />
 		</div>
+		<script src="og-content.js"></script>
+		<script>
+			/* 문구는 content/ 에서 옵니다. 여기서는 자리에 끼워 넣기만 합니다. */
+			(function () {
+				var lang = location.hash === '#en' ? 'en' : 'ko';
+				document.documentElement.lang = lang;
+				var data = window.OG[lang];
+				document.querySelectorAll('[data-og]').forEach(function (el) {
+					var value = el.dataset.og.split('.').reduce(function (o, k) {
+						return o == null ? o : o[k];
+					}, data);
+					el.textContent = '';
+					String(value == null ? '' : value).split('\n').forEach(function (line, i) {
+						if (i) el.appendChild(document.createElement('br'));
+						el.appendChild(document.createTextNode(line));
+					});
+				});
+			})();
+		</script>
 	</body>
 </html>

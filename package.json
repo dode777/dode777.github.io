@@ -7,13 +7,15 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && node scripts/alias-sitemap.mjs",
+    "build": "astro build && node scripts/alias-sitemap.mjs && node scripts/build-og-content.mjs",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "og": "node scripts/build-og-content.mjs && node scripts/render-og.mjs"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.4",
     "astro": "^7.3.2",
-    "js-yaml": "^5.4.2"
+    "js-yaml": "^5.4.2",
+    "playwright-core": "^1.63.0"
   }
 }
