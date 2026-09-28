@@ -8,19 +8,27 @@
  * 정적 빌드에서만 돌아가므로 파일을 그냥 읽습니다(브라우저로 나가지 않습니다).
  */
 import { readFileSync } from 'node:fs';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 import { load as parseYaml } from 'js-yaml';
 
-const CONTENT_ROOT = new URL('../../content/', import.meta.url);
+/*
+ * 저장소 뿌리의 content/ 를 가리킵니다.
+ * import.meta.url 은 빌드 과정에서 묶인 파일의 위치가 되어 버리므로,
+ * 명령을 실행한 위치(= 저장소 뿌리)를 기준으로 잡습니다.
+ */
+const CONTENT_ROOT = resolve(process.cwd(), 'content');
 
 /** content/ 기준 상대 경로를 받아 파싱된 값을 돌려줍니다. */
 export function readContent(relativePath) {
-	const path = fileURLToPath(new URL(relativePath, CONTENT_ROOT));
+	const path = resolve(CONTENT_ROOT, relativePath);
 	let text;
 	try {
 		text = readFileSync(path, 'utf8');
 	} catch (error) {
-		throw new Error(`[content] content/${relativePath} 을 읽지 못했습니다: ${error.message}`);
+		throw new Error(
+			`[content] content/${relativePath} 을 읽지 못했습니다: ${error.message}\n` +
+				`(저장소 뿌리에서 실행해야 합니다. 지금 위치: ${process.cwd()})`
+		);
 	}
 	try {
 		return parseYaml(text) ?? {};

@@ -1,0 +1,268 @@
+# 화면에 공통으로 쓰이는 문구입니다.
+#
+#   · 항목마다 ko(한국어)와 en(영어)이 나란히 있습니다. 둘 다 채워 주세요.
+#   · 값에 따옴표를 붙일 필요가 없습니다. 작은따옴표도 그냥 쓰면 됩니다.
+#   · 여러 줄은 아래 example 처럼 |- 을 쓰고 줄을 바꿔 적습니다.
+#
+#       example:
+#         ko: |-
+#           첫 줄입니다.
+#           둘째 줄입니다.
+#
+#   · {name} 처럼 중괄호로 감싼 자리는 값이 채워 넣어지는 곳입니다. 지우지 마세요.
+#   · 왼쪽 이름(site, home 같은 것)은 화면 코드가 찾는 이름이라 바꾸면 안 됩니다.
+#     바꿀 것은 ko / en 오른쪽의 글자뿐입니다.
+
+# ── 사이트 이름과 검색 결과 제목
+site:
+  title:
+    ko: ISO Service
+    en: ISO Service
+  metaTitle:
+    ko: 북적이는 1인 스튜디오 | 이소서비스
+    en: A crowded one-person studio | ISO Service
+  descriptionItem:
+    ko: '{name} — {tagline}'
+    en: '{name} — {tagline}'
+  descriptionJoin:
+    ko: ', '
+    en: ' · '
+  descriptionTail:
+    ko: 무료로 쓸 수 있습니다.
+    en: Free to use.
+
+# ── 화면 낭독기·보조 기술용 설명 (눈에 보이지 않습니다)
+a11y:
+  skipToContent:
+    ko: 본문으로 건너뛰기
+    en: Skip to content
+  openMenu:
+    ko: 메뉴 열기
+    en: Open main menu
+  closeMenu:
+    ko: 메뉴 닫기
+    en: Close main menu
+  toggleTheme:
+    ko: 밝은 화면과 어두운 화면 전환
+    en: Toggle light and dark appearance
+  switchLanguage:
+    ko: 언어 전환
+    en: Switch language
+
+# ── 헤더 메뉴
+nav:
+  home:
+    ko: 홈
+    en: Home
+  contact:
+    ko: 문의
+    en: Contact
+
+# ── 첫 화면
+home:
+  title:
+    ko: 북적이는 1인 스튜디오
+    en: A crowded one-person studio
+  lede:
+    ko: |-
+      혼자 만드는 프로그램을 모아둔 곳입니다.
+      아래에서 확인해보세요.
+    en: |-
+      Everything here is made by one person.
+      Take a look below.
+
+# ── 홈의 서비스 카드 버튼
+card:
+  detail:
+    ko: 자세히 보기
+    en: Read more
+  download:
+    ko: 다운로드
+    en: Download
+  open:
+    ko: 열기
+    en: Open
+  comingSoon:
+    ko: 준비 중
+    en: Coming soon
+
+# ── 서비스 상태 배지
+status:
+  live:
+    ko: 정식 버전
+    en: Stable release
+  beta:
+    ko: 출시 준비 중
+    en: Release pending
+  dev:
+    ko: 개발 중
+    en: In development
+
+# ── 서비스 상세 페이지
+detail:
+  backToHome:
+    ko: 목록으로
+    en: All programs
+  overview:
+    ko: 소개
+    en: Overview
+  features:
+    ko: 주요 기능
+    en: Key features
+  screenshots:
+    ko: '{name} 사용 예시'
+    en: '{name} in use'
+  screenshotsPending:
+    ko: 화면 이미지는 준비 중입니다.
+    en: Screenshots are on the way.
+  releases:
+    ko: Releases
+    en: Releases
+  releasesEmpty:
+    ko: 아직 공개된 릴리스가 없습니다.
+    en: No public releases yet.
+  requirements:
+    ko: 사용 환경
+    en: System requirements
+  faq:
+    ko: 자주 묻는 질문(FAQ)
+    en: Frequently asked questions (FAQ)
+  currentVersion:
+    ko: 최신 버전
+    en: Current version
+  downloadWindows:
+    ko: Windows용 다운로드
+    en: Download for Windows
+  downloadStore:
+    ko: 크롬 웹스토어에서 설치
+    en: Install from the Chrome Web Store
+  openWeb:
+    ko: 웹에서 열기
+    en: Open in browser
+  openWebHint:
+    ko: 휴대폰이나 태블릿에서 열어주세요. 컴퓨터에서는 QR 코드가 나옵니다.
+    en: Open it on a phone or tablet. On a computer you will see a QR code.
+  downloadPendingRelease:
+    ko: 첫 정식 릴리스를 준비하고 있습니다.
+    en: The first public release is being prepared.
+  downloadPendingStore:
+    ko: 크롬 웹스토어 등록을 준비하고 있습니다.
+    en: The Chrome Web Store listing is being prepared.
+
+# ── 릴리스 목록
+releases:
+  latest:
+    ko: 최신 버전
+    en: Latest
+  details:
+    ko: 변경 내용 자세히 보기
+    en: See what changed
+  download:
+    ko: 이 버전 다운로드
+    en: Download this version
+  unavailable:
+    ko: 버전 기록을 불러오지 못했습니다. 잠시 후 다시 확인해 주세요.
+    en: Version history could not be loaded. Please check back shortly.
+
+# ── 문의 양식
+contact:
+  title:
+    ko: 문의
+    en: Contact
+  lede:
+    ko: |-
+      사용 중 발생한 문제나 기능 제안을 남겨주세요.
+      적어주신 메일 주소로 빠른 시일 내 답변드리겠습니다.
+    en: |-
+      Report a problem or suggest a feature below.
+      A reply will be sent to the address you provide as soon as possible.
+  nameLabel:
+    ko: 이름
+    en: Name
+  namePlaceholder:
+    ko: 홍길동
+    en: Your name
+  emailLabel:
+    ko: 이메일
+    en: Email
+  emailPlaceholder:
+    ko: name@example.com
+    en: name@example.com
+  topicLabel:
+    ko: 문의 유형
+    en: Topic
+  topicUsage:
+    ko: 사용 방법
+    en: How to use it
+  topicBug:
+    ko: 오류 신고
+    en: Bug report
+  topicFeature:
+    ko: 기능 제안
+    en: Feature request
+  topicEtc:
+    ko: 기타
+    en: Something else
+  messageLabel:
+    ko: 문의 내용
+    en: Message
+  messagePlaceholder:
+    ko: 문제가 발생한 상황과 증상을 함께 적어주시면 확인이 빠릅니다.
+    en: Describing the situation and the symptom helps it get looked at faster.
+  consentLabel:
+    ko: 답변을 위해 이름과 이메일을 수집하는 데 동의합니다.
+    en: I agree to my name and email being collected so I can be replied to.
+  submit:
+    ko: 보내기
+    en: Send
+  required:
+    ko: 필수
+    en: Required
+  mailFallbackLead:
+    ko: 아래 주소로 메일을 보내셔도 됩니다.
+    en: You may also write to the address below.
+  mailFallbackCta:
+    ko: 메일 앱으로 보내기
+    en: Open your mail app
+
+# ── 문의 전송 완료 안내
+thanks:
+  title:
+    ko: 문의를 접수했습니다
+    en: Your message has been received
+  lede:
+    ko: 적어주신 메일 주소로 답변드리겠습니다.
+    en: A reply will be sent to the address you provided.
+  cta:
+    ko: 홈으로
+    en: Back to home
+
+# ── 푸터
+footer:
+  services:
+    ko: 프로그램
+    en: Programs
+  links:
+    ko: 링크
+    en: Links
+  contact:
+    ko: 문의
+    en: Contact
+  github:
+    ko: GitHub
+    en: GitHub
+  builtWith:
+    ko: Odyssey Theme 기반 · Astro로 제작
+    en: Based on the Odyssey Theme · Built with Astro
+
+# ── 없는 주소 안내
+'404':
+  title:
+    ko: 페이지를 찾을 수 없습니다
+    en: Page not found
+  lede:
+    ko: 주소가 바뀌었거나 아직 없는 페이지입니다.
+    en: The address may have changed, or this page does not exist yet.
+  cta:
+    ko: 홈으로
+    en: Back to home
