@@ -7,10 +7,11 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && node scripts/alias-sitemap.mjs && node scripts/build-og-content.mjs",
+    "build": "node scripts/check-content.mjs && astro build && node scripts/alias-sitemap.mjs && node scripts/build-og-content.mjs",
     "preview": "astro preview",
     "check": "astro check",
-    "og": "node scripts/build-og-content.mjs && node scripts/render-og.mjs"
+    "og": "node scripts/build-og-content.mjs && node scripts/render-og.mjs",
+    "check:content": "node scripts/check-content.mjs"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.4",
