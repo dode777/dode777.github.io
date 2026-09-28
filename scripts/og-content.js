@@ -30,7 +30,7 @@ window.OG = {
 			"do-it": {
 				"headline": "손짓으로 챙기는\n하루 체크리스트",
 				"pillName": "두잇 Do-It",
-				"pillTagline": "할 일 · 복약 · 고정비",
+				"pillTagline": "할 일 · 복약 · 구독료",
 				"foot": "설치 없는 무료 웹앱 · isocompany.co.kr"
 			}
 		}
