@@ -63,7 +63,7 @@ services:
       ko: 두잇 Do-It
       en: Do-It
     pillTagline:
-      ko: 할 일 · 복약 · 고정비
+      ko: 할 일 · 복약 · 구독료
       en: To-dos · pills · bills
     foot:
       ko: 설치 없는 무료 웹앱 · isocompany.co.kr
