@@ -69,4 +69,13 @@ jobs:
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git commit -m 'Chore: 링크 공유 사진 다시 만듦 (자동)'
-          git push
+          # 다른 워크플로가 먼저 밀어 넣었을 수 있습니다. 받아서 얹고 다시 시도합니다.
+          for attempt in 1 2 3; do
+            if git pull --rebase --autostash origin main && git push; then
+              exit 0
+            fi
+            echo "밀어 넣기 실패 ($attempt/3). 잠시 뒤 다시 시도합니다."
+            sleep 5
+          done
+          echo "::error::세 번 시도했지만 밀어 넣지 못했습니다."
+          exit 1
