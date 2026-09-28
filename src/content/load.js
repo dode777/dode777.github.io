@@ -79,3 +79,9 @@ export function pickLocale(node, lang) {
 		Object.entries(node).map(([key, value]) => [key, pickLocale(value, lang)])
 	);
 }
+
+/** 한 서비스의 문구를 읽어 { ko, en } 두 벌로 나눠 돌려줍니다. */
+export function readServiceContent(slug, locales) {
+	const tree = readContent(`services/${slug}.yml`);
+	return Object.fromEntries(locales.map((lang) => [lang, pickLocale(tree, lang)]));
+}
