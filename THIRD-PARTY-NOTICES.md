@@ -31,8 +31,13 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-## 폰트
+## 글꼴
 
-- **Lato** — Łukasz Dziedzic, SIL Open Font License 1.1
-- **Roboto Serif** — Google, SIL Open Font License 1.1
-- **Noto Sans KR / Noto Serif KR** — Google Fonts에서 로드, SIL Open Font License 1.1
+**Pretendard** — 길형진(orioncactus), SIL Open Font License 1.1
+
+- 원본: https://github.com/orioncactus/pretendard
+- 저장소에 직접 담아 배포합니다: `public/assets/fonts/pretendard/`
+- 라이선스 전문은 같은 폴더의 `OFL.txt` 에 있습니다.
+
+제목과 본문에 모두 이 글꼴 하나만 씁니다. 예전에 쓰던 Lato · Roboto Serif ·
+Noto Sans KR · Noto Serif KR 은 더 이상 쓰지 않습니다.

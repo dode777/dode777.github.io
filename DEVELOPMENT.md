@@ -109,7 +109,7 @@ src/
 public/
   CNAME               커스텀 도메인 (isocompany.co.kr)
   robots.txt          크롤러 안내 + 사이트맵 위치
-  assets/fonts/       Lato, Roboto Serif (라틴)
+  assets/fonts/pretendard/  Pretendard (제목·본문 모두. 저장소에 직접 담았습니다)
   assets/screenshots/ 프로그램 화면 이미지
   assets/og/          링크 공유 사진 (1200x630)
 docs/                 ★ 빌드 산출물 = 배포본 (커밋 대상)
@@ -257,6 +257,30 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
 `public/assets/screenshots/` 의 파일을 바꾸고, 크기가 달라졌다면
 `src/config/services.js`의 `screenshots[].width` / `height` 도 함께 맞춰주세요.
 설명 문구는 같은 파일의 `screenshotCaptions` 에 있습니다.
+
+## 글꼴
+
+제목과 본문 모두 **Pretendard** 입니다. 글꼴 파일을 `public/assets/fonts/pretendard/` 에
+직접 담아 두었으므로 **외부 서비스에 기대지 않습니다.** 구글 폰트가 느리거나 막히는
+환경에서도 글꼴이 그대로 나옵니다.
+
+가변 폰트 하나를 유니코드 구간별로 92조각(약 2.8MB)으로 쪼갠 것입니다. 브라우저는
+그 페이지에 실제로 쓰인 글자가 든 조각만 내려받습니다 — 홈 화면 기준 10조각, 약 116KB.
+
+| 무엇 | 어디 |
+| --- | --- |
+| 글꼴 파일과 `@font-face` | `public/assets/fonts/pretendard/pretendard.css` |
+| 불러오는 줄 | `src/components/head/BaseHead.astro` |
+| 글꼴 이름 지정 | `src/styles/theme.css` 의 `--theme-font-family-*` |
+
+`--theme-font-family-serif` 라는 이름이 남아 있는데 지금은 Pretendard 를 가리킵니다.
+나중에 제목만 다른 글꼴로 바꾸고 싶을 때 그 한 줄만 고치면 되도록 남겨 두었습니다.
+
+링크 공유 사진도 같은 글꼴을 씁니다. 원본 HTML 을 브라우저로 직접 열 때를 위해
+글꼴 주소만 상대 경로로 바꾼 `pretendard.relative.css` 를 빌드가 함께 만듭니다
+(자동 생성이므로 직접 고치지 마세요).
+
+라이선스는 SIL Open Font License 1.1 입니다. `OFL.txt` 를 글꼴 파일과 함께 두었습니다.
 
 ## 검색 노출
 

@@ -7,7 +7,7 @@
  *
  * npm run build 가 자동으로 실행합니다.
  */
-import { writeFileSync } from 'node:fs';
+import { readFileSync, writeFileSync } from 'node:fs';
 import { readContent, pickLocale } from '../src/content/load.js';
 import settings from '../src/config/settings.js';
 import { services } from '../src/config/services.js';
@@ -52,3 +52,17 @@ const banner = `/* 자동 생성 파일입니다. 고치지 마세요.
 
 writeFileSync('scripts/og-content.js', `${banner}window.OG = ${JSON.stringify(content, null, '\t')};\n`, 'utf8');
 console.log('scripts/og-content.js 생성');
+
+/*
+ * 카드 원본을 브라우저로 직접 열 때도 글꼴이 나오도록, 글꼴 주소만 상대 경로로
+ * 바꾼 사본을 만들어 둡니다. 원본(pretendard.css)은 사이트가 씁니다.
+ */
+const FONT_DIR = 'public/assets/fonts/pretendard';
+const fontCss = readFileSync(`${FONT_DIR}/pretendard.css`, 'utf8');
+writeFileSync(
+	`${FONT_DIR}/pretendard.relative.css`,
+	`/* 자동 생성 파일입니다. 고치지 마세요.\n   pretendard.css 와 같은 내용이되 글꼴 주소만 상대 경로입니다.\n   scripts/og-*.html 을 브라우저로 직접 열 때 쓰입니다. */\n` +
+		fontCss.replaceAll("url('/assets/fonts/pretendard/", "url('./"),
+	'utf8'
+);
+console.log('public/assets/fonts/pretendard/pretendard.relative.css 생성');

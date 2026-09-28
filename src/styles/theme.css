@@ -48,13 +48,12 @@
 	--container-padding: 0 1.25rem;
 
 	/* Theme Fonts */
-	/* 라틴은 Roboto Serif, 한글은 Noto Serif KR.
-	   웹폰트를 못 받는 환경에서는 한글이 바탕체로 떨어지지 않도록 고딕으로 폴백합니다. */
-	--theme-font-family-serif: 'Roboto Serif', 'Noto Serif KR', Georgia, Cambria,
-		'Times New Roman', Times, 'Pretendard', 'Apple SD Gothic Neo',
-		'Malgun Gothic', sans-serif;
-	--theme-font-family-sans: 'Lato', 'Pretendard', 'Noto Sans KR', -apple-system,
-		BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+	/* 제목과 본문 모두 Pretendard 입니다. 두 이름을 남겨 둔 것은 나중에 제목만
+	   다른 글꼴로 바꾸고 싶을 때 이 한 줄만 고치면 되게 하려는 것입니다. */
+	--theme-font-family-serif: 'Pretendard', -apple-system, BlinkMacSystemFont,
+		'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+	--theme-font-family-sans: 'Pretendard', -apple-system, BlinkMacSystemFont,
+		'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
 	--theme-font-family-mono: ui-monospace, SFMono-Regular, 'SF Mono', Menlo,
 		Consolas, monospace;
 }

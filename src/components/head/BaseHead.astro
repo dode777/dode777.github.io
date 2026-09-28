@@ -69,13 +69,12 @@ const webSiteSchema = {
 
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
-<!-- 한글 글리프 폴백 (라틴 폰트는 /assets/fonts 에 함께 배포됩니다) -->
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-	rel="stylesheet"
-	href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&family=Noto+Serif+KR:wght@600;700&display=swap"
-/>
+<!--
+	본문·제목 모두 Pretendard 입니다. 글꼴 파일을 저장소에 직접 담아 두었으므로
+	외부 서비스에 기대지 않습니다. 가변 폰트를 유니코드 구간별로 쪼갠 것이라
+	브라우저는 그 페이지에 실제로 쓰인 글자가 든 조각만 내려받습니다.
+-->
+<link rel="stylesheet" href="/assets/fonts/pretendard/pretendard.css" />
 
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content={t('site.title')} />

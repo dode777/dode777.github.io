@@ -1,41 +1,7 @@
 /*
- * 라틴 본문/제목 폰트는 Odyssey Theme에서 함께 가져온 로컬 woff2를 사용하고,
- * 한글 글리프는 Google Fonts(Noto Sans KR / Noto Serif KR)로 폴백됩니다.
- * (폰트 링크는 BaseHead.astro 참고)
+ * 글꼴은 Pretendard 하나입니다. 파일은 public/assets/fonts/pretendard/ 에 있고,
+ * 불러오는 곳은 BaseHead.astro 입니다. 외부 서비스에 기대지 않습니다.
  */
-
-/* roboto-serif-700 - latin */
-@font-face {
-	font-family: 'Roboto Serif';
-	font-style: normal;
-	font-weight: 700;
-	font-display: swap;
-	src: url('/assets/fonts/roboto-serif-v8-latin-700.woff2') format('woff2');
-}
-/* roboto-serif-600 - latin */
-@font-face {
-	font-family: 'Roboto Serif';
-	font-style: normal;
-	font-weight: 600;
-	font-display: swap;
-	src: url('/assets/fonts/roboto-serif-v8-latin-600.woff2') format('woff2');
-}
-/* lato-regular - latin */
-@font-face {
-	font-family: 'Lato';
-	font-style: normal;
-	font-weight: 400;
-	font-display: swap;
-	src: url('/assets/fonts/lato-v23-latin-regular.woff2') format('woff2');
-}
-/* lato-700 - latin */
-@font-face {
-	font-family: 'Lato';
-	font-style: normal;
-	font-weight: 700;
-	font-display: swap;
-	src: url('/assets/fonts/lato-v23-latin-700.woff2') format('woff2');
-}
 
 :root {
 	--font-size-sm: clamp(14.4px, 0.07vw + 14.13px, 15px);
