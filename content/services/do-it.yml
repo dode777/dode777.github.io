@@ -11,7 +11,7 @@
 #
 #   왼쪽 이름(summary, features 같은 것)은 화면 코드가 찾는 이름이라 바꾸면 안 됩니다.
 
-name: 두잇!
+name:
   ko: 두잇!
   en: Do-It
 subName:
