@@ -27,9 +27,9 @@ site:
   descriptionJoin:
     ko: ', '
     en: ' · '
-  descriptionTail:
-    ko: 무료로 쓸 수 있습니다.
-    en: Free to use.
+  # descriptionTail:
+  #   ko: 무료로 쓸 수 있습니다.
+  #   en: Free to use.
 
 # ── 화면 낭독기·보조 기술용 설명 (눈에 보이지 않습니다)
 a11y:
@@ -65,10 +65,8 @@ home:
     en: A crowded one-person studio
   lede:
     ko: |-
-      혼자 만드는 프로그램을 모아둔 곳입니다.
       아래에서 확인해보세요.
     en: |-
-      Everything here is made by one person.
       Take a look below.
 
 # ── 홈의 서비스 카드 버튼
@@ -89,8 +87,8 @@ card:
 # ── 서비스 상태 배지
 status:
   live:
-    ko: 정식 버전
-    en: Stable release
+    ko: 최신 버전
+    en: latest release
   beta:
     ko: 출시 준비 중
     en: Release pending
@@ -140,8 +138,8 @@ detail:
     ko: 웹에서 열기
     en: Open in browser
   openWebHint:
-    ko: 휴대폰이나 태블릿에서 열어주세요. 컴퓨터에서는 QR 코드가 나옵니다.
-    en: Open it on a phone or tablet. On a computer you will see a QR code.
+    ko: 휴대폰이나 태블릿에서 열어주세요. PC에서는 QR 코드가 출력됩니다.
+    en: Open it on a phone or tablet. On a PC you will see a QR code.
   downloadPendingRelease:
     ko: 첫 정식 릴리스를 준비하고 있습니다.
     en: The first public release is being prepared.
@@ -240,8 +238,8 @@ thanks:
 # ── 푸터
 footer:
   services:
-    ko: 프로그램
-    en: Programs
+    ko: 서비스
+    en: Services
   links:
     ko: 링크
     en: Links
