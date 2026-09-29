@@ -1,5 +1,6 @@
 ---
 import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+import ShotCarousel from './ShotCarousel.astro';
 
 const { service } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
@@ -10,7 +11,10 @@ const captions = service[lang].screenshotCaptions ?? [];
 ---
 
 {
-	shots.length > 0 ? (
+	/* screenshotCarousel 을 켠 서비스만 옆으로 넘기는 모양. 나머지는 아래 목록 그대로입니다. */
+	shots.length > 0 && service.screenshotCarousel ? (
+		<ShotCarousel service={service} />
+	) : shots.length > 0 ? (
 		<ul class:list={['shots', { 'shots--phone': service.screenshotLayout === 'phone' }]}>
 			{shots.map((shot, index) => (
 				<li class="shots__item">

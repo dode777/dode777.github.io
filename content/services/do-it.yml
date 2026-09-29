@@ -52,6 +52,10 @@ screenshotCaptions:
     en: Double-tap to add in one line — it splits time, dose and amount for you.
   - ko: 한 번에 확인하는 요약 — 남은 항목과 고정 지출을 한눈에 볼 수 있어요.
     en: Pull down for today’s summary — what is left per topic and your monthly bills.
+  - ko: 요약에서 주제 카드를 누르면 항목을 모아 보고, 이름과 색도 바꿔요.
+    en: Tap a topic card in the summary to see all its items and change its name or color.
+  - ko: 요약을 옆으로 넘기면 기록 — 지난 몇 달을 잔디로 돌아봐요.
+    en: Swipe the summary sideways for your history — each month as a grid of days.
 features:
   - title:
       ko: 꾹 눌러 완료
@@ -83,8 +87,12 @@ features:
       ko: 간격과 기한
       en: Intervals and deadlines
     body:
-      ko: 칫솔 교체처럼 며칠마다 하는 일, 자동차 검사처럼 날짜가 정해진 일도 때가 되면 나타나요.
-      en: Things you do every few days, or by a set date, show up when they are due.
+      ko: |-
+        칫솔 교체처럼 며칠마다 하는 일, 자동차 검사처럼 날짜가 정해진 일도 남은 날을 세어 줘요.
+        며칠 전부터 카드에 띄울지도 골라요.
+      en: |-
+        Things you do every few days, or by a set date, count down the days left.
+        You choose how many days ahead they show up.
   - title:
       ko: 고정 지출도 한눈에
       en: Bills at a glance
@@ -93,6 +101,26 @@ features:
         구독·보험·통신비 등 분류별로 모아 한 달 합계와 다가오는 결제일을 보여줘요.
         해지하기로 한 것은 따로 모아 표시해요.
       en: Subscriptions, insurance and utilities grouped by category, with the monthly total and upcoming payment dates.
+  - title:
+      ko: 남은 개수 세기
+      en: Count what is left
+    body:
+      ko: |-
+        약·영양제처럼 개수가 있는 것은 남은 개수를 적어 두면 완료할 때마다 줄어요.
+        다 줄어드는 날을 미리 보여주고, 얼마 안 남으면 카드에 표시해요.
+      en: |-
+        For things you count, like pills, enter how many are left and it goes down each time you finish.
+        See roughly when you will run out, and the card shows the count when it runs low.
+  - title:
+      ko: 지난 기록은 잔디로
+      en: Your history as a grid
+    body:
+      ko: |-
+        요약을 옆으로 넘기면 달마다 다 한 날이 짙게 칠해져요.
+        못 한 날을 빨갛게 칠하지 않아요. 달을 누르면 날마다 한 일을 봐요.
+      en: |-
+        Swipe the summary sideways to see each month as a grid, with fully done days in the darkest shade.
+        Missed days are never marked in red. Tap a month to see what you did each day.
   - title:
       ko: 설치 없이 앱처럼
       en: An app without installing
