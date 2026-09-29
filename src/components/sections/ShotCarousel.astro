@@ -1,0 +1,298 @@
+---
+/**
+ * 화면 예시를 옆으로 넘기는 캐러셀입니다.
+ *
+ * services.js 에서 screenshotCarousel: true 를 켠 서비스만 이 모양을 씁니다(지금은 Do-It).
+ * 켜지 않은 서비스는 Screenshots.astro 의 기존 목록 그대로입니다.
+ *
+ * 스타일과 스크립트를 is:inline 으로 두는 까닭: 상세 페이지들은 CSS 묶음 하나를 함께 쓰므로,
+ * 보통 <style> 로 두면 이 캐러셀을 쓰지 않는 페이지의 CSS 파일(과 그 주소)까지 바뀝니다.
+ * 인라인이면 이 컴포넌트가 그려지는 페이지에만 들어갑니다. 대신 범위가 자동으로 갇히지
+ * 않으므로 클래스 이름을 모두 shot-carousel 로 시작합니다.
+ *
+ * 스크립트가 없어도 옆으로 밀어 넘길 수 있습니다. 버튼·점은 스크립트가 켤 때만 나타납니다.
+ */
+import { getLangFromUrl, useTranslations } from '../../i18n/ui.js';
+
+const { service } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const shots = service.screenshots ?? [];
+const captions = service[lang].screenshotCaptions ?? [];
+const name = service[lang].name;
+const listLabel = t('detail.screenshots').replace('{name}', name);
+---
+
+<div class="shot-carousel" data-shot-carousel>
+	<ul class="shot-carousel__track" role="list" aria-label={listLabel} tabindex="0" data-shot-track>
+		{
+			shots.map((shot, index) => (
+				<li class="shot-carousel__item">
+					<img
+						class="shot-carousel__img"
+						src={shot.src}
+						width={shot.width}
+						height={shot.height}
+						alt={captions[index] ?? name}
+						loading={index < 2 ? 'eager' : 'lazy'}
+						decoding="async"
+						draggable="false"
+					/>
+					{captions[index] && <p class="shot-carousel__caption">{captions[index]}</p>}
+				</li>
+			))
+		}
+	</ul>
+	<div class="shot-carousel__nav" data-shot-nav hidden>
+		<button type="button" class="shot-carousel__arrow" data-shot-prev aria-label={t('detail.shotsPrev')}>
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7"></path></svg>
+		</button>
+		<!-- 점은 보이는 위치 표시입니다. 읽기 도구에는 목록과 앞뒤 버튼으로 충분해 감춥니다. 개수는 화면 폭에 따라 스크립트가 정합니다. -->
+		<div class="shot-carousel__dots" data-shot-dots aria-hidden="true"></div>
+		<button type="button" class="shot-carousel__arrow" data-shot-next aria-label={t('detail.shotsNext')}>
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7"></path></svg>
+		</button>
+	</div>
+</div>
+
+<style is:inline>
+	.shot-carousel {
+		/* 한 장의 폭. 좁은 화면에서는 다음 장이 오른쪽에 걸쳐 보여 넘길 수 있음을 알립니다. */
+		--shot-w: min(13.5rem, 72%);
+		--shot-gap: 1.25rem;
+		position: relative;
+	}
+	.shot-carousel__track {
+		margin: 0;
+		padding: 0.25rem 0 0.5rem;
+		list-style: none;
+		display: flex;
+		gap: var(--shot-gap);
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		-webkit-overflow-scrolling: touch;
+		/* 스크롤바는 숨기고 아래 점으로 위치를 알립니다. */
+		scrollbar-width: none;
+		border-radius: var(--theme-shape-radius-sm);
+	}
+	/* 좁은 화면에서는 트랙을 화면 끝까지 넓혀, 다음 장이 여백에 잘리지 않고 화면 끝에 걸쳐 보이게 합니다.
+	   (1.25rem 은 Container 의 좌우 여백 --container-padding 과 같은 값) */
+	@media (max-width: 700px) {
+		.shot-carousel__track {
+			margin-inline: -1.25rem;
+			padding-inline: 1.25rem;
+			scroll-padding-inline: 1.25rem;
+			border-radius: 0;
+		}
+	}
+	.shot-carousel__track::-webkit-scrollbar {
+		display: none;
+	}
+	.shot-carousel__track:focus-visible {
+		outline: 3px solid var(--theme-primary);
+		outline-offset: 3px;
+	}
+	.shot-carousel__item {
+		flex: 0 0 var(--shot-w);
+		scroll-snap-align: start;
+		margin: 0;
+	}
+	.shot-carousel__img {
+		width: 100%;
+		height: auto;
+		display: block;
+		background-color: var(--theme-surface-1);
+		border: 1px solid var(--theme-border);
+		border-radius: var(--theme-shape-radius-sm);
+		-webkit-user-drag: none;
+		user-select: none;
+	}
+	.shot-carousel__caption {
+		margin: 0.75rem 0 0 0;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.shot-carousel__nav {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1rem;
+		margin-top: 1.25rem;
+	}
+	.shot-carousel__nav[hidden] {
+		display: none;
+	}
+	.shot-carousel__arrow {
+		width: 2.5rem;
+		height: 2.5rem;
+		flex: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0;
+		border: 1px solid var(--theme-border);
+		border-radius: 3rem;
+		background-color: transparent;
+		color: var(--theme-on-bg);
+		cursor: pointer;
+		transition: background-color var(--theme-transition), border-color var(--theme-transition),
+			opacity var(--theme-transition);
+	}
+	.shot-carousel__arrow svg {
+		width: 1.15rem;
+		height: 1.15rem;
+	}
+	.shot-carousel__arrow:hover:not(:disabled) {
+		background-color: var(--theme-surface-1);
+		border-color: var(--theme-primary);
+	}
+	.shot-carousel__arrow:disabled {
+		opacity: 0.35;
+		cursor: default;
+	}
+	.shot-carousel__dots {
+		display: flex;
+		align-items: center;
+	}
+	/* 점은 작게 보이지만 누르는 자리는 넉넉하게(24px) 둡니다. 크기는 바뀌지 않고 색만 바뀝니다. */
+	.shot-carousel__dot {
+		width: 1.5rem;
+		height: 1.5rem;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		cursor: pointer;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.shot-carousel__dot::before {
+		content: '';
+		width: 0.5rem;
+		height: 0.5rem;
+		border-radius: 50%;
+		background-color: var(--theme-border);
+		transition: background-color var(--theme-transition);
+	}
+	.shot-carousel__dot:hover::before {
+		background-color: var(--theme-muted);
+	}
+	.shot-carousel__dot.is-current::before {
+		background-color: var(--theme-primary);
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.shot-carousel__track {
+			scroll-behavior: auto;
+		}
+	}
+</style>
+
+<script is:inline>
+	(() => {
+		const reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+		document.querySelectorAll('[data-shot-carousel]').forEach((root) => {
+			const track = root.querySelector('[data-shot-track]');
+			const items = Array.from(track.children);
+			const nav = root.querySelector('[data-shot-nav]');
+			const prev = root.querySelector('[data-shot-prev]');
+			const next = root.querySelector('[data-shot-next]');
+			const dotBox = root.querySelector('[data-shot-dots]');
+			if (items.length < 2) return;
+
+			/*
+			 * 멈출 수 있는 자리. 장마다 왼쪽 끝이지만, 넓은 화면에서는 마지막 몇 장이 한 번에
+			 * 보여 끝까지 밀어도 그 자리에 닿지 않으므로 "끝" 하나로 합칩니다.
+			 * (스크롤 스냅도 같은 식으로 끝에 멈춥니다.)
+			 */
+			let stops = [];
+			function measure() {
+				const max = track.scrollWidth - track.clientWidth;
+				const base = items[0].offsetLeft;
+				const found = [];
+				for (const item of items) {
+					const x = Math.min(item.offsetLeft - base, max);
+					if (!found.length || x - found[found.length - 1] > 2) found.push(x);
+				}
+				if (found.length !== stops.length) {
+					dotBox.replaceChildren(
+						...found.map((_, n) => {
+							const dot = document.createElement('button');
+							dot.type = 'button';
+							dot.className = 'shot-carousel__dot';
+							dot.tabIndex = -1;
+							dot.addEventListener('click', () => go(n));
+							return dot;
+						})
+					);
+				}
+				stops = found;
+			}
+
+			function current() {
+				const x = track.scrollLeft;
+				let best = 0;
+				stops.forEach((stop, i) => {
+					if (Math.abs(stop - x) < Math.abs(stops[best] - x)) best = i;
+				});
+				return best;
+			}
+
+			function go(index) {
+				const i = Math.max(0, Math.min(stops.length - 1, index));
+				track.scrollTo({ left: stops[i], behavior: reduce.matches ? 'auto' : 'smooth' });
+			}
+
+			function update() {
+				const i = current();
+				Array.from(dotBox.children).forEach((dot, n) => dot.classList.toggle('is-current', n === i));
+				prev.disabled = track.scrollLeft <= 2;
+				next.disabled = track.scrollLeft >= stops[stops.length - 1] - 2;
+			}
+
+			let frame = 0;
+			track.addEventListener(
+				'scroll',
+				() => {
+					if (frame) return;
+					frame = requestAnimationFrame(() => {
+						frame = 0;
+						update();
+					});
+				},
+				{ passive: true }
+			);
+			window.addEventListener(
+				'resize',
+				() => {
+					measure();
+					update();
+				},
+				{ passive: true }
+			);
+
+			prev.addEventListener('click', () => go(current() - 1));
+			next.addEventListener('click', () => go(current() + 1));
+
+			/* 트랙에 초점이 있을 때 왼쪽·오른쪽 화살표, Home·End 로 한 자리씩 넘깁니다. */
+			track.addEventListener('keydown', (event) => {
+				const moves = {
+					ArrowLeft: () => current() - 1,
+					ArrowRight: () => current() + 1,
+					Home: () => 0,
+					End: () => stops.length - 1,
+				};
+				const target = moves[event.key];
+				if (!target) return;
+				event.preventDefault();
+				go(target());
+			});
+
+			nav.hidden = false;
+			measure();
+			update();
+		});
+	})();
+</script>

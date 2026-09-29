@@ -116,6 +116,13 @@ detail:
   screenshotsPending:
     ko: 화면 이미지는 준비 중입니다.
     en: Screenshots are on the way.
+  # 화면 예시를 옆으로 넘기는 모양(캐러셀)의 앞뒤 버튼 이름입니다. 화면에는 화살표만 보이고, 읽기 도구가 이 이름을 읽습니다.
+  shotsPrev:
+    ko: 이전 사진
+    en: Previous screenshot
+  shotsNext:
+    ko: 다음 사진
+    en: Next screenshot
   releases:
     ko: Releases
     en: Releases
