@@ -14,7 +14,7 @@ window.OG = {
 					"note": "Windows · 무료"
 				},
 				{
-					"name": "두잇!",
+					"name": "두잇(Do-It)",
 					"tagline": "할 일·복약·구독료 체크 앱",
 					"note": "웹앱 · 설치 없음"
 				}
