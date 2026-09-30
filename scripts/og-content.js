@@ -9,7 +9,7 @@ window.OG = {
 			"foot": "isocompany.co.kr",
 			"cards": [
 				{
-					"name": "Bible OnAir",
+					"name": "Bible OnAir(바이블온에어)",
 					"tagline": "예배용 성경 구절 프롬프터",
 					"note": "Windows · 무료"
 				},
@@ -42,7 +42,7 @@ window.OG = {
 			"foot": "isocompany.co.kr",
 			"cards": [
 				{
-					"name": "Bible OnAir",
+					"name": "Bible OnAir(바이블온에어)",
 					"tagline": "A scripture prompter for worship",
 					"note": "Windows · free"
 				},
