@@ -16,7 +16,7 @@
 
 <p align="center">
   <a href="https://isocompany.co.kr/bible-onair/">Bible OnAir</a> &nbsp;·&nbsp;
-  <a href="https://isocompany.co.kr/do-it/">두잇!</a> &nbsp;·&nbsp;
+  <a href="https://isocompany.co.kr/do-it/">두잇</a> &nbsp;·&nbsp;
   <a href="https://isocompany.co.kr/#contact">문의</a>
 </p>
 
@@ -32,7 +32,7 @@
 
 Windows 전용이며 무료(개역개정 유료, 준비중)입니다. 저작권이 소멸된 「성경전서 개역한글판」(1961)을 사용하고 있습니다.
 
-**[소개 페이지](https://isocompany.co.kr/bible-onair/)** · [내려받기](https://github.com/dode777/Bible-OnAir-Releases/releases/latest)
+**[소개 페이지](https://isocompany.co.kr/bible-onair/)**
 
 <br>
 
@@ -49,7 +49,7 @@ Windows 전용이며 무료(개역개정 유료, 준비중)입니다. 저작권�
 
 설치가 필요 없습니다. 휴대폰 브라우저에서 열고 홈 화면에 추가하여 앱처럼 사용합니다.(앱 준비중)
 
-**[소개 페이지](https://isocompany.co.kr/do-it/)** · [웹에서 열기](https://doit.isocompany.co.kr/)
+**[소개 페이지](https://isocompany.co.kr/do-it/)**
 
 <br>
 
