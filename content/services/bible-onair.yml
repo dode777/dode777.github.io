@@ -14,14 +14,14 @@
 #   값을 비우면 빌드가 멈추고 어디가 비었는지 알려줍니다.
 #   단, 바로 위에 "↓ 비워 두어도 됩니다" 라고 적힌 항목은 예외입니다.
 
-name: Bible OnAir
+name: Bible OnAir(바이블온에어)
 # ↓ 비워 두어도 됩니다 — 제품명 아래 작은 이름입니다. 비우면 그 줄이 사라집니다.
 subName:
-  ko: 바이블온에어
-  en: Bible OnAir
+  ko: 
+  en: 
 tagline:
-  ko: 성경 구절 프롬프터
-  en: A scripture prompter
+  ko: 쓰기편한 성경 프롬프터
+  en: Easy-to-use Bible prompter
 metaTagline:
   ko: 예배용 성경 구절 프롬프터
   en: A scripture prompter for worship
@@ -37,7 +37,7 @@ description:
     en: Ever had to find and put a verse on screen in the middle of a service?
   - ko: |-
       갑작스러운 성경 인용에도 당황하지 마세요.
-      Bible OnAir는 간단한 조작으로 신속한 구절 송출을 지원해요.
+      Bible OnAir(바이블온에어)는 간단한 조작으로 신속한 구절 송출을 지원해요.
     en: |-
       An unexpected reading need not throw you.
       Bible OnAir sends the passage out in a few keystrokes.
