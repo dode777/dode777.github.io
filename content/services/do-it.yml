@@ -15,12 +15,12 @@
 #   단, 바로 위에 "↓ 비워 두어도 됩니다" 라고 적힌 항목은 예외입니다.
 
 name:
-  ko: 두잇!
+  ko: 두잇(Do-It)
   en: Do-It
 # ↓ 비워 두어도 됩니다 — 제품명 아래 작은 이름입니다. 비우면 그 줄이 사라집니다.
 subName:
-  ko: Do-It
-  en: Do-It
+  ko: 
+  en: 
 tagline:
   ko: 손짓으로 챙기는 하루
   en: Your day, one gesture at a time
@@ -38,7 +38,7 @@ description:
   - ko: 매일 먹는 약, 잊기 쉬운 루틴, 달마다 빠져나가는 고정비. 챙길 것은 많은데 체크리스트는 금방 길어져요.
     en: Daily pills, easy-to-forget routines, monthly bills. There is a lot to keep track of, and checklists grow long fast.
   - ko: |-
-      두잇!은 한 화면에 한 가지 항목만 표시해요.
+      두잇은 한 화면에 한 가지 항목만 표시해요.
       꾹 눌러 완료하고, 위로 넘겨 다음 할 일을 챙겨보세요.
     en: |-
       Do-It shows one thing per screen.
@@ -198,7 +198,7 @@ faq:
       en: Can I use it on a computer?
     a:
       ko: |-
-        Do-It은 꾹 누르기, 두 번 탭, 밀기 같은 손짓으로 쓰는 앱이라 휴대폰과 태블릿만 지원합니다.
+        두잇은 꾹 누르기, 두 번 탭, 밀기 같은 손짓으로 쓰는 앱이라 휴대폰과 태블릿만 지원합니다.
         컴퓨터에서 열면 휴대폰으로 옮겨 열 수 있는 QR 코드가 나옵니다.
       en: |-
         Do-It is driven by gestures — hold, double-tap, swipe — so it supports phones and tablets only.
