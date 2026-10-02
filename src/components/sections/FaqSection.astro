@@ -1,4 +1,8 @@
 ---
+/**
+ * 자주 묻는 질문. 항목에 images 가 있으면 답 아래에 그림을 나란히 놓습니다
+ * (넓은 화면 두 칸 · 좁은 화면 한 칸). 그림마다 caption 이 그림 아래 한 줄로, alt 가 대체 글로 들어갑니다.
+ */
 const { faq } = Astro.props;
 ---
 
@@ -11,6 +15,24 @@ const { faq } = Astro.props;
 					<svg class="faq__chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 9 6 6 6-6" /></svg>
 				</summary>
 				<p class="faq__answer">{item.a}</p>
+				{item.images?.length > 0 && (
+					<div class="faq__figures">
+						{item.images.map((image) => (
+							<figure class="faq__figure">
+								<img
+									class="faq__img"
+									src={image.src}
+									width={image.width}
+									height={image.height}
+									alt={image.alt}
+									loading="lazy"
+									decoding="async"
+								/>
+								{image.caption && <figcaption class="faq__caption">{image.caption}</figcaption>}
+							</figure>
+						))}
+					</div>
+				)}
 			</details>
 		))
 	}
@@ -58,5 +80,32 @@ const { faq } = Astro.props;
 		padding: 0 1.25rem 1.25rem 1.25rem;
 		color: var(--theme-muted);
 		white-space: pre-line;
+	}
+	.faq__figures {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1.25rem;
+		max-width: 52rem;
+		padding: 0 1.25rem 1.5rem 1.25rem;
+	}
+	@media (max-width: 640px) {
+		.faq__figures {
+			grid-template-columns: minmax(0, 1fr);
+		}
+	}
+	.faq__figure {
+		margin: 0;
+	}
+	.faq__img {
+		display: block;
+		width: 100%;
+		height: auto;
+		border: 1px solid var(--theme-border);
+		border-radius: var(--theme-shape-radius-sm);
+	}
+	.faq__caption {
+		margin-top: 0.6rem;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
 	}
 </style>

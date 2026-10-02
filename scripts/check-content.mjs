@@ -6,6 +6,8 @@
  *
  * npm run build 가 자동으로 실행합니다.
  */
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 import { readContent } from '../src/content/load.js';
 import settings from '../src/config/settings.js';
 
@@ -107,6 +109,26 @@ for (const service of services) {
 			report(file, 'screenshotCaptions', `그림은 ${shots}장인데 설명은 ${captions}개입니다 (${lang})`);
 		}
 	}
+	// 자주 묻는 질문의 그림 — 주소(ko·en)와 대체 글은 위 walk 가 봅니다. 여기서는 파일과 크기를 봅니다.
+	(tree.faq ?? []).forEach((item, i) => {
+		(item.images ?? []).forEach((image, j) => {
+			const where = `faq[${i}].images[${j}]`;
+			if (!image.src) report(file, `${where}.src`, '그림 주소가 없습니다');
+			if (!image.alt) report(file, `${where}.alt`, '대체 글이 없습니다');
+			for (const key of ['width', 'height']) {
+				if (!Number.isInteger(image[key]) || image[key] <= 0) {
+					report(file, `${where}.${key}`, '그림 크기(픽셀, 정수)를 적어 주세요');
+				}
+			}
+			for (const lang of LOCALES) {
+				const src = image.src?.[lang];
+				if (typeof src !== 'string' || !src.startsWith('/')) continue;
+				if (!existsSync(resolve('public', `.${src}`))) {
+					report(file, `${where}.src.${lang}`, `public${src} 파일이 없습니다`);
+				}
+			}
+		});
+	});
 }
 
 if (problems.length === 0) {
