@@ -111,6 +111,7 @@ public/
   robots.txt          크롤러 안내 + 사이트맵 위치
   assets/fonts/pretendard/  Pretendard (제목·본문 모두. 저장소에 직접 담았습니다)
   assets/screenshots/ 프로그램 화면 이미지
+  assets/faq/         자주 묻는 질문에 넣는 그림
   assets/og/          링크 공유 사진 (1200x630)
 docs/                 ★ 빌드 산출물 = 배포본 (커밋 대상)
 scripts/
@@ -119,6 +120,8 @@ scripts/
   og-bible-onair.html Bible OnAir 미리보기 이미지의 원본
   og-do-it.html       Do-It 미리보기 이미지의 원본
   og-content.js       위 세 원본이 읽는 문구 (자동 생성 · 고치지 마세요)
+  faq-smartscreen.html  FAQ 의 SmartScreen 경고창 그림 원본 (다시 그린 것 · 실제 캡처 아님)
+  render-faq.mjs      위 그림 네 장을 다시 만듭니다 (npm run faq-images · 워크플로는 돌리지 않음)
   render-og.mjs       링크 공유 사진 여섯 장을 다시 만듭니다 (npm run og)
   build-og-content.mjs  og-content.js 를 만듭니다 (npm run build 가 실행)
   check-content.mjs   content/ 검사 (npm run build 가 실행)
@@ -256,7 +259,33 @@ Bible OnAir 와 같은 방식으로 **자동으로** 읽습니다 — `services.
 
 `public/assets/screenshots/` 의 파일을 바꾸고, 크기가 달라졌다면
 `src/config/services.js`의 `screenshots[].width` / `height` 도 함께 맞춰주세요.
-설명 문구는 같은 파일의 `screenshotCaptions` 에 있습니다.
+설명 문구는 `content/services/<이름>.yml` 의 `screenshotCaptions` 에 있습니다(그림 수와 같아야 합니다).
+사진이 여러 장이면 `screenshotCarousel: true` 로 옆으로 넘기는 캐러셀이 됩니다(휴대폰 세로 사진은
+`screenshotLayout: 'phone'` 과 함께 — 그렇지 않으면 가로 사진용 넓은 폭).
+`bible-onair-screen.png` 는 링크 공유 사진(`scripts/og-bible-onair.html`)에도 들어가니 이름을 바꾸면 그쪽도 고치세요.
+
+### 자주 묻는 질문에 그림 넣기
+
+FAQ 항목에 `images` 를 달면 답 아래에 그림이 나란히 놓입니다(좁은 화면에서는 한 줄에 하나).
+
+```yaml
+    images:
+      - src:
+          ko: /assets/faq/smartscreen-1.png
+          en: /assets/faq/smartscreen-1-en.png
+        width: 1200
+        height: 840
+        caption:            # 그림 아래 한 줄
+          ko: ...
+          en: ...
+        alt:                # 대체 글
+          ko: ...
+          en: ...
+```
+
+파일이 `public/` 에 없거나 크기·대체 글이 비면 문구 검사에서 멈춥니다.
+Bible OnAir 의 SmartScreen 그림은 `scripts/faq-smartscreen.html` 을 고친 뒤 `npm run faq-images` 로 다시 만듭니다
+(문구가 content/ 가 아니라 원본 안에 있어 워크플로가 다시 만들지 않습니다).
 
 ## 글꼴
 

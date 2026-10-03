@@ -100,9 +100,21 @@ export const services = [
 		installerName: installerFileName(BIBLE_ONAIR_VERSION),
 		/* 링크 공유 미리보기 그림(1200x630). 원본: scripts/og-bible-onair.html */
 		ogImage: { ko: '/assets/og/og-bible-onair.png', en: '/assets/og/og-bible-onair-en.png' },
+		/* 사진이 많아 옆으로 넘기는 캐러셀로 보여줍니다(ShotCarousel.astro — 가로 화면이라 한 장을 넓게). */
+		screenshotCarousel: true,
+		/*
+		 * 1.2.2 화면 · 밝은 테마(새 설치 기본값). 조작 창은 1280x800 창을 1.25배로(1600x1000),
+		 * 송출·방송 자막 화면은 1920x1080. bible-onair-screen.png 는 링크 공유 그림(og-bible-onair.html)도 씁니다.
+		 * 방송 자막 화면은 투명 자막을 예시 배경 위에 합성한 것입니다.
+		 */
 		screenshots: [
-			{ src: '/assets/screenshots/bible-onair-control.png', width: 1100, height: 720 },
-			{ src: '/assets/screenshots/bible-onair-screen.png', width: 1599, height: 999 },
+			{ src: '/assets/screenshots/bible-onair-control.png', width: 1600, height: 1000 },
+			{ src: '/assets/screenshots/bible-onair-screen.png', width: 1920, height: 1080 },
+			{ src: '/assets/screenshots/bible-onair-caption-control.png', width: 1600, height: 1000 },
+			{ src: '/assets/screenshots/bible-onair-caption.jpg', width: 1920, height: 1080 },
+			{ src: '/assets/screenshots/bible-onair-favorites.png', width: 1600, height: 1000 },
+			{ src: '/assets/screenshots/bible-onair-screen-settings.png', width: 1600, height: 1000 },
+			{ src: '/assets/screenshots/bible-onair-caption-settings.png', width: 1600, height: 1000 },
 		],
 		ko: bibleOnAir.ko,
 		en: bibleOnAir.en,

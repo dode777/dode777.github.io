@@ -11,6 +11,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "og": "node scripts/build-og-content.mjs && node scripts/render-og.mjs",
+    "faq-images": "node scripts/render-faq.mjs",
     "check:content": "node scripts/check-content.mjs"
   },
   "devDependencies": {

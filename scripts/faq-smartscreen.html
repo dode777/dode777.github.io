@@ -1,0 +1,184 @@
+<!doctype html>
+<!--
+  자주 묻는 질문 「"알 수 없는 앱" 경고」 에 넣는 그림의 원본입니다.
+  Windows SmartScreen 경고창을 실제 화면과 같은 구성으로 다시 그린 것입니다
+  (실제 캡처나 Microsoft 로고는 쓰지 않습니다). 주소 끝(#)으로 언어와 단계를 고릅니다.
+
+    이 파일#ko-1  → public/assets/faq/smartscreen-1.png      처음 뜨는 창 · [추가 정보] 표시
+    이 파일#ko-2  → public/assets/faq/smartscreen-2.png      추가 정보를 누른 뒤 · [실행] 표시
+    이 파일#en-1  → public/assets/faq/smartscreen-1-en.png
+    이 파일#en-2  → public/assets/faq/smartscreen-2-en.png
+
+  npm run faq-images 가 네 장을 다시 만듭니다(scripts/render-faq.mjs, 600x420 @2x).
+  설치 파일 이름은 아래 FILE 한 줄입니다. 버전이 바뀌어도 그림의 뜻은 같으므로 매번 고칠 필요는 없습니다.
+-->
+<html lang="ko">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="../public/assets/fonts/pretendard/pretendard.relative.css" />
+		<style>
+			* { margin: 0; padding: 0; box-sizing: border-box; }
+			html, body { width: 600px; height: 420px; overflow: hidden; }
+			body {
+				display: grid; place-items: center;
+				background: #eef1f5;
+				font-family: 'Segoe UI', 'Pretendard', sans-serif;
+				word-break: keep-all;
+			}
+			/* 경고창 — 단색 파랑 바탕, 흰 글씨, 아래 오른쪽 버튼 */
+			.dlg {
+				position: relative;
+				width: 568px; height: 388px;
+				padding: 30px 40px 0 40px;
+				background: #0b62b5;
+				color: #fff;
+				box-shadow: 0 8px 24px rgba(15, 30, 60, 0.3), 0 0 0 1px rgba(0, 0, 0, 0.12);
+			}
+			.close {
+				position: absolute; top: 0; right: 0;
+				width: 46px; height: 32px;
+				display: grid; place-items: center;
+				font-size: 18px; font-weight: 300; color: #fff;
+			}
+			h1 {
+				font-size: 31px; font-weight: 300; letter-spacing: -0.01em;
+				line-height: 1.2;
+			}
+			.body {
+				margin-top: 20px;
+				font-size: 16px; line-height: 1.55; font-weight: 400;
+				max-width: 480px;
+			}
+			.more {
+				display: inline-block; margin-top: 16px;
+				font-size: 16px; text-decoration: underline; text-underline-offset: 3px;
+			}
+			.meta { margin-top: 16px; font-size: 16px; line-height: 1.7; }
+			.meta b { font-weight: 400; display: inline-block; min-width: 0; }
+			.buttons {
+				position: absolute; right: 24px; bottom: 24px;
+				display: flex; gap: 10px;
+			}
+			.btn {
+				min-width: 118px; height: 34px; padding: 0 16px;
+				display: grid; place-items: center;
+				border: 2px solid #fff;
+				font-size: 16px; color: #fff; background: transparent;
+			}
+			/* 눌러야 할 곳 표시 — 실제 창에는 없는 덧그림 */
+			.mark {
+				position: absolute;
+				border: 3px solid #ffb400;
+				border-radius: 8px;
+				pointer-events: none;
+			}
+			.badge {
+				position: absolute;
+				width: 30px; height: 30px; border-radius: 50%;
+				display: grid; place-items: center;
+				background: #ffb400; color: #1a1a1a;
+				font: 800 17px/1 'Pretendard', sans-serif;
+				box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+			}
+			.cursor { position: absolute; width: 22px; height: 30px; }
+			[hidden] { display: none !important; }
+		</style>
+	</head>
+	<body>
+		<div class="dlg" id="dlg">
+			<div class="close" aria-hidden="true"><svg width="12" height="12" viewBox="0 0 12 12"><path d="M1 1 L11 11 M11 1 L1 11" stroke="#fff" stroke-width="1.3" /></svg></div>
+			<h1 data-t="title"></h1>
+			<p class="body" data-t="body"></p>
+			<a class="more" id="more" data-t="more"></a>
+			<div class="meta" id="meta" hidden>
+				<div><span data-t="app"></span> <b id="file"></b></div>
+				<div><span data-t="publisher"></span> <b data-t="unknown"></b></div>
+			</div>
+			<div class="buttons">
+				<div class="btn" id="run" data-t="run" hidden></div>
+				<div class="btn" data-t="dontRun"></div>
+			</div>
+		</div>
+		<script>
+			(function () {
+				var FILE = 'Bible-OnAir-Setup-1.2.2.exe';
+				var TEXT = {
+					ko: {
+						title: 'Windows의 PC 보호',
+						body: 'Microsoft Defender SmartScreen에서 인식할 수 없는 앱의 시작을 차단했습니다. 이 앱을 실행하면 PC가 위험에 노출될 수 있습니다.',
+						more: '추가 정보',
+						app: '앱:',
+						publisher: '게시자:',
+						unknown: '알 수 없는 게시자',
+						run: '실행',
+						dontRun: '실행 안 함',
+					},
+					en: {
+						title: 'Windows protected your PC',
+						body: 'Microsoft Defender SmartScreen prevented an unrecognized app from starting. Running this app might put your PC at risk.',
+						more: 'More info',
+						app: 'App:',
+						publisher: 'Publisher:',
+						unknown: 'Unknown publisher',
+						run: 'Run anyway',
+						dontRun: "Don't run",
+					},
+				};
+				var m = /^#?(ko|en)?-?([12])?$/.exec(location.hash) || [];
+				var lang = m[1] || 'ko';
+				var step = m[2] === '2' ? 2 : 1;
+				var t = TEXT[lang];
+				document.documentElement.lang = lang;
+				document.querySelectorAll('[data-t]').forEach(function (el) {
+					el.textContent = t[el.dataset.t];
+				});
+				document.getElementById('file').textContent = FILE;
+
+				// 2단계: 추가 정보 링크가 사라지고 앱·게시자 줄과 [실행] 버튼이 나타납니다.
+				if (step === 2) {
+					document.getElementById('more').hidden = true;
+					document.getElementById('meta').hidden = false;
+					document.getElementById('run').hidden = false;
+				}
+
+				// 표시는 글자가 그려진 뒤 실제 위치를 재서 겹칩니다.
+				function mark(target) {
+					var r = target.getBoundingClientRect();
+					var pad = 6;
+					var box = document.createElement('div');
+					box.className = 'mark';
+					box.style.left = r.left - pad + 'px';
+					box.style.top = r.top - pad + 'px';
+					box.style.width = r.width + pad * 2 + 'px';
+					box.style.height = r.height + pad * 2 + 'px';
+					document.body.appendChild(box);
+
+					var badge = document.createElement('div');
+					badge.className = 'badge';
+					badge.textContent = String(step);
+					// 표시 상자 왼쪽에, 세로 가운데로 — 글자를 가리지 않게
+					badge.style.left = r.left - pad - 40 + 'px';
+					badge.style.top = r.top + r.height / 2 - 15 + 'px';
+					document.body.appendChild(badge);
+
+					var ns = 'http://www.w3.org/2000/svg';
+					var svg = document.createElementNS(ns, 'svg');
+					svg.setAttribute('class', 'cursor');
+					svg.setAttribute('viewBox', '0 0 22 30');
+					svg.innerHTML =
+						'<path d="M2 2 L2 24 L8 18.5 L12 27.5 L15.5 26 L11.5 17 L19.5 17 Z" fill="#fff" stroke="#111" stroke-width="1.6" stroke-linejoin="round"/>';
+					// 화살표 끝이 표시 상자의 오른쪽 아래 모서리 안쪽을 가리키게
+					svg.style.left = r.right - 2 + 'px';
+					svg.style.top = r.bottom - 2 + 'px';
+					document.body.appendChild(svg);
+				}
+
+				function draw() {
+					mark(document.getElementById(step === 2 ? 'run' : 'more'));
+				}
+				if (document.fonts && document.fonts.ready) document.fonts.ready.then(draw);
+				else window.addEventListener('load', draw);
+			})();
+		</script>
+	</body>
+</html>

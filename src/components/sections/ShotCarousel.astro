@@ -2,8 +2,12 @@
 /**
  * 화면 예시를 옆으로 넘기는 캐러셀입니다.
  *
- * services.js 에서 screenshotCarousel: true 를 켠 서비스만 이 모양을 씁니다(지금은 Do-It).
+ * services.js 에서 screenshotCarousel: true 를 켠 서비스만 이 모양을 씁니다(Do-It · Bible OnAir).
  * 켜지 않은 서비스는 Screenshots.astro 의 기존 목록 그대로입니다.
+ *
+ * 한 장의 폭은 화면 모양에 따라 둘입니다. 휴대폰 세로 화면(screenshotLayout: 'phone')은 좁게,
+ * 그 밖의 가로 데스크톱 화면은 넓게(shot-carousel--wide) — 가로 사진을 휴대폰 사진 폭에 맞추면
+ * 글자를 읽을 수 없기 때문입니다. 넓은 쪽은 장마다 화면비가 조금 달라도(16:10 · 16:9) 위쪽을 맞춥니다.
  *
  * 스타일과 스크립트를 is:inline 으로 두는 까닭: 상세 페이지들은 CSS 묶음 하나를 함께 쓰므로,
  * 보통 <style> 로 두면 이 캐러셀을 쓰지 않는 페이지의 CSS 파일(과 그 주소)까지 바뀝니다.
@@ -22,9 +26,10 @@ const shots = service.screenshots ?? [];
 const captions = service[lang].screenshotCaptions ?? [];
 const name = service[lang].name;
 const listLabel = t('detail.screenshots').replace('{name}', name);
+const isPhone = service.screenshotLayout === 'phone';
 ---
 
-<div class="shot-carousel" data-shot-carousel>
+<div class:list={['shot-carousel', { 'shot-carousel--wide': !isPhone }]} data-shot-carousel>
 	<ul class="shot-carousel__track" role="list" aria-label={listLabel} tabindex="0" data-shot-track>
 		{
 			shots.map((shot, index) => (
@@ -63,6 +68,10 @@ const listLabel = t('detail.screenshots').replace('{name}', name);
 		--shot-gap: 1.25rem;
 		position: relative;
 	}
+	/* 가로 데스크톱 화면: 좁은 화면에서는 한 장에 다음 장이 조금 걸쳐 보입니다. */
+	.shot-carousel--wide {
+		--shot-w: 86%;
+	}
 	.shot-carousel__track {
 		margin: 0;
 		padding: 0.25rem 0 0.5rem;
@@ -77,6 +86,25 @@ const listLabel = t('detail.screenshots').replace('{name}', name);
 		/* 스크롤바는 숨기고 아래 점으로 위치를 알립니다. */
 		scrollbar-width: none;
 		border-radius: var(--theme-shape-radius-sm);
+	}
+	.shot-carousel--wide .shot-carousel__track {
+		align-items: flex-start;
+	}
+	/*
+	 * 넓은 화면: 가로 사진은 글자가 작아 본문 폭(860px)을 거의 다 씁니다. 대신 트랙만 오른쪽으로
+	 * 본문 바깥 여백(넓은 Container 와 좁은 본문의 차이)까지 늘려 다음 장이 그 여백에 걸쳐 보이게 합니다.
+	 * 2.5rem 은 Container 의 좌우 여백 둘. 100vw 가 세로 스크롤바만큼 넓어도 Container 여백 안에서 끝나
+	 * 화면이 옆으로 밀리지 않습니다. 한 장의 폭은 본문 폭(100cqw)에서 3rem 을 뺀 값입니다.
+	 */
+	@media (min-width: 701px) {
+		.shot-carousel--wide {
+			container-type: inline-size;
+			--shot-w: calc(100cqw - 3rem);
+		}
+		.shot-carousel--wide .shot-carousel__track {
+			margin-right: calc((min(100vw, var(--container-max-width)) - 2.5rem - 100%) / -2);
+			border-radius: 0;
+		}
 	}
 	/* 좁은 화면에서는 트랙을 화면 끝까지 넓혀, 다음 장이 여백에 잘리지 않고 화면 끝에 걸쳐 보이게 합니다.
 	   (1.25rem 은 Container 의 좌우 여백 --container-padding 과 같은 값) */
