@@ -259,6 +259,9 @@ footer:
   github:
     ko: GitHub
     en: GitHub
+  privacy:
+    ko: 개인정보처리방침
+    en: Privacy Policy
   builtWith:
     ko: Odyssey Theme 기반 · Astro로 제작
     en: Based on the Odyssey Theme · Built with Astro

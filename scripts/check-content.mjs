@@ -91,6 +91,7 @@ walk(readContent('ui.yml'), 'ui.yml', '');
 
 // ── 공유 카드
 walk(readContent('og.yml'), 'og.yml', '');
+walk(readContent('legal/privacy-bible-onair.yml'), 'legal/privacy-bible-onair.yml', '');
 
 // ── 서비스
 const { services } = await import('../src/config/services.js');
