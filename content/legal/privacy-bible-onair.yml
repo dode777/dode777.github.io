@@ -121,10 +121,8 @@ sections:
     items:
       - ko: '**책임자** — 전도해'
         en: '**Officer** — Dohae Jeon'
-      - ko: '**전화** — 010-5332-6909'
-        en: '**Phone** — +82 10-5332-6909'
-      - ko: '**이메일** — [hello@isocompany.co.kr](mailto:hello@isocompany.co.kr)'
-        en: '**Email** — [hello@isocompany.co.kr](mailto:hello@isocompany.co.kr)'
+      - ko: '**이메일** — [privacy@isocompany.co.kr](mailto:privacy@isocompany.co.kr)'
+        en: '**Email** — [privacy@isocompany.co.kr](mailto:privacy@isocompany.co.kr)'
   - heading:
       ko: 13. 권익 침해 구제 방법
       en: 13. Where to get help
