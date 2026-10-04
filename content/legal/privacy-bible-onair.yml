@@ -1,0 +1,148 @@
+# Bible OnAir 개인정보처리방침 — /bible-onair/privacy (영문 /en/bible-onair/privacy)
+# 문단(paras)과 목록(items)은 **굵게** 와 [글자](주소) 만 해석합니다.
+title:
+  ko: Bible OnAir 개인정보처리방침
+  en: Bible OnAir Privacy Policy
+effective:
+  ko: '시행일: 2026년 10월 4일'
+  en: 'Effective: 4 October 2026'
+intro:
+  ko: |-
+    ISO Service(이하 「운영자」)는 Bible OnAir(바이블온에어, 이하 「서비스」) 이용자의 개인정보를 소중히 여기며, 「개인정보 보호법」 등 관련 법령을 지킵니다.
+    이 방침은 서비스가 어떤 개인정보를 왜 수집하고 어떻게 다루는지 알려 드립니다.
+  en: |-
+    ISO Service ("we") values the privacy of people using Bible OnAir ("the Service") and complies with the Personal Information Protection Act of Korea and related laws.
+    This policy explains what personal information the Service collects, why, and how it is handled.
+sections:
+  - heading:
+      ko: 1. 로그인하지 않고 쓰는 경우
+      en: 1. Using the Service without signing in
+    paras:
+      - ko: 로그인하지 않으면 서비스는 개인정보를 수집하지 않습니다. 모든 설정과 즐겨찾기는 이용자의 PC 에만 저장됩니다.
+        en: If you do not sign in, the Service collects no personal information. All settings and favorites stay on your PC.
+      - ko: 새 버전 확인을 위해 업데이트 파일 저장소(GitHub)에 접속할 때, 일반적인 인터넷 접속과 같이 IP 주소가 해당 저장소에 전달될 수 있습니다.
+        en: When the app checks for a new version it contacts the update file host (GitHub), which, as with any internet connection, may receive your IP address.
+  - heading:
+      ko: 2. 수집하는 개인정보 항목
+      en: 2. Personal information we collect
+    paras:
+      - ko: 구글 계정으로 로그인한 경우에만 아래 항목을 수집합니다.
+        en: The following is collected only when you sign in with a Google account.
+    items:
+      - ko: '**계정 정보** — 구글 계정 식별자, 이메일 주소, 이름(구글 계정의 표시 이름), 시간대'
+        en: '**Account** — Google account identifier, email address, name (the display name on the Google account), time zone'
+      - ko: '**기기 정보** — 기기 식별값(PC 하드웨어 정보를 가공해 만든 값으로, 원래 정보를 알아낼 수 없음), 기기 이름(PC 이름), 운영체제·앱 버전, 등록·마지막 사용 시각'
+        en: '**Device** — a device identifier (derived from PC hardware information; the original information cannot be recovered from it), device name (PC name), operating system and app version, registration and last-use times'
+      - ko: '**동기화 정보**(동기화를 켠 경우) — 즐겨찾기, 표시 설정(글자 크기·표시 방식·장절 표시·테마), 방송 자막 모양, 번역본 선택, 실험실 설정'
+        en: '**Sync data** (when sync is on) — favorites, display settings (type size, display mode, verse references, theme), broadcast caption style, translation choice, Labs settings'
+      - ko: '**자동으로 생성되는 정보** — 서비스 이용 시각, 과도한 요청을 막기 위한 IP 주소의 변환값(원래 주소를 저장하지 않음)'
+        en: '**Generated automatically** — times the Service was used, and a transformed value of your IP address used to limit excessive requests (the original address is not stored)'
+  - heading:
+      ko: 3. 개인정보의 이용 목적
+      en: 3. Why we use it
+    items:
+      - ko: 본인 확인과 로그인 유지
+        en: Identifying you and keeping you signed in
+      - ko: 번역본(개역개정 등) 이용 권한 확인과 내려받기
+        en: Checking your access to translations (such as 개역개정) and delivering them
+      - ko: 여러 PC 사이의 설정·즐겨찾기 동기화
+        en: Syncing settings and favorites between your PCs
+      - ko: 기기 관리, 부정 이용 방지, 장애 대응과 문의 답변
+        en: Device management, preventing misuse, handling outages and answering enquiries
+  - heading:
+      ko: 4. 보유 및 이용 기간
+      en: 4. How long we keep it
+    paras:
+      - ko: 개인정보는 이용 목적을 이룰 때까지 보관하며, 이용자가 삭제를 요청하면 지체 없이 파기합니다. 해제한 기기의 기록은 부정 이용 방지를 위해 계정이 있는 동안 보관하고, 계정 삭제 시 함께 파기합니다.
+        en: Personal information is kept only as long as needed for the purposes above and is destroyed without delay when you ask us to delete it. Records of removed devices are kept while the account exists, to prevent misuse, and are destroyed with the account.
+      - ko: '운영자가 계정에 권한을 주거나 해제한 작업 기록(예: 베타 테스터 지정)은 서비스 운영의 증빙을 위해 보관합니다. 관련 법령이 보관을 정한 정보는 그 기간 동안 보관합니다.'
+        en: Records of administrative actions on an account (for example, adding a beta tester) are kept as evidence of how the Service is operated. Information that the law requires us to keep is kept for the period the law sets.
+  - heading:
+      ko: 5. 제3자 제공
+      en: 5. Sharing with third parties
+    paras:
+      - ko: 운영자는 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만 법령에 따라 요구되는 경우는 예외로 합니다.
+        en: We do not provide your personal information to third parties, except where required by law.
+  - heading:
+      ko: 6. 처리 위탁과 국외 이전
+      en: 6. Processors and transfers abroad
+    paras:
+      - ko: 서비스 운영을 위해 아래 업체에 개인정보 처리를 맡기고 있으며, 이 과정에서 개인정보가 국외로 전송됩니다. 전송은 서비스 이용 시 암호화된 네트워크로 이루어지며, 보유 기간은 4번과 같습니다.
+        en: We use the providers below to run the Service, and personal information is transferred abroad in the process. Transfers happen over encrypted network connections while you use the Service, and are kept for the periods in section 4.
+    items:
+      - ko: '**Google LLC**(미국) — 구글 로그인 인증. 항목: 구글 계정 식별자, 이메일, 이름'
+        en: '**Google LLC** (USA) — Google sign-in. Items: Google account identifier, email, name'
+      - ko: '**Railway Corp.**(미국, 해외 데이터센터) — 계정 서버와 데이터베이스 운영. 항목: 2번의 모든 항목'
+        en: '**Railway Corp.** (USA, overseas data centres) — running the account server and database. Items: everything in section 2'
+      - ko: '**GitHub, Inc.**(미국) — 설치·업데이트 파일 배포. 항목: 접속 시 IP 주소'
+        en: '**GitHub, Inc.** (USA) — distributing installer and update files. Items: IP address when connecting'
+    paras_after:
+      - ko: 국외 이전을 원하지 않으면 로그인하지 않고 서비스를 이용할 수 있습니다. 이 경우 동기화와 개역개정 등 로그인이 필요한 기능은 쓸 수 없습니다.
+        en: If you do not want your information transferred abroad, you can use the Service without signing in. Features that need an account, such as sync and 개역개정, will then be unavailable.
+  - heading:
+      ko: 7. 파기 절차와 방법
+      en: 7. How information is destroyed
+    paras:
+      - ko: 보유 기간이 끝났거나 삭제 요청을 받은 개인정보는 복구할 수 없는 방법으로 데이터베이스에서 지웁니다. 이용자 PC 에 저장된 정보는 앱을 지우거나 로그아웃하면 함께 지워집니다.
+        en: Information past its retention period, or that you ask us to delete, is erased from the database so that it cannot be recovered. Information stored on your PC is removed when you sign out or uninstall the app.
+  - heading:
+      ko: 8. 이용자의 권리와 행사 방법
+      en: 8. Your rights
+    paras:
+      - ko: 이용자는 언제든지 자신의 개인정보를 열람·정정·삭제하거나 처리 정지를 요구할 수 있습니다. 아래 12번의 이메일로 요청하시면 지체 없이 처리하고 결과를 알려 드립니다.
+        en: You may at any time ask to see, correct or delete your personal information, or ask us to stop processing it. Write to the email address in section 12 and we will act without delay and let you know the result.
+      - ko: 앱에서도 로그아웃, 기기 해제, 동기화 항목 끄기를 직접 할 수 있습니다.
+        en: In the app you can also sign out, remove a device, and turn individual sync items off yourself.
+  - heading:
+      ko: 9. 안전성 확보 조치
+      en: 9. How we protect your information
+    items:
+      - ko: 모든 통신 구간 암호화(HTTPS)
+        en: Encryption of all connections (HTTPS)
+      - ko: 로그인 정보는 운영체제의 보안 저장소를 이용해 암호화해 저장
+        en: Sign-in credentials stored encrypted using the operating system's secure storage
+      - ko: 서버 접근 권한을 최소한의 운영자로 제한하고 관리 작업을 기록
+        en: Server access limited to the fewest operators possible, with administrative actions logged
+  - heading:
+      ko: 10. 만 14세 미만 아동
+      en: 10. Children under 14
+    paras:
+      - ko: 서비스는 교회 예배 운영을 위한 도구로, 만 14세 미만 아동을 대상으로 하지 않으며 아동의 개인정보를 알면서 수집하지 않습니다.
+        en: The Service is a tool for running church services. It is not directed at children under 14 and does not knowingly collect their personal information.
+  - heading:
+      ko: 11. 쿠키 등 자동 수집 장치
+      en: 11. Cookies
+    paras:
+      - ko: 서비스(앱)는 쿠키를 사용하지 않습니다.
+        en: The Service (the app) does not use cookies.
+  - heading:
+      ko: 12. 개인정보 보호책임자
+      en: 12. Privacy officer
+    items:
+      - ko: '**책임자** — 전도해'
+        en: '**Officer** — Dohae Jeon'
+      - ko: '**전화** — 010-5332-6909'
+        en: '**Phone** — +82 10-5332-6909'
+      - ko: '**이메일** — [hello@isocompany.co.kr](mailto:hello@isocompany.co.kr)'
+        en: '**Email** — [hello@isocompany.co.kr](mailto:hello@isocompany.co.kr)'
+  - heading:
+      ko: 13. 권익 침해 구제 방법
+      en: 13. Where to get help
+    paras:
+      - ko: 개인정보 침해에 대한 상담이나 신고는 아래 기관에도 할 수 있습니다.
+        en: You can also contact the following Korean agencies about a privacy concern.
+    items:
+      - ko: 개인정보침해신고센터 — [privacy.kisa.or.kr](https://privacy.kisa.or.kr) · 국번 없이 118
+        en: Personal Information Infringement Report Center — [privacy.kisa.or.kr](https://privacy.kisa.or.kr) · 118
+      - ko: 개인정보분쟁조정위원회 — [www.kopico.go.kr](https://www.kopico.go.kr) · 1833-6972
+        en: Personal Information Dispute Mediation Committee — [www.kopico.go.kr](https://www.kopico.go.kr) · 1833-6972
+      - ko: 대검찰청 — [www.spo.go.kr](https://www.spo.go.kr) · 1301
+        en: Supreme Prosecutors' Office — [www.spo.go.kr](https://www.spo.go.kr) · 1301
+      - ko: 경찰청 — [ecrm.police.go.kr](https://ecrm.police.go.kr) · 182
+        en: Korean National Police Agency — [ecrm.police.go.kr](https://ecrm.police.go.kr) · 182
+  - heading:
+      ko: 14. 방침의 변경
+      en: 14. Changes to this policy
+    paras:
+      - ko: 이 방침을 바꾸면 시행 7일 전부터 이 페이지에 알립니다. 결제 기능을 도입할 때에는 결제 관련 항목을 더해 다시 알립니다.
+        en: If this policy changes, we will post the change on this page at least seven days before it takes effect. When payments are introduced, the related items will be added and announced again.

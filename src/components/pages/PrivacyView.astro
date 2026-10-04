@@ -1,0 +1,100 @@
+---
+/**
+ * Bible OnAir 개인정보처리방침. 문구는 content/legal/privacy-bible-onair.yml 에만 있습니다.
+ * 구글 로그인 동의 화면에 이 주소(/bible-onair/privacy)가 등록되므로 주소를 바꾸지 마세요.
+ */
+import Page from '../../layouts/Page.astro';
+import Container from '../core/Container.astro';
+import MarkdownText from '../MarkdownText.astro';
+import { readContent } from '../../content/load.js';
+import { getLangFromUrl } from '../../i18n/ui.js';
+
+const lang = getLangFromUrl(Astro.url);
+const doc = readContent('legal/privacy-bible-onair.yml');
+const pick = (node) => node?.[lang] ?? node?.ko ?? '';
+const lines = (text) => pick(text).split('\n');
+---
+
+<Page title={pick(doc.title)} description={lines(doc.intro)[0]}>
+	<Container narrow>
+		<article class="policy">
+			<header class="policy__head">
+				<h1>{pick(doc.title)}</h1>
+				<p class="policy__date">{pick(doc.effective)}</p>
+				{lines(doc.intro).map((line) => <p class="lead">{line}</p>)}
+			</header>
+			{
+				doc.sections.map((section) => (
+					<section class="policy__sec">
+						<h2>{pick(section.heading)}</h2>
+						{(section.paras ?? []).map((p) => (
+							<p>
+								<MarkdownText text={pick(p)} />
+							</p>
+						))}
+						{section.items && (
+							<ul>
+								{section.items.map((item) => (
+									<li>
+										<MarkdownText text={pick(item)} />
+									</li>
+								))}
+							</ul>
+						)}
+						{(section.paras_after ?? []).map((p) => (
+							<p>
+								<MarkdownText text={pick(p)} />
+							</p>
+						))}
+					</section>
+				))
+			}
+		</article>
+	</Container>
+</Page>
+
+<style>
+	.policy {
+		padding: clamp(3rem, 8vh, 5rem) 0 1rem 0;
+		max-width: 68ch;
+	}
+	.policy__head {
+		margin-bottom: 2.5rem;
+	}
+	.policy__head h1 {
+		margin-bottom: 0.5rem;
+		text-wrap: balance;
+	}
+	.policy__date {
+		margin: 0 0 1.25rem 0;
+		font-size: var(--font-size-sm);
+		color: var(--theme-muted);
+	}
+	.policy__head .lead {
+		margin: 0 0 0.5rem 0;
+	}
+	.policy__sec {
+		padding-top: 1.75rem;
+		margin-top: 1.75rem;
+		border-top: 1px solid var(--theme-border);
+	}
+	.policy__sec h2 {
+		margin: 0 0 0.75rem 0;
+		font-size: 1.15rem;
+	}
+	.policy__sec p {
+		margin: 0 0 0.75rem 0;
+		line-height: 1.75;
+	}
+	.policy__sec ul {
+		margin: 0 0 0.75rem 0;
+		padding-left: 1.25rem;
+	}
+	.policy__sec li {
+		margin-bottom: 0.4rem;
+		line-height: 1.7;
+	}
+	.policy :global(a) {
+		word-break: break-all;
+	}
+</style>
