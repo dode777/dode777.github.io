@@ -6,6 +6,7 @@
  * 적어 둔 내용으로 돌아갑니다.
  */
 import {
+	RETIRED_RELEASE_DATES,
 	SHOW_UNRELEASED_NOTES,
 	UPDATE_NOTES_URL,
 	releaseMetaUrl,
@@ -49,6 +50,25 @@ async function build(service, lang) {
 	if (parsed && entries.every((entry) => !entry.released)) {
 		entries = fallback.map((entry) => ({ ...entry, size: null, released: true }));
 	}
+
+	/*
+	 * latest.yml 이 없는데 배포된 최신 버전보다 낮은 버전은 "아직 배포 전" 이 아니라
+	 * 설치 파일을 지운 옛 버전입니다. 변경 내역에는 남기고 내려받기 버튼만 뺍니다.
+	 * (아직 배포 전인 버전은 늘 배포된 최신보다 높습니다.)
+	 */
+	const newest = entries
+		.filter((entry) => entry.released)
+		.reduce((max, entry) => (max && compareVersions(max, entry.version) >= 0 ? max : entry.version), null);
+	entries = entries.map((entry) =>
+		!entry.released && newest && compareVersions(entry.version, newest) < 0
+			? {
+					...entry,
+					date: entry.date ?? RETIRED_RELEASE_DATES[entry.version] ?? null,
+					released: true,
+					hideDownload: true,
+				}
+			: entry
+	);
 
 	if (!SHOW_UNRELEASED_NOTES) entries = entries.filter((entry) => entry.released);
 	entries.sort((a, b) => compareVersions(b.version, a.version));

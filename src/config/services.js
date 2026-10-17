@@ -34,6 +34,20 @@ export function releaseMetaUrl(version) {
  */
 export const SHOW_UNRELEASED_NOTES = false;
 
+/**
+ * 설치 파일을 지운 버전의 게시일. 그 버전은 latest.yml 도 함께 지워져 날짜를 읽을 곳이 없어
+ * 여기 적어 둡니다(값은 지우기 전 latest.yml 의 releaseDate). 변경 내역에는 남고 버튼만 사라집니다.
+ * 2026-10-17 — 2.x 가 나와 1.x 설치 파일을 릴리스 저장소에서 지웠습니다.
+ */
+export const RETIRED_RELEASE_DATES = {
+	'1.2.2': '2026-10-02',
+	'1.2.1': '2026-10-01',
+	'1.2.0': '2026-10-01',
+	'1.1.1': '2026-09-16',
+	'1.1.0': '2026-09-15',
+	'1.0.0': '2026-09-11',
+};
+
 /** 내려받기를 제공하는 계열 수 — 최신 계열을 포함해 3개. */
 export const DOWNLOADABLE_RELEASES = 3;
 
