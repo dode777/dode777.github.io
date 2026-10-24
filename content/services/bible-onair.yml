@@ -19,6 +19,20 @@ name: Bible OnAir(바이블온에어)
 subName:
   ko: 
   en: 
+# ↓ 비워 두어도 됩니다 — 상세 페이지의 큰 제목입니다. 비우면 제품명(name)이 나옵니다.
+#   홈 카드·메뉴·바닥글은 늘 제품명입니다.
+pageName:
+  ko: 쓰기편한 성경 프롬프터
+  en: Easy-to-use Bible Prompter
+# ↓ 비워 두어도 됩니다 — 상세 페이지 큰 제목 아래 작은 이름입니다. 비우면 subName 이 나옵니다.
+pageSubName:
+  ko: 바이블온에어
+  en: Bible OnAir
+# ↓ 비워 두어도 됩니다 — 검색 결과·브라우저 탭에 보일 제목 전체입니다(사이트 이름을 붙이지 않습니다).
+#   비우면 「제품명 — metaTagline | ISO Service」 가 됩니다.
+metaTitle:
+  ko: 쓰기편한 성경 프롬프터 - 바이블온에어
+  en: Easy-to-use Bible Prompter - Bible OnAir
 tagline:
   ko: 쓰기편한 성경 프롬프터
   en: Easy-to-use Bible prompter

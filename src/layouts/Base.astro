@@ -4,13 +4,13 @@ import SkipLink from '../components/core/SkipLink.astro';
 import { getLangFromUrl } from '../i18n/ui.js';
 
 const lang = getLangFromUrl(Astro.url);
-const { title, description, noindex, image } = Astro.props;
+const { title, fullTitle, description, noindex, image } = Astro.props;
 ---
 
 <!doctype html>
 <html lang={lang}>
 	<head>
-		<BaseHead title={title} description={description} noindex={noindex} image={image}>
+		<BaseHead title={title} fullTitle={fullTitle} description={description} noindex={noindex} image={image}>
 			<slot name="head" />
 		</BaseHead>
 	</head>

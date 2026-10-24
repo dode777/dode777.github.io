@@ -24,6 +24,9 @@ const problems = [];
 const OPTIONAL = new Set([
 	'ui:site.descriptionTail', // 사이트 설명 끝에 덧붙이는 한 문장
 	'services:subName', // 제품명 아래 작은 이름
+	'services:pageName', // 상세 페이지의 큰 제목(비우면 제품명)
+	'services:pageSubName', // 상세 페이지 큰 제목 아래 작은 이름(비우면 subName)
+	'services:metaTitle', // 검색 결과에 보일 제목 전체(비우면 「제품명 — 소개 | ISO Service」)
 	'services:summaryDetail', // 카드의 부연 한 줄
 	'services:releaseNote', // 릴리스 목록 위의 안내 한 줄
 ]);

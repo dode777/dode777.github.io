@@ -3,10 +3,10 @@ import Base from './Base.astro';
 import Header from '../components/core/Header.astro';
 import Footer from '../components/core/Footer.astro';
 
-const { title, description, noindex, image } = Astro.props;
+const { title, fullTitle, description, noindex, image } = Astro.props;
 ---
 
-<Base title={title} description={description} noindex={noindex} image={image}>
+<Base title={title} fullTitle={fullTitle} description={description} noindex={noindex} image={image}>
 	<slot name="head" slot="head" />
 	<Header slot="header" />
 	<slot />
