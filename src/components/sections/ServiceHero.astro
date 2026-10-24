@@ -23,6 +23,12 @@ const pendingNote =
 	service.downloadKind === 'chrome-store'
 		? t('detail.downloadPendingStore')
 		: t('detail.downloadPendingRelease');
+
+// 상세 페이지의 큰 제목·작은 이름. 따로 정하지 않으면 제품명·subName 을 씁니다(홈 카드·메뉴는 늘 제품명).
+const pageName = content.pageName || content.name;
+const pageSubName = content.pageSubName || content.subName;
+// 큰 제목과 같은 한 줄 소개는 두 번 보이지 않게 뺍니다.
+const same = (a, b) => String(a ?? '').trim().toLowerCase() === String(b ?? '').trim().toLowerCase();
 ---
 
 <Container narrow>
@@ -43,11 +49,11 @@ const pendingNote =
 			}
 		</div>
 
-		<h1 class="service-hero__title">{content.name}</h1>
-		{content.subName && content.subName !== content.name && (
-			<p class="service-hero__subname">{content.subName}</p>
+		<h1 class="service-hero__title">{pageName}</h1>
+		{pageSubName && pageSubName !== pageName && (
+			<p class="service-hero__subname">{pageSubName}</p>
 		)}
-		<p class="service-hero__tagline">{content.tagline}</p>
+		{!same(content.tagline, pageName) && <p class="service-hero__tagline">{content.tagline}</p>}
 
 		<div class="service-hero__actions">
 			<DownloadButton service={service} version={version} large />
